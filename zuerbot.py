@@ -3,9 +3,16 @@ import random
 import discord
 import asyncio
 import random
-import secreto
+import os
 
 client = discord.Client ()
+
+is_prod = os.environ.get('IS_HEROKU', None)
+if is_prod:
+    token = os.environ.get('TOKEN')
+else:
+    import secreto
+    token = secreto.seu_token()
 
 roxo =0x690FC3
 token = secreto.seu_token()
@@ -23,11 +30,11 @@ async def on_ready ():
 @client.event
 async def on_message(message):
     if message.content.lower().startswith('zhelp'):
-        await client.send_message(message.channel, "```http\nOlá,\nNo momento ainda não estou pronto, porem posso lhe servir em algumas coisas...\nVou deixar alguns emojis abaixo para lhe ajudar\n- Me adicione ao seu Discord  https://goo.gl/SJCndF \n- Servidor oficial https://discord.gg/CmszJUV \n- Comandos:\nzHelp = aparece esta mensagem\nzFlipcoin = cara ou coroa \nzGames = Aparece uma lista de jogos e se você clicar em um dos emotes você ganha o cargo dele, entretando só ganhará o cargo se o servidor tiver os seguintes cargos:\n      CS:GO, League of Legends, Gartic, VRCHAT, Brawlhalla, GTA V, PUBG, Roblox\n       (Obs. os cargos (roles) devem estar escritos igual ao que está acima)\nzSteam = mostra nosso Grupo da Steam\nBreve mais coisas...```")
+        await client.send_message(message.channel, "```http\nOlá,\nNo momento ainda não estou pronto, estou quase sempre OFFLINE, porem posso lhe servir em algumas coisas...\nVou deixar algumas infos abaixo para lhe ajudar\n- Me adicione ao seu Discord  https://goo.gl/SJCndF \n- Servidor oficial https://discord.gg/CmszJUV \n- Comandos:\nzHelp = aparece esta mensagem\nzFlipcoin = cara ou coroa \nzVotar (mensagem) = o faz uma votação de acordo com sua pergunta\nzGames = Aparece uma lista de jogos e se você clicar em um dos emotes você ganha o cargo dele, entretando só ganhará o cargo se o servidor tiver os seguintes cargos:\n      CS:GO, League of Legends, Gartic, VRCHAT, Brawlhalla, GTA V, PUBG, Roblox\n       (Obs. os cargos (roles) devem estar escritos igual ao que está acima)\nzSteam = mostra nosso Grupo da Steam\nBreve mais coisas...```")
 
 
     if message.content.lower().startswith('zsteam'):
-        await client.send_message(message.channel, "{0.author.mention}```Entra lá bb``` \nhttps://goo.gl/R2mC2g")
+        await client.send_message(message.channel, "```Entra lá bb``` \nhttps://goo.gl/R2mC2g")
 
     if message.content.lower().startswith('zflipcoin'):
         choice = random.randint(1,2)
@@ -35,6 +42,12 @@ async def on_message(message):
           await client.add_reaction (message, '😀')
         if choice == 2:
           await client.add_reaction (message, '👑')
+
+
+    if message.content.lower().startswith('zvotar'):
+        await client.add_reaction(message, '✅')
+        await client.add_reaction(message, '❌')
+
 
     if message.content.lower().startswith("zgames"):
      embed1 =discord.Embed(
