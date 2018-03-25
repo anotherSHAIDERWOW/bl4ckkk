@@ -7,7 +7,7 @@ import os
 import io
 import re
 import time
-import requests
+import request
 
 config = None
 client = discord.Client()
