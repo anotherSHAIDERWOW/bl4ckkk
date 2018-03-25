@@ -7,7 +7,7 @@ import os
 import io
 import re
 import time
-import request
+import requests
 
 config = None
 client = discord.Client()
@@ -379,7 +379,7 @@ async def on_reaction_remove(reaction, user):
 async def on_member_join(member):
     canal = client.get_channel("417466650451771394")
     regras = client.get_channel("420007865894567946")
-    msg = "Bem Vindo {}\n Quem sou eu ? eu sou um BOT muito gente boa S2\n leia as regras do canal".format(
+    msg = "Bem Vindo ao {}, {}\n Quem sou eu ? eu sou um BOT muito gente boa S2\n Para ver meus comandos digite `zHelp`".format(
         member.mention)
     await client.send_message(member, msg)  # substitua canal por member para enviar a msg no DM do membro
 
