@@ -3,66 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="76e8f6a0-681b-4476-95d0-262621459eaa" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" afterPath="$PROJECT_DIR$/LICENSE" />
-      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp-3.0.7.dist-info/DESCRIPTION.rst" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp-3.0.7.dist-info/INSTALLER" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp-3.0.7.dist-info/METADATA" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp-3.0.7.dist-info/RECORD" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp-3.0.7.dist-info/WHEEL" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp-3.0.7.dist-info/metadata.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp-3.0.7.dist-info/top_level.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/__init__.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/_cparser.pxd" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/_frozenlist.c" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/_frozenlist.pyx" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/_http_parser.c" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/_http_parser.pyx" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/_websocket.c" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/_websocket.c" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/_websocket.pyx" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/_websocket.pyx" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/abc.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/abc.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/client.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/client.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/client_exceptions.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/client_proto.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/client_reqrep.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/client_reqrep.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/client_ws.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/client_ws.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/connector.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/connector.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/cookiejar.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/cookiejar.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/formdata.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/frozenlist.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/hdrs.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/hdrs.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/helpers.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/helpers.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/http.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/http_exceptions.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/http_parser.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/http_websocket.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/http_writer.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/locks.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/log.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/log.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/multipart.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/multipart.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/payload.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/payload_streamer.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/pytest_plugin.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/pytest_plugin.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/resolver.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/resolver.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/signals.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/signals.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/streams.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/streams.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/tcp_helpers.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/test_utils.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/test_utils.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/tracing.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_app.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_exceptions.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_exceptions.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_fileresponse.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_middlewares.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_protocol.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_request.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_response.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_runner.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_server.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_urldispatcher.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_urldispatcher.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_ws.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/web_ws.py" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/worker.py" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/aiohttp/worker.py" />
-      <change beforePath="$PROJECT_DIR$/venv/pip-selfcheck.json" afterPath="$PROJECT_DIR$/venv/pip-selfcheck.json" />
       <change beforePath="$PROJECT_DIR$/zuerbot.py" afterPath="$PROJECT_DIR$/zuerbot.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -77,8 +17,8 @@
       <file leaf-file-name="zuerbot.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/zuerbot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="57" column="36" lean-forward="false" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
+            <state relative-caret-position="10260">
+              <caret line="380" column="25" lean-forward="true" selection-start-line="380" selection-start-column="25" selection-end-line="380" selection-end-column="25" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -248,16 +188,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.116071425" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293718" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39219016" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39219016" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3293718" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39728352" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -498,8 +437,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/zuerbot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="57" column="36" lean-forward="false" selection-start-line="57" selection-start-column="36" selection-end-line="57" selection-end-column="36" />
+        <state relative-caret-position="10260">
+          <caret line="380" column="25" lean-forward="true" selection-start-line="380" selection-start-column="25" selection-end-line="380" selection-end-column="25" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
