@@ -7,7 +7,7 @@ import os
 import io
 import re
 import time
-import resquests
+#import resquests
 
 config = None
 client = discord.Client()
@@ -46,9 +46,9 @@ async def on_message(message):
         await client.send_message(message.channel,
                                   "```http\nOlá,\nNo momento ainda não estou pronto, porem posso lhe servir em algumas coisas...\nVou deixar algumas infos abaixo para lhe ajudar\n- Me adicione ao seu Discord  https://goo.gl/SJCndF \n- Servidor oficial CmszJUV``` \n ```- Comandos:\nzHelp = aparece esta mensagem\nzFlipcoin = cara ou coroa \nzVotar (mensagem) = o faz uma votação de acordo com sua pergunta\nzGames = Aparece uma lista de jogos e se você clicar em um dos emotes você ganha o cargo dele, entretando só ganhará o cargo se o servidor tiver os seguintes cargos:\n      CS:GO, League of Legends, Gartic, VRCHAT, Brawlhalla, GTA V, PUBG, Roblox\n       (Obs. os cargos (roles) devem estar escritos igual ao que está acima)\nzSteam = mostra nosso Grupo da Steam\nzAvatar {usuário} = mostra o avatar daquele usuário que foi mencionado\nzServerinfo = mostra as informações do server\nzBotinfo = mostra informações do BOT\nzUserinfo (usuário) = mostra as informações do usuário mencionado\nzGif = Manda um gif aleatório \nBreve mais coisas...```")
 
-    if message.content.lower().startswith('<@421862224454221824>'):
-        imagem = requests.get('https://images-ext-2.discordapp.net/external/UuIdfaTGI15OWrW9tZnlXD-rjkhVSzsuQXhUh7463Pg/https/i.imgur.com/T8auOavh.jpg?width=764&height=430', stream=True)
-        await client.send_file(message.channel, io.BytesIO(imagem.raw.read()), filename='zueiroanonimo.png', content='<:python:419662789997756419> Falou comigo, {}?'.format(message.author.mention))
+    #if message.content.lower().startswith('<@421862224454221824>'):
+    #    imagem = requests.get('https://images-ext-2.discordapp.net/external/UuIdfaTGI15OWrW9tZnlXD-rjkhVSzsuQXhUh7463Pg/https/i.imgur.com/T8auOavh.jpg?width=764&height=430', stream=True)
+    #    await client.send_file(message.channel, io.BytesIO(imagem.raw.read()), filename='zueiroanonimo.png', content='<:python:419662789997756419> Falou comigo, {}?'.format(message.author.mention))
 
     if message.content.lower().startswith('zaviso'):
         if not message.author.server_permissions.administrator:
