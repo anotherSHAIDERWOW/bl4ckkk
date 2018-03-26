@@ -51,8 +51,52 @@ async def on_message(message):
 
 
     if message.content.lower().startswith('zhelp'):
-        await client.send_message(message.channel,
-                                  "```http\nOlá,\nNo momento ainda não estou pronto, porem posso lhe servir em algumas coisas...\nVou deixar algumas infos abaixo para lhe ajudar\n- Me adicione ao seu Discord  https://goo.gl/kDKqhF \n- Servidor oficial(Suporte) discord.me/zueirosanonimous``` \n ```- Comandos:\nzHelp = aparece esta mensagem\nzFlipcoin = cara ou coroa \nzVotar (mensagem) = o faz uma votação de acordo com sua pergunta\nzGames = Aparece uma lista de jogos e se você clicar em um dos emotes você ganha o cargo dele, entretando só ganhará o cargo se o servidor tiver os seguintes cargos:\n      CS:GO, League of Legends, Gartic, VRCHAT, Brawlhalla, GTA V, PUBG, Roblox\n       (Obs. os cargos (roles) devem estar escritos igual ao que está acima)\nzSteam = mostra nosso Grupo da Steam\nzAvatar {usuário} = mostra o avatar daquele usuário que foi mencionado\nzServerinfo = mostra as informações do server\nzBotinfo = mostra informações do BOT\nzUserinfo (usuário) = mostra as informações do usuário mencionado\nzGif = Manda um gif aleatório \nBreve mais coisas...```")
+    #    await client.send_message(message.channel,
+    #                              "```http\nOlá,\nNo momento ainda não estou pronto, porem posso lhe servir em algumas coisas...\nVou deixar algumas infos abaixo para lhe ajudar\n- Me adicione ao seu Discord  https://goo.gl/kDKqhF \n- Servidor oficial(Suporte) discord.me/zueirosanonimous``` \n ```- Comandos:\nzHelp = aparece esta mensagem\nzFlipcoin = cara ou coroa \nzVotar (mensagem) = o faz uma votação de acordo com sua pergunta\nzGames = Aparece uma lista de jogos e se você clicar em um dos emotes você ganha o cargo dele, entretando só ganhará o cargo se o servidor tiver os seguintes cargos:\n      CS:GO, League of Legends, Gartic, VRCHAT, Brawlhalla, GTA V, PUBG, Roblox\n       (Obs. os cargos (roles) devem estar escritos igual ao que está acima)\nzSteam = mostra nosso Grupo da Steam\nzAvatar {usuário} = mostra o avatar daquele usuário que foi mencionado\nzServerinfo = mostra as informações do server\nzBotinfo = mostra informações do BOT\nzUserinfo (usuário) = mostra as informações do usuário mencionado\nzGif = Manda um gif aleatório \nBreve mais coisas...```")
+        user = message.author
+        embhelp = discord.Embed(
+            title='<:python:419660191244484609> Olá, {}'.format(message.author.name),
+            color=user.color,
+            descriptino='No momento ainda não estou pronto, porem posso lhe servir em algumas coisas...\nVou deixar algumas infos abaixo para lhe ajudar',
+        )
+        embhelp.add_field(name='<:python:419660191244484609> <:python:419660191244484609> <:python:419660191244484609> <:python:419660191244484609> <:python:419660191244484609> <:python:419660191244484609> <:python:419660191244484609> ' ,value='No momento ainda não estou pronto, porem posso lhe servir em algumas coisas...\nVou deixar algumas infos abaixo para lhe ajudar')
+        embhelp.add_field(name='Meu servidor oficial',value='http://discord.me/zueirosanonimous')
+        embhelp.add_field(name='Me adicione em seu servidor',value='https://goo.gl/kDKqhF')
+        await client.send_message(message.channel, embed=embhelp)
+        user = message.author
+        embhelp1 = discord.Embed(
+            title='<:python:419660191244484609> COMANDOS',
+            color=user.color,
+            descriptino=None,
+        )
+        embhelp1.add_field(name='zHelp', value='Aparece esta mensagem')
+        embhelp1.add_field(name='zGif', value='Mostra um Gif aleatório engraçado')
+        embhelp1.add_field(name='zVotar (mensagem)', value='Faz uma votação de ✅ ou ❌ na sua mensagem')
+        embhelp1.add_field(name='zAvatar (usuário)', value='Mostra o avatar do usuário mencionado, junto com reações')
+        embhelp1.add_field(name='zServerinfo', value='Mostra informações do servidor')
+        embhelp1.add_field(name='zBotinfo', value='Mostra minhas informações')
+        embhelp1.add_field(name='zUserinfo (usuário)', value='Mostra informações do usuário mencionado')
+        embhelp1.add_field(name='zSteam', value='Mostra meu grupo da Steam')
+        embhelp1.add_field(name='zFlipcoin', value='Famoso "cara ou coroa"')
+        embhelp1.add_field(name='zGames', value='Aparece uma lista de jogos e se você clicar em um dos emotes você ganha o cargo dele, entretando só ganhará o cargo se o servidor tiver os seguintes cargos: `CS:GO, League of Legends, Gartic, VRCHAT, Brawlhalla, GTA V, PUBG, Roblox` (Obs. os cargos (roles) devem estar escritos igual ao que está acima)')
+        embhelp1.add_field(name='zPing', value='Quantos segundos o BOT demora pra responder ?')
+        await client.send_message(message.channel, embed=embhelp1)
+        embhelp2 = discord.Embed(
+            title='<:python:419660191244484609> COMANDOS PARA ADMs',
+            color=amarelo,
+            descriptino=None,
+        )
+        embhelp2.add_field(name='zAviso (usuário) (mensagem)', value='Manda uma mensagem para o usuário mencionado através do BOT')
+        await client.send_message(message.channel, embed=embhelp2)
+        embhelp99 = discord.Embed(
+            title='<:python:419660191244484609> BREVE MAIS...',
+            color=azul,
+            descriptino=None,
+        )
+        embhelp99.add_field(name='Só pra enfatizar...', value='Este bot ainda está em desenvolvimento')
+        await client.send_message(message.channel, embed=embhelp99)
+
+
 
     if message.content.lower().startswith('<@421862224454221824>'):
         user = message.author
