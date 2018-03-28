@@ -44,7 +44,18 @@ async def on_ready():
 @client.event
 async def on_message(message):
 
-
+    if message.content.lower().startswith('<@426850189836419092>'):
+        user = message.author
+        embtestmarc = discord.Embed(
+            title='<:python:419662789997756419> Reação da LoriS ao ver sua marcação, {}'.format(message.author.name),
+            color=user.color,
+            descriptino="VACILÃO MORRE CEDO",
+        )
+        embtestmarc.set_image(
+            url='https://www.google.com.br/search?biw=1366&bih=662&tbm=isch&sa=1&ei=nZy7WrnZG4WrwASI6b-IBw&q=gif+zueira&oq=gif+zueira&gs_l=psy-ab.3...82605.82719.0.82842.2.2.0.0.0.0.0.0..0.0....0...1c.1.64.psy-ab..2.0.0....0.nfDpNkTOz5k#imgrc=ejIo82PTqaOZsM:')
+        testmarc1 = await client.send_message(message.channel, embed=embtestmarc)
+    
+    
 
 
 
