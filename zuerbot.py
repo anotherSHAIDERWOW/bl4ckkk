@@ -43,7 +43,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-
+    ###################################BOTS DO LAB###########################################
+    #LoriS
     if message.content.lower().startswith('<@426850189836419092>'):
         user = message.author
         embtestmarc = discord.Embed(
@@ -54,6 +55,22 @@ async def on_message(message):
         embtestmarc.set_image(
             url='https://img00.deviantart.net/358f/i/2014/108/0/7/erza_scarlet_s_cake_problem_by_picklesandpigtails-d7f19lf.jpg')
         testmarc1 = await client.send_message(message.channel, embed=embtestmarc)
+    #ZERO
+    if message.content.lower().startswith('<@410173139084115968>'):
+        user = message.author
+        embtestmarc1 = discord.Embed(
+            title='<:python:419662789997756419> Reação do Zero ao ver sua marcação, {}'.format(message.author.name),
+            color=user.color,
+            descriptino="VACILÃO MORRE CEDO",
+        )
+        embtestmarc1.set_image(
+            url='https://media.discordapp.net/attachments/425866379921719297/428576974005338117/Izuku_Midoriya.png?width=589&height=431')
+        testmarc11 = await client.send_message(message.channel, embed=embtestmarc1)
+    ############################################################################################
+    
+    
+    
+    
     
     
 
