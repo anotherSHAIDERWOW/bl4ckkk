@@ -52,7 +52,7 @@ async def on_message(message):
             descriptino="VACILÃO MORRE CEDO",
         )
         embtestmarc.set_image(
-            url='https://www.google.com.br/search?biw=1366&bih=662&tbm=isch&sa=1&ei=nZy7WrnZG4WrwASI6b-IBw&q=gif+zueira&oq=gif+zueira&gs_l=psy-ab.3...82605.82719.0.82842.2.2.0.0.0.0.0.0..0.0....0...1c.1.64.psy-ab..2.0.0....0.nfDpNkTOz5k#imgrc=ejIo82PTqaOZsM:')
+            url='http://s2.glbimg.com/DEW7nk8HcCDewOXtn8YECe5sx34=/s.glbimg.com/jo/g1/f/original/2014/06/26/giphy_12.gif')
         testmarc1 = await client.send_message(message.channel, embed=embtestmarc)
     
     
