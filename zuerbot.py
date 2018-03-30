@@ -43,6 +43,14 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+
+
+
+
+
+
+
+
     ###################################BOTS DO LAB###########################################
     #LoriS
     if message.content.lower().startswith('<@426850189836419092>'):
@@ -66,21 +74,28 @@ async def on_message(message):
         embtestmarc1.set_image(
             url='https://media.discordapp.net/attachments/425866379921719297/428576974005338117/Izuku_Midoriya.png?width=589&height=431')
         testmarc11 = await client.send_message(message.channel, embed=embtestmarc1)
+
+    if message.content.lower().startswith('<@426745809833295872>'):
+        user = message.author
+        embtestmarc2 = discord.Embed(
+            title='<:python:419662789997756419> Reação da üc207Pr4f5t9 ao ver sua marcação, {}'.format(message.author.name),
+            color=user.color,
+            descriptino="VACILÃO MORRE CEDO",
+        )
+        embtestmarc2.set_image(
+            url='https://i.pinimg.com/originals/d0/e0/1c/d0e01cae1613414eff5e5091ac09b934.jpg')
+        testmarc1 = await client.send_message(message.channel, embed=embtestmarc2)
     ############################################################################################
-    
-    
-    
-    
-    
-    
 
-
-
-
+    if message.content.lower().startswith('z.py'):
+        usermsgcod = message.content[4:]
+        try:
+            await client.send_message(message.channel,'<:python:426890674256740384> {} enviou o segunte código:\n```python\n {} \n```'.format(message.author.mention, usermsgcod))
+            await client.delete_message(message)
+        except:
+            await client.send_message(message.channel, 'Esqueceu de por o código, bb.')
 
     if message.content.lower().startswith('zhelp'):
-    #    await client.send_message(message.channel,
-    #                              "```http\nOlá,\nNo momento ainda não estou pronto, porem posso lhe servir em algumas coisas...\nVou deixar algumas infos abaixo para lhe ajudar\n- Me adicione ao seu Discord  https://goo.gl/kDKqhF \n- Servidor oficial(Suporte) discord.me/zueirosanonimous``` \n ```- Comandos:\nzHelp = aparece esta mensagem\nzFlipcoin = cara ou coroa \nzVotar (mensagem) = o faz uma votação de acordo com sua pergunta\nzGames = Aparece uma lista de jogos e se você clicar em um dos emotes você ganha o cargo dele, entretando só ganhará o cargo se o servidor tiver os seguintes cargos:\n      CS:GO, League of Legends, Gartic, VRCHAT, Brawlhalla, GTA V, PUBG, Roblox\n       (Obs. os cargos (roles) devem estar escritos igual ao que está acima)\nzSteam = mostra nosso Grupo da Steam\nzAvatar {usuário} = mostra o avatar daquele usuário que foi mencionado\nzServerinfo = mostra as informações do server\nzBotinfo = mostra informações do BOT\nzUserinfo (usuário) = mostra as informações do usuário mencionado\nzGif = Manda um gif aleatório \nBreve mais coisas...```")
         user = message.author
         embhelp = discord.Embed(
             title='<:python:419660191244484609> Olá, {}'.format(message.author.name),
@@ -97,17 +112,18 @@ async def on_message(message):
             color=user.color,
             descriptino=None,
         )
-        embhelp1.add_field(name='zHelp', value='Aparece esta mensagem')
-        embhelp1.add_field(name='zGif', value='Mostra um Gif aleatório engraçado')
-        embhelp1.add_field(name='zVotar (mensagem)', value='Faz uma votação de ✅ ou ❌ na sua mensagem')
-        embhelp1.add_field(name='zAvatar (usuário)', value='Mostra o avatar do usuário mencionado, junto com reações')
-        embhelp1.add_field(name='zServerinfo', value='Mostra informações do servidor')
-        embhelp1.add_field(name='zBotinfo', value='Mostra minhas informações')
-        embhelp1.add_field(name='zUserinfo (usuário)', value='Mostra informações do usuário mencionado')
+        embhelp1.add_field(name='zHelp', value='Aparece esta mensagem, com todos os comandos do BOT')
+        embhelp1.add_field(name='zGif', value='Mostra um Gif aleatório engraçado aleatório')
+        embhelp1.add_field(name='zVotar + (mensagem)', value='Faz uma votação de ✅ ou ❌ na sua mensagem')
+        embhelp1.add_field(name='zAvatar + (usuário)', value='Mostra o avatar do usuário mencionado, junto com reações')
+        embhelp1.add_field(name='zServerinfo', value='Mostra informações do servidor em que o BOT está')
+        embhelp1.add_field(name='zBotinfo', value='Mostra minhas informações, ou seja, as informações do Zueiro Anonimo')
+        embhelp1.add_field(name='zUserinfo + (usuário)', value='Mostra suas informações, caso mencione alguém, mostrará a do usuário mencionado')
         embhelp1.add_field(name='zSteam', value='Mostra meu grupo da Steam')
-        embhelp1.add_field(name='zFlipcoin', value='Famoso "cara ou coroa"')
+        embhelp1.add_field(name='zFlipcoin', value='Famoso "cara ou coroa", o BOT reagirá se for cara(😀) ou coroa(👑)')
         embhelp1.add_field(name='zGames', value='Aparece uma lista de jogos e se você clicar em um dos emotes você ganha o cargo dele, entretando só ganhará o cargo se o servidor tiver os seguintes cargos: `CS:GO, League of Legends, Gartic, VRCHAT, Brawlhalla, GTA V, PUBG, Roblox` (Obs. os cargos (roles) devem estar escritos igual ao que está acima)')
-        embhelp1.add_field(name='zPing', value='Quantos segundos o BOT demora pra responder ?')
+        embhelp1.add_field(name='zPing', value='Quantos segundos o BOT demora pra responder ? Teste de velocidade da internet do BOT')
+        embhelp1.add_field(name='z.Py + (código)', value='Envia o código do formato Python formatado devolta')
         await client.send_message(message.channel, embed=embhelp1)
         embhelp2 = discord.Embed(
             title='<:python:419660191244484609> COMANDOS PARA ADMs',
@@ -299,38 +315,50 @@ async def on_message(message):
         await client.send_message(message.channel, "```Entra lá bb``` \nhttps://goo.gl/R2mC2g")
 
     if message.content.lower().startswith('zgif'):
-        choice = random.randint(1, 11)
+        embgif = discord.Embed(
+            title='O gif escolhido aleatóriamente foi....',
+            color=azul,
+            descriptino=None,
+        )
+        choice = random.randint(1, 17)
         if choice == 1:
-            await client.send_message(message.channel,
-                                      " <:python:420390751399051265> https://i.pinimg.com/originals/03/38/ed/0338ed402affbb1f80961f09a7153d35.gif")
+            linkdogif = "https://i.pinimg.com/originals/03/38/ed/0338ed402affbb1f80961f09a7153d35.gif"
         if choice == 2:
-            await client.send_message(message.channel, " <:python:420390751399051265>  https://www.tenor.co/O1zu.gif")
+            linkdogif = "https://www.tenor.co/O1zu.gif"
         if choice == 3:
-            await client.send_message(message.channel,
-                                      " <:python:420390751399051265>  https://media.giphy.com/media/Ewd3jzmdc9XKo/giphy.gif")
+            linkdogif = "https://media.giphy.com/media/Ewd3jzmdc9XKo/giphy.gif"
         if choice == 4:
-            await client.send_message(message.channel,
-                                      " <:python:420390751399051265>  https://i.pinimg.com/originals/82/32/0d/82320d4e1f8d1b1f4a7878817cc02bb9.gif")
+            linkdogif = "https://i.pinimg.com/originals/82/32/0d/82320d4e1f8d1b1f4a7878817cc02bb9.gif"
         if choice == 5:
-            await client.send_message(message.channel,
-                                      " <:python:420390751399051265>  http://1.bp.blogspot.com/--a2oXKQftfs/Ua5gSz1aSXI/AAAAAAAAEAk/kKlQQB8liyg/s1600/huehuehue-brbrbr-oque-e-significado-brchan-b-como-usar-humortalouco.gif")
+            linkdogif = 'http://1.bp.blogspot.com/--a2oXKQftfs/Ua5gSz1aSXI/AAAAAAAAEAk/kKlQQB8liyg/s1600/huehuehue-brbrbr-oque-e-significado-brchan-b-como-usar-humortalouco.gif'
         if choice == 6:
-            await client.send_message(message.channel,
-                                      " <:python:420390751399051265>  https://img.buzzfeed.com/buzzfeed-static/static/2017-04/21/12/asset/buzzfeed-prod-fastlane-03/anigif_sub-buzz-8560-1492791743-1.gif")
+            linkdogif = "https://img.buzzfeed.com/buzzfeed-static/static/2017-04/21/12/asset/buzzfeed-prod-fastlane-03/anigif_sub-buzz-8560-1492791743-1.gif"
         if choice == 7:
-            await client.send_message(message.channel,
-                                      " <:python:420390751399051265>  https://im-01.gifer.com/BkSi.gif")
+            linkdogif = "https://im-01.gifer.com/BkSi.gif"
         if choice == 8:
-            await client.send_message(message.channel,
-                                      " <:python:420390751399051265>  http://muitobacana.com/wp-content/uploads/2017/09/gif-engra%C3%A7ado-que-se-mexe-para-whatsapp-7.gif")
+            linkdogif = "http://muitobacana.com/wp-content/uploads/2017/09/gif-engra%C3%A7ado-que-se-mexe-para-whatsapp-7.gif"
         if choice == 9:
-            await client.send_message(message.channel,
-                                      " <:python:420390751399051265>  https://zippy.gfycat.com/DefensiveFrayedGentoopenguin.gif")
+            linkdogif = "https://zippy.gfycat.com/DefensiveFrayedGentoopenguin.gif"
         if choice == 10:
-            await client.send_message(message.channel,
-                                      " <:python:420390751399051265> http://www.whatstube.com.br/wp-content/uploads/2016/08/quando-o-desespero-bate.gif")
+            linkdogif = "http://www.whatstube.com.br/wp-content/uploads/2016/08/quando-o-desespero-bate.gif"
         if choice == 11:
-            await client.send_message(message.channel, " <:python:420390751399051265>  https://www.tenor.co/RhQf.gif")
+            linkdogif = "https://www.tenor.co/RhQf.gif"
+        if choice == 12:
+            linkdogif = "https://media.giphy.com/media/d3mlE7uhX8KFgEmY/source.gif"
+        if choice == 13:
+            linkdogif = "https://cdn.discordapp.com/attachments/425048501504704543/427455890300469248/20161023-001_1.gif"
+        if choice == 14:
+            linkdogif = "https://cdn.discordapp.com/attachments/425048501504704543/427227841315340298/Gifs_animados_1_thumb.gif"
+        if choice == 15:
+            linkdogif = "https://cdn.discordapp.com/attachments/425048501504704543/427226506423566336/pikachu_troll.gif"
+        if choice == 16:
+            linkdogif = "https://media.tenor.com/images/6afb17492c5b0a711b51afe70e24d3c4/tenor.gif"
+        if choice == 17:
+            linkdogif = "https://media.giphy.com/media/fc5sXBODbh1UA/giphy.gif"
+
+        embgif.set_image(url=linkdogif)
+        await client.send_message(message.channel, embed=embgif)
+
 
     if message.content.lower().startswith('zflipcoin'):
         choice = random.randint(1, 2)
@@ -437,6 +465,10 @@ async def on_reaction_add(reaction, user):
         role = discord.utils.find(lambda r: r.name == "Roblox", msg.server.roles)
         await client.add_roles(user, role)
         print("add")
+
+
+
+
 
 
 @client.event
