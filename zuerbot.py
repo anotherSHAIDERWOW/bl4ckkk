@@ -90,7 +90,7 @@ async def on_message(message):
     if message.content.lower().startswith('z.py'):
         usermsgcod = message.content[4:]
         try:
-            await client.send_message(message.channel,'<:python:426890674256740384> {} enviou o segunte código:\n```python\n {} \n```'.format(message.author.mention, usermsgcod))
+            await client.send_message(message.channel,'<:python:426890674256740384> {} enviou o segunte código:\n```python\n{} \n```'.format(message.author.mention, usermsgcod))
             await client.delete_message(message)
         except:
             await client.send_message(message.channel, 'Esqueceu de por o código, bb.')
