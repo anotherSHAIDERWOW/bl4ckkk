@@ -8,6 +8,8 @@ import io
 import re
 import time
 import youtube_dl
+import discord.ext.commands
+
 
 players = {}
 config = None
@@ -32,6 +34,7 @@ msg_id = None
 msg_user = None
 
 
+
 @client.event
 async def on_ready():
     print('BOT ONLINE - Testando')
@@ -41,8 +44,90 @@ async def on_ready():
     await client.change_presence(game=discord.Game(name='zHelp //// discord.me/zueirosanonimous'))
 
 
+
+
+
 @client.event
 async def on_message(message):
+
+
+
+    if message.content.lower().startswith('zjoin'):
+        try:
+            channel = message.author.voice.voice_channel
+            await client.join_voice_channel(channel)
+        except:
+            await client.send_message(message.channel, 'Você precisa estar em um canal de voz para me chamar')
+        if message.content.startswith('?play '):
+            try:
+                yt_url = message.content[6:]
+                channel = message.author.voice.voice_channel
+                voice = await client.join_voice_channel(channel)
+                player = await voice.create_ytdl_player(yt_url)
+                players[message.server.id] = player
+                player.start()
+            except:
+                await client.send_message(message.channel, "Error.")
+
+        try:
+            channel = message.author.voice.voice_channel
+            await client.join_voice_channel(channel)
+        except discord.errors.InvalidArgument:
+            await client.send_message(message.channel, "Nenhum canal de voz encontrado.")
+        except Exception as error:
+            await client.send_message(message.channel, "Um erro: ```{error}```".format(error=error))
+
+    if message.content.startswith('zquit'):
+        try:
+            voice_client = client.voice_client_in(message.server)
+            await voice_client.disconnect()
+        except AttributeError:
+            await client.send_message(message.channel, "Eu não estou conectado no momento.")
+        except Exception as Hugo:
+            await client.send_message(message.channel, "Um erro: ```{haus}```".format(haus=Hugo))
+
+    if message.content.startswith('zplay '):
+        try:
+            yt_url = message.content[6:]
+            if client.is_voice_connected(message.server):
+                try:
+                    voice = client.voice_client_in(message.server)
+                    players[message.server.id].stop()
+                    player = await voice.create_ytdl_player(yt_url, before_options=" -reconnect 1 -reconnect_streamed 1"
+                                                                                   " -reconnect_delay_max 5")
+                    players[message.server.id] = player
+                    player.start()
+                except Exception as e:
+                    await client.send_message(message.server, "Error: [{error}]".format(error=e))
+
+            if not client.is_voice_connected(message.server):
+                try:
+                    channel = message.author.voice.voice_channel
+                    voice = await client.join_voice_channel(channel)
+                    player = await voice.create_ytdl_player(yt_url, before_options=" -reconnect 1 -reconnect_streamed 1"
+                                                                                   " -reconnect_delay_max 5")
+                    players[message.server.id] = player
+                    player.start()
+                except Exception as error:
+                    await client.send_message(message.channel, "Error: [{error}]".format(error=error))
+
+        except Exception as e:
+            await client.send_message(message.channel, "Error: [{error}]".format(error=e))
+
+
+
+
+    if message.content.startswith('zpause'):
+        try:
+            players[message.server.id].pause()
+        except Exception as error:
+            await client.send_message(message.channel, "Error: [{error}]".format(error=error))
+    if message.content.startswith('zresume'):
+        try:
+            players[message.server.id].resume()
+        except Exception as error:
+            await client.send_message(message.channel, "Error: [{error}]".format(error=error))
+
 
 
 
@@ -96,6 +181,35 @@ async def on_message(message):
             await client.send_message(message.channel, 'Esqueceu de por o código, bb.')
 
     if message.content.lower().startswith('zhelp'):
+        user = message.author
+        embhelp2 = discord.Embed(title='<:zueiro:426887690101981195> Olá, {}. <:hm:426887690101981195>'.format(message.author.name), color=user.color,
+                              description='No momento ainda não estou pronto,porém,posso lhe servir em algumas coisas.\n'
+                                          'Vou deixar os meus comandos abaixo para ajudar.\n'
+                                          '**zHelp : **Exibe esta mensagem.\n'
+                                          '**zGif : **Envia um gif aleatório.\n'
+                                          '**zVotar** `<mensagem>` **:** Faz uma votação por reactions.\n'
+                                          '**zAvatar : **Mostra o avatar do usuário mencionado ou do seu.\n'
+                                          '**zServerinfo : **Mostra as informações do servidor.\n'
+                                          '**zBotinfo : **Mostra algumas informações sobre mim.\n'
+                                          '**zUserinfo : **Mostra as informações do usuário mencionado ou as suas.\n'
+                                          '**zSteam : **Mostra o meu grupo da Steam.\n'
+                                          '**zFlipcoin : **Me faz reagir com cara(😀) ou coroa(👑).\n'
+                                          '**zGames : **Te dá o cargo do jogo caso você reaja com o emoji relativo ao mesmo.\n'
+                                          '`Obs:Só funciona se o servidor tiver os cargos`\n'
+                                          '**zPing : **Exibe meu tempo de resposta.\n'
+                                          '**z.Py** `<código>`**:** Coloca a fonte python do discord no seu código.\n'
+                                          '<:python:419660191244484609>**Comandos que requerem permissões de administrador.**<:python:419660191244484609>\n'
+                                          '**zAviso** `<menção>` `<mensagem>` **:** Envia uma mensagem ao usuário mencionado através de mim.\n'
+                                '**ME ADICIONE AO SEU SERVIDOR**\n'
+                                          'Me adicione ao seu servidor usando este link:\n'
+                                          '[Link direto](' + "https://goo.gl/kDKqhF" +')\n'
+                                          'Servidor oficial (para suporte e afins):\n'
+                                          '[Link direto](' + "http://discord.me/zueirosanonimous" + ')\n')
+        await client.send_message(message.channel, embed=embhelp2)
+
+
+
+    if message.content.lower().startswith('zzhelpantigasso'):
         user = message.author
         embhelp = discord.Embed(
             title='<:python:419660191244484609> Olá, {}'.format(message.author.name),
@@ -320,7 +434,7 @@ async def on_message(message):
             color=azul,
             descriptino=None,
         )
-        choice = random.randint(1, 17)
+        choice = random.randint(1,17)
         if choice == 1:
             linkdogif = "https://i.pinimg.com/originals/03/38/ed/0338ed402affbb1f80961f09a7153d35.gif"
         if choice == 2:
@@ -338,7 +452,7 @@ async def on_message(message):
         if choice == 8:
             linkdogif = "http://muitobacana.com/wp-content/uploads/2017/09/gif-engra%C3%A7ado-que-se-mexe-para-whatsapp-7.gif"
         if choice == 9:
-            linkdogif = "https://zippy.gfycat.com/DefensiveFrayedGentoopenguin.gif"
+            linkdogif = "https://thumbs.gfycat.com/DefensiveFrayedGentoopenguin-size_restricted.gif"
         if choice == 10:
             linkdogif = "http://www.whatstube.com.br/wp-content/uploads/2016/08/quando-o-desespero-bate.gif"
         if choice == 11:
