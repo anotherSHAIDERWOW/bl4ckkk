@@ -52,89 +52,152 @@ async def on_message(message):
 
 
 
-    if message.content.lower().startswith('zjoin'):
-        try:
-            channel = message.author.voice.voice_channel
-            await client.join_voice_channel(channel)
-        except:
-            await client.send_message(message.channel, 'Você precisa estar em um canal de voz para me chamar')
-        if message.content.startswith('?play '):
-            try:
-                yt_url = message.content[6:]
-                channel = message.author.voice.voice_channel
-                voice = await client.join_voice_channel(channel)
-                player = await voice.create_ytdl_player(yt_url)
-                players[message.server.id] = player
-                player.start()
-            except:
-                await client.send_message(message.channel, "Error.")
+    if message.content.startswith('zzzentrar'):
+      try:
+        canal = message.author.voice.voice_channel
+        await client.join_voice_channel(canal)
+      except discord.errors.InvalidArgument:
+             await client.send_message(message.channel, "Tu acha que eu vou advinhar em qual canal de voz entrar ? entra nele primeiro, depois me chama!")
 
-        try:
-            channel = message.author.voice.voice_channel
-            await client.join_voice_channel(channel)
-        except discord.errors.InvalidArgument:
-            await client.send_message(message.channel, "Nenhum canal de voz encontrado.")
-        except Exception as error:
-            await client.send_message(message.channel, "Um erro: ```{error}```".format(error=error))
-
-    if message.content.startswith('zquit'):
-        try:
-            voice_client = client.voice_client_in(message.server)
-            await voice_client.disconnect()
-        except AttributeError:
-            await client.send_message(message.channel, "Eu não estou conectado no momento.")
-        except Exception as Hugo:
-            await client.send_message(message.channel, "Um erro: ```{haus}```".format(haus=Hugo))
-
-    if message.content.startswith('zplay '):
-        try:
-            yt_url = message.content[6:]
-            if client.is_voice_connected(message.server):
-                try:
-                    voice = client.voice_client_in(message.server)
-                    players[message.server.id].stop()
-                    player = await voice.create_ytdl_player(yt_url, before_options=" -reconnect 1 -reconnect_streamed 1"
-                                                                                   " -reconnect_delay_max 5")
-                    players[message.server.id] = player
-                    player.start()
-                except Exception as e:
-                    await client.send_message(message.server, "Error: [{error}]".format(error=e))
-
-            if not client.is_voice_connected(message.server):
-                try:
-                    channel = message.author.voice.voice_channel
-                    voice = await client.join_voice_channel(channel)
-                    player = await voice.create_ytdl_player(yt_url, before_options=" -reconnect 1 -reconnect_streamed 1"
-                                                                                   " -reconnect_delay_max 5")
-                    players[message.server.id] = player
-                    player.start()
-                except Exception as error:
-                    await client.send_message(message.channel, "Error: [{error}]".format(error=error))
-
-        except Exception as e:
-            await client.send_message(message.channel, "Error: [{error}]".format(error=e))
+    if message.content.startswith('zzzsair'):
+      try:
+        canaldevoz = client.voice_client_in(message.server)
+        await canaldevoz.disconnect()
+      except AttributeError:
+          await client.send_message(message.channel,"Tu ta me vendo eu algum canal de voz ???? ENTÃO NÃO ME PEDE PRA SAIR!")
+    #if message.content.startswith('zplay '):
+     #   yt_url = message.content[6:]
+      #  channel = message.author.voice.voice_channel
+       # voice = await client.join_voice_channel(channel)
+        #await voice.create_ytdl_player(yt_url)
+      if message.content.lower().startswith('zzzplay'):
+        link = message.content[6:]
+        voice = client.voice_client_in(message.server)
+        player = await voice.create_ytdl_player("ytsearch:{}".format(link))
+        player.start()
+        await client.send_message(message.channel, "Tocando agora: {}".format(player.title))
 
 
 
-
-    if message.content.startswith('zpause'):
-        try:
-            players[message.server.id].pause()
-        except Exception as error:
-            await client.send_message(message.channel, "Error: [{error}]".format(error=error))
-    if message.content.startswith('zresume'):
-        try:
-            players[message.server.id].resume()
-        except Exception as error:
-            await client.send_message(message.channel, "Error: [{error}]".format(error=error))
-
-
-
-
-
-
-
-
+    ###################################INFO-LABNEGRO##################################
+    if message.content.lower().startswith('zbotslabnegro'):
+        user = message.author
+        emblabneg1 = discord.Embed(
+            title='{}, aqui estão algumas info de nossos BOTS em Python'.format(message.author.name),
+            color=user.color,
+            description='✅ = Informações completas\n❌ = Informações incompletas\n \n'
+                        '✅**Nome do bot:** Deku#5579, '
+                '**Id do bot:** 426889239318364170, '
+                '**Dono do bot:** Diego#8505, '
+                '**Id do dono:** 348920758623272960, '
+                '**Link pra invite:** https://goo.gl/u28a1h, '
+                '**LP:** Python, '
+                '**Prefixo:** `-` \n'
+                '✅**Nome do bot:** Earphone Jack#1589, '
+                '**Id do bot:** 432140087019438080, '
+                '**Dono do bot:** Diego#8505, '
+                '**Id do dono:** 348920758623272960, '
+                '**Link pra invite:** http://swifttopia.com/6870268/botepjack, '
+                '**LP:** Python, '
+                '**Prefixo:** `&` \n'
+                '✅**Nome do bot:** Pythozinho#0053, '
+                '**Id do bot:** 420703371918442499, '
+                '**Dono do bot:** Vagner#1735, '
+                '**Id do dono:** 232309115865661440, '
+                '**Link pra invite:** https://goo.gl/q9hKzS , '
+                '**LP:** Python, '
+                '**Prefixo:** `?` \n'
+                '✅**Nome do bot:** LoriS#9246, '
+                '**Id do bot:** 426850189836419092, '
+                '**Dono do bot:** Ph4#3931, '
+                '**Id do dono:** 369962464613367811, '
+                '**Link pra invite:** bit.ly/LoriSBOT, '
+                '**LP:** Python, '
+                '**Prefixo:** `L!` \n'
+                '✅**Nome do bot:** Zueiro Anonimo#9641, '
+                '**Id do bot:** 421862224454221824, '
+                '**Dono do bot:** SHAIDERWOW#6701, '
+                '**Id do dono:** 320339126601777152, '
+                '**Link pra invite:** https://goo.gl/kDKqhF, '
+                '**LP:** Python, '
+                '**Prefixo:** `z` \n'
+        )
+        emblabneg2 = discord.Embed(
+            title=None,
+            color=user.color,
+            description='✅**Nome do bot:** Beagle!#3110, '
+                '**Id do bot:** 431517427147472936, '
+                '**Dono do bot:** oCyberBR#5963 , '
+                '**Id do dono:** 409318688895008768, '
+                '**Link pra invite:** http://swifttopia.com/6870268/botbeagle, '
+                '**LP:** Python, '
+                '**Prefixo:** `b?` \n' 
+                '✅**Nome do bot:** Joder#7480, '
+                '**Id do bot:** 416669469050404865, '
+                '**Dono do bot:** Kaigo#5682, '
+                '**Id do dono:** 380441229416071170, '
+                '**Link pra invite:** https://bit.ly/Joder, '
+                '**LP:** Python, '
+                '**Prefixo:** `jd_` \n' 
+                '❌**Nome do bot:** Sesshomaru#9401, '
+                '**Id do bot:** 425670256741187604, '
+                '**Dono do bot:** Vagner#1735, '
+                '**Id do dono:** 232309115865661440, '
+                '**Link pra invite:** ?????, '
+                '**LP:** Python, '
+                '**Prefixo:** `s!` \n' 
+                '✅**Nome do bot:** Hullo!!#2613, '
+                '**Id do bot:** 431800868585865219, '
+                '**Dono do bot:** Ph4#3931, '
+                '**Id do dono:** 369962464613367811, '
+                '**Link pra invite:** bit.ly/HulloBOT, '
+                '**LP:** Python, '
+                '**Prefixo:** `!!` \n' 
+                '✅**Nome do bot:** Wanted#6346, '
+                '**Id do bot:** 429376853162197002, '
+                '**Dono do bot:** IamEduardo#6790, '
+                '**Id do dono:** 319253966586118146, '
+                '**Link pra invite:** http://swifttopia.com/6870268/botwanted, '
+                '**LP:** Python, '
+                '**Prefixo:** `w!` \n'
+        )
+        emblabneg3 = discord.Embed(
+            title=None,
+            color=user.color,
+            description='✅**Nome do bot:** Zero#0561, '
+                '**Id do bot:** 410173139084115968, '
+                '**Dono do bot:** ◤LUCAS◥#5146, '
+                '**Id do dono:** 302148993688010752, '
+                '**Link pra invite:** https://goo.gl/9nECqp, '
+                '**LP:** Python, '
+                '**Prefixo:** `.` \n' 
+                '✅**Nome do bot:** Shelect#7633, '
+                '**Id do bot:** 414639245932756992, '
+                '**Dono do bot:** yNerdSz.py 🔥#2937, '
+                '**Id do dono:** 326513443693920266, '
+                '**Link pra invite:** http://swifttopia.com/6870268/botshelect, '
+                '**LP:** Python, '
+                '**Prefixo:** `sh!` \n' 
+                '❌**Nome do bot:** GeniusesBot#4849, '
+                '**Id do bot:** 429022581614444553, '
+                '**Dono do bot:** Dono#1090, '
+                '**Id do dono:** ?????, '
+                '**Link pra invite:** http://swifttopia.com/6870268/botgenuis, '
+                '**LP:** Python, '
+                '**Prefixo:** `?` \n' 
+                '✅**Nome do bot:** Rafaela#2740, '
+                '**Id do bot:** 428321055539462145, '
+                '**Dono do bot:** yFunnyBr Lira#3629, '
+                '**Id do dono:** 264101569333559297, '
+                '**Link pra invite:** http://swifttopia.com/6870268/botrafaela, '
+                '**LP:** Python, '
+                '**Prefixo:** `.` \n'
+        )
+        emblabneg3.set_footer(text="Todas as informações foram pegas em: https://h4rt3ck.wixsite.com/apocryphos/forum/programacao/_bots")
+        await client.send_message(message.channel, embed=emblabneg1)
+        await client.send_message(message.channel, embed=emblabneg2)
+        await client.send_message(message.channel, embed=emblabneg3)
+    ##################################################################################
 
     ###################################BOTS DO LAB###########################################
     #LoriS
