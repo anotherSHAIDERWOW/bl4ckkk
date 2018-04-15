@@ -281,7 +281,7 @@ async def on_message(message):
         )
         embhelp.add_field(name='<:python:419660191244484609> <:python:419660191244484609> <:python:419660191244484609> <:python:419660191244484609> <:python:419660191244484609> <:python:419660191244484609> <:python:419660191244484609> ' ,value='No momento ainda não estou pronto, porem posso lhe servir em algumas coisas...\nVou deixar algumas infos abaixo para lhe ajudar')
         embhelp.add_field(name='Meu servidor oficial',value='http://discord.me/zueirosanonimous')
-        embhelp.add_field(name='Me adicione em seu servidor',value='https://goo.gl/kDKqhF')
+        embhelp.add_field(name='Me adicione em seu servidor',value='http://swifttopia.com/6870268/zueiroanonimo')
         await client.send_message(message.channel, embed=embhelp)
         user = message.author
         embhelp1 = discord.Embed(
@@ -384,7 +384,7 @@ async def on_message(message):
         )
         embedbotin.set_thumbnail(url=client.user.avatar_url)
         embedbotin.add_field(name='Discord BOT Básico', value='Sendo atualizado cada vez mais')
-        embedbotin.add_field(name='Me adicione em seu server', value='https://goo.gl/kDKqhF')
+        embedbotin.add_field(name='Me adicione em seu server', value='http://swifttopia.com/6870268/zueiroanonimo')
         embedbotin.add_field(name='estou online em',
                              value='` ' + (str(len(client.servers))) + ' `  Serve(s) <:python:419660191244484609> ')
         embedbotin.add_field(name='Em contato com', value=str(len(set(client.get_all_members()))) + ' usuarios')
