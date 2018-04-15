@@ -52,14 +52,14 @@ async def on_message(message):
 
 
 
-    if message.content.startswith('zzzentrar'):
+    if message.content.startswith('zzzentr4r'):
       try:
         canal = message.author.voice.voice_channel
         await client.join_voice_channel(canal)
       except discord.errors.InvalidArgument:
              await client.send_message(message.channel, "Tu acha que eu vou advinhar em qual canal de voz entrar ? entra nele primeiro, depois me chama!")
 
-    if message.content.startswith('zzzsair'):
+    if message.content.startswith('zzzs4ir'):
       try:
         canaldevoz = client.voice_client_in(message.server)
         await canaldevoz.disconnect()
@@ -70,12 +70,21 @@ async def on_message(message):
       #  channel = message.author.voice.voice_channel
        # voice = await client.join_voice_channel(channel)
         #await voice.create_ytdl_player(yt_url)
-      if message.content.lower().startswith('zzzplay'):
-        link = message.content[6:]
-        voice = client.voice_client_in(message.server)
-        player = await voice.create_ytdl_player("ytsearch:{}".format(link))
-        player.start()
-        await client.send_message(message.channel, "Tocando agora: {}".format(player.title))
+    if message.content.startswith('zzzpl4y'):
+            link = message.content[8:]
+            canal = message.author.voice.voice_channel
+            voice = await client.join_voice_channel(canal)
+            player = await voice.create_ytdl_player(link)
+            player.start()
+            embedmusic = discord.Embed(
+                title=":headphones: Tocando agora : {0}".format(player.title),
+                colour=azul,
+                descripition='\n'
+            )
+            embedmusic.set_thumbnail(url='https://i.pinimg.com/originals/a7/28/a7/a728a76e57ef17416040dd45a6548845.png%27')
+            embedmusic.add_field(name='Duração', value='{} segundos'.format(player.duration))
+            embedmusic.add_field(name="Música requisitada por", value='{}'.format(message.author.name))
+            await client.send_message(message.channel, embed=embedmusic)
 
 
 
@@ -118,7 +127,7 @@ async def on_message(message):
                 '**Id do bot:** 421862224454221824, '
                 '**Dono do bot:** SHAIDERWOW#6701, '
                 '**Id do dono:** 320339126601777152, '
-                '**Link pra invite:** https://goo.gl/kDKqhF, '
+                '**Link pra invite:** http://swifttopia.com/6870268/zueiroanonimo, '
                 '**LP:** Python, '
                 '**Prefixo:** `z` \n'
         )
@@ -198,7 +207,6 @@ async def on_message(message):
         await client.send_message(message.channel, embed=emblabneg2)
         await client.send_message(message.channel, embed=emblabneg3)
     ##################################################################################
-
     ###################################BOTS DO LAB###########################################
     #LoriS
     if message.content.lower().startswith('<@426850189836419092>'):
@@ -235,6 +243,37 @@ async def on_message(message):
         testmarc1 = await client.send_message(message.channel, embed=embtestmarc2)
     ############################################################################################
 
+    if message.content.lower().startswith('zserie'):
+        embserie = discord.Embed(
+            title='{}, aqui está sua recomendação'.format(message.author.name),
+            color=azul,
+            descriptino=None,
+        )
+        choice = random.randint(1,2)
+        if choice == 1:
+            tituloserie = 'Sherlock'
+            sinopseserie = 'O dr. John Watson precisa de um lugar para morar em Londres. Ele é apresentado ao detetive Sherlock Holmes e os dois acabam desenvolvendo uma parceria intrigante, na qual a dupla vagará pela capital inglesa solucionando assassinatos e outros crimes brutais. Tudo isso em pleno século XXI.'
+            fotinhaserie = 'http://cabanadoleitor.com.br/wp-content/uploads/2017/01/sherlock-season-4-netflix.jpg'
+            authorserie = 'SHAIDERWOW#6701'
+        if choice == 2:
+            tituloserie = 'Game of Thrones'
+            sinopseserie = 'Há muito tempo, em um tempo esquecido, uma força destruiu o equilíbrio das estações. Em uma terra onde os verões podem durar vários anos e o inverno toda uma vida, as reivindicações e as forças sobrenaturais correm as portas do Reino dos Sete Reinos. A irmandade da Patrulha da Noite busca proteger o reino de cada criatura que pode vir de lá da Muralha, mas já não tem os recursos necessários para garantir a segurança de todos. Depois de um verão de dez anos, um inverno rigoroso promete chegar com um futuro mais sombrio. Enquanto isso, conspirações e rivalidades correm no jogo político pela disputa do Trono de Ferro, o símbolo do poder absoluto.'
+            fotinhaserie = 'https://upload.wikimedia.org/wikipedia/pt/a/a0/GameofThrones.png'
+            authorserie = 'SHAIDERWOW#6701'
+
+
+        embserie.add_field(name=tituloserie, value=sinopseserie)
+        embserie.set_image(url=fotinhaserie)
+        embserie.set_footer(text='Recomendação criada por {}.\n      Adicione sua série também em:  https://goo.gl/forms/9ijb6PLgyjEvJY5d2'.format(authorserie))
+        recoserie = await client.send_message(message.channel, embed=embserie)
+        await client.add_reaction(recoserie, '😍')
+        await client.add_reaction(recoserie, '😃')
+        await client.add_reaction(recoserie, '😑')
+        await client.add_reaction(recoserie, '☹')
+
+
+
+
     if message.content.lower().startswith('z.py'):
         usermsgcod = message.content[4:]
         try:
@@ -257,6 +296,7 @@ async def on_message(message):
                                           '**zUserinfo : **Mostra as informações do usuário mencionado ou as suas.\n'
                                           '**zSteam : **Mostra o meu grupo da Steam.\n'
                                           '**zFlipcoin : **Me faz reagir com cara(😀) ou coroa(👑).\n'
+                                          '**zSerie : **Eu te mostro uma recomendação de série'
                                           '**zGames : **Te dá o cargo do jogo caso você reaja com o emoji relativo ao mesmo.\n'
                                           '`Obs:Só funciona se o servidor tiver os cargos`\n'
                                           '**zPing : **Exibe meu tempo de resposta.\n'
