@@ -297,7 +297,7 @@ async def on_message(message):
                                           '**zUserinfo : **Mostra as informações do usuário mencionado ou as suas.\n'
                                           '**zSteam : **Mostra o meu grupo da Steam.\n'
                                           '**zFlipcoin : **Me faz reagir com cara(😀) ou coroa(👑).\n'
-                                          '**zSerie : **Eu te mostro uma recomendação de série'
+                                          '**zSerie : **Eu te mostro uma recomendação de série.\n'
                                           '**zGames : **Te dá o cargo do jogo caso você reaja com o emoji relativo ao mesmo.\n'
                                           '`Obs:Só funciona se o servidor tiver os cargos`\n'
                                           '**zPing : **Exibe meu tempo de resposta.\n'
