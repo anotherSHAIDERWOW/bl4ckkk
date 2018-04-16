@@ -267,9 +267,9 @@ async def on_message(message):
             authorserie = 'Tulio 🌠#7588'
             
 
-        embserie.add_field(name=tituloserie, value='{} \n \n \n `Adicione sua série também em: https://goo.gl/forms/9ijb6PLgyjEvJY5d2`').format(sinopseserie)
+        embserie.add_field(name=tituloserie, value=sinopseserie)
         embserie.set_image(url=fotinhaserie)
-        #embserie.add_field(name='Recomende também!', value='`Adicione sua série também em: https://goo.gl/forms/9ijb6PLgyjEvJY5d2`')
+        embserie.add_field(name='Recomende também!', value='`Adicione sua série também em: https://goo.gl/forms/9ijb6PLgyjEvJY5d2`')
         embserie.set_footer(text='Recomendação criada por {}.'.format(authorserie))
         recoserie = await client.send_message(message.channel, embed=embserie)
         await client.add_reaction(recoserie, '😍')
