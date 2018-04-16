@@ -249,7 +249,7 @@ async def on_message(message):
             color=azul,
             descriptino=None,
         )
-        choice = random.randint(1,2)
+        choice = random.randint(1,3)
         if choice == 1:
             tituloserie = 'Sherlock'
             sinopseserie = 'O dr. John Watson precisa de um lugar para morar em Londres. Ele é apresentado ao detetive Sherlock Holmes e os dois acabam desenvolvendo uma parceria intrigante, na qual a dupla vagará pela capital inglesa solucionando assassinatos e outros crimes brutais. Tudo isso em pleno século XXI.'
@@ -260,11 +260,16 @@ async def on_message(message):
             sinopseserie = 'Há muito tempo, em um tempo esquecido, uma força destruiu o equilíbrio das estações. Em uma terra onde os verões podem durar vários anos e o inverno toda uma vida, as reivindicações e as forças sobrenaturais correm as portas do Reino dos Sete Reinos. A irmandade da Patrulha da Noite busca proteger o reino de cada criatura que pode vir de lá da Muralha, mas já não tem os recursos necessários para garantir a segurança de todos. Depois de um verão de dez anos, um inverno rigoroso promete chegar com um futuro mais sombrio. Enquanto isso, conspirações e rivalidades correm no jogo político pela disputa do Trono de Ferro, o símbolo do poder absoluto.'
             fotinhaserie = 'https://upload.wikimedia.org/wikipedia/pt/a/a0/GameofThrones.png'
             authorserie = 'SHAIDERWOW#6701'
+        if choice == 3:
+            tituloserie = 'La casa de papel'
+            sinopseserie = 'La Casa de Papel é uma série de televisão espanhola do gênero de filmes de assalto. Criada por Álex Pina para as redes televisão espanhola Antena 3, a série estreou em 2 de maio de 2017 estrelando Úrsula Corberó (Tókyo), Alba Flores (Nairóbi), Álvaro Morte (El Profesor), Itziar Ituño (Raquel Murillo), Pedro Alonso (Berlin), Paco Tous (Moscou), Jaime Lorente (Denver), Miguel Herrán (Rio), Darko Peric (Helsinque) e Roberto García (Oslo). A série foi adicionada internacionalmente no catálogo da Netflix no dia 25 de dezembro de 2017 com uma nova edição e diferente quantidade de episódios'
+            fotinhaserie = 'https://pbs.twimg.com/profile_images/953288656046952448/wmbDYoH4_400x400.jpg'
+            authorserie = 'Tulio 🌠#7588'
+            
 
-
-        embserie.add_field(name=tituloserie, value=sinopseserie)
+        embserie.add_field(name=tituloserie, value='{} \n \n \n `Adicione sua série também em: https://goo.gl/forms/9ijb6PLgyjEvJY5d2`').format(sinopseserie)
         embserie.set_image(url=fotinhaserie)
-        embserie.add_field(name='Recomende também!', value='`Adicione sua série também em: https://goo.gl/forms/9ijb6PLgyjEvJY5d2`')
+        #embserie.add_field(name='Recomende também!', value='`Adicione sua série também em: https://goo.gl/forms/9ijb6PLgyjEvJY5d2`')
         embserie.set_footer(text='Recomendação criada por {}.'.format(authorserie))
         recoserie = await client.send_message(message.channel, embed=embserie)
         await client.add_reaction(recoserie, '😍')
