@@ -9,6 +9,7 @@ import re
 import time
 import youtube_dl
 import discord.ext.commands
+import requests
 
 
 players = {}
@@ -46,12 +47,78 @@ async def on_ready():
 
 
 
-
 @client.event
 async def on_message(message):
 
 
 
+
+    if message.content.lower().startswith('zsugestao'):
+        try:
+            canalsuges = discord.utils.get(client.get_all_channels(), id='437736462843248651')
+            shaiderwow = discord.utils.get(client.get_all_members(), id='320339126601777152')
+            sugestao1 = message.content[9:]
+            user = message.author
+            embsuges = discord.Embed(
+                title='Nova sugestão de {}'.format(
+                    user.name),
+                color=user.color,
+                descriptino=None,
+            )
+            embsuges.set_thumbnail(url=user.avatar_url)
+            embsuges.add_field(name='sugestão:', value=sugestao1)
+            embsuges.add_field(name="Nome", value=user.name)
+            embsuges.add_field(name='Apelido', value=user.nick)
+            embsuges.add_field(name="Seu Id", value=user.id)
+            embsuges.add_field(name="Tag", value=user.discriminator)
+            await client.send_message(shaiderwow, embed=embsuges)
+            await client.send_message(message.channel, 'Sua sugestão foi enviada :3')
+            await client.send_message(canalsuges, embed=embsuges)
+        except:
+            await client.send_message(message.channel, 'Desculpe, não entendi')
+
+
+
+    if message.content.lower().startswith('zfilme'):
+        try:
+            filme1 = message.content[7:]
+            filme2 = requests.get('http://www.omdbapi.com/?t=' + filme1 + '&apikey=------')
+            filme = json.loads(filme2.text)
+            nomefil = (filme['Title'])
+
+
+            embedfil = discord.Embed(color=azul)
+            embedfil.add_field(name='Titulo:', value="{}".format(nomefil))
+
+            await client.send_message(message.channel, embed=embedfil)
+        except discord.errors.HTTPException:
+            await client.send_message(message.channel, "Não consegui encontrar o filme!")
+
+
+    if message.content.lower().startswith('zzztoc4r'):
+        #role = discord.utils.get(message.server.roles, name='DJ')
+        #if not role in message.author.roles:
+        #    return await client.send_message(message.channel, "💽``É necessário o cargo DJ para executar este comando!``")
+        link = message.content[9:]
+        voice = client.voice_client_in(message.server)
+        player = await voice.create_ytdl_player("ytsearch:{}".format(link))
+        player.start()
+        await client.send_message(message.channel, "💽``Tocando agora: {}``".format(player.title))
+
+
+    if message.content.startswith('ztist'):
+        counter = 0
+        tmp = await client.send_message(message.channel, 'Calculating messages...')
+        async for log in client.logs_from(message.channel, limit=100):
+            if log.author == message.author:
+                counter += 1
+
+        await client.edit_message(tmp, 'You have {} messages.'.format(counter))
+    elif message.content.startswith('zsleep'):
+        await asyncio.sleep(5)
+        await client.send_message(message.channel, 'Done sleeping')
+
+##############################BOT MUSIC##################################
     if message.content.startswith('zzzentr4r'):
       try:
         canal = message.author.voice.voice_channel
@@ -265,7 +332,7 @@ async def on_message(message):
             sinopseserie = 'La Casa de Papel é uma série de televisão espanhola do gênero de filmes de assalto. Criada por Álex Pina para as redes televisão espanhola Antena 3, a série estreou em 2 de maio de 2017 estrelando Úrsula Corberó (Tókyo), Alba Flores (Nairóbi), Álvaro Morte (El Profesor), Itziar Ituño (Raquel Murillo), Pedro Alonso (Berlin), Paco Tous (Moscou), Jaime Lorente (Denver), Miguel Herrán (Rio), Darko Peric (Helsinque) e Roberto García (Oslo). A série foi adicionada internacionalmente no catálogo da Netflix no dia 25 de dezembro de 2017 com uma nova edição e diferente quantidade de episódios'
             fotinhaserie = 'https://pbs.twimg.com/profile_images/953288656046952448/wmbDYoH4_400x400.jpg'
             authorserie = 'Tulio 🌠#7588'
-            
+
 
         embserie.add_field(name=tituloserie, value=sinopseserie)
         embserie.set_image(url=fotinhaserie)
@@ -306,6 +373,7 @@ async def on_message(message):
                                           '**zGames : **Te dá o cargo do jogo caso você reaja com o emoji relativo ao mesmo.\n'
                                           '`Obs:Só funciona se o servidor tiver os cargos`\n'
                                           '**zPing : **Exibe meu tempo de resposta.\n'
+                                          '**zSugestao** `<mensagem>`**:** Envia sua sigestão diretamente pro meu dono.\n'
                                           '**z.Py** `<código>`**:** Coloca a fonte python do discord no seu código.\n'
                                           '<:python:419660191244484609>**Comandos que requerem permissões de administrador.**<:python:419660191244484609>\n'
                                           '**zAviso** `<menção>` `<mensagem>` **:** Envia uma mensagem ao usuário mencionado através de mim.\n'
