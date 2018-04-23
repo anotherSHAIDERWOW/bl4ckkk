@@ -66,13 +66,14 @@ async def on_message(message):
                 descriptino=None,
             )
             embsuges.set_thumbnail(url=user.avatar_url)
-            embsuges.add_field(name='sugestão:', value=sugestao1)
+            embsuges.add_field(name='Sugestão:', value=sugestao1)
+            embsuges.add_field(name="Enviada através do server", value=message.server.name, inline=True)
             embsuges.add_field(name="Nome", value=user.name)
             embsuges.add_field(name='Apelido', value=user.nick)
             embsuges.add_field(name="Seu Id", value=user.id)
             embsuges.add_field(name="Tag", value=user.discriminator)
             await client.send_message(shaiderwow, embed=embsuges)
-            await client.send_message(message.channel, 'Sua sugestão foi enviada :3')
+            await client.send_message(message.channel, 'Sua sugestão foi enviada para o servidor de suporte :3')
             await client.send_message(canalsuges, embed=embsuges)
         except:
             await client.send_message(message.channel, 'Desculpe, não entendi')
