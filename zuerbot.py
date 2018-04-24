@@ -63,15 +63,23 @@ async def on_message(message):
                 title='Nova sugestão de {}'.format(
                     user.name),
                 color=user.color,
-                descriptino=None,
+                descriptino=None
             )
             embsuges.set_thumbnail(url=user.avatar_url)
-            embsuges.add_field(name='Sugestão:', value=sugestao1)
-            embsuges.add_field(name="Enviada através do server", value=message.server.name, inline=True)
-            embsuges.add_field(name="Nome", value=user.name)
-            embsuges.add_field(name='Apelido', value=user.nick)
-            embsuges.add_field(name="Seu Id", value=user.id)
-            embsuges.add_field(name="Tag", value=user.discriminator)
+            embsuges.add_field(name='<:zueiroanonimosafadinho:438472983942660097>  Sugestão proposta:', value=sugestao1)
+            embsuges.add_field(name="<:10barra10:438472637765779456> Informações do usuário que enviou a sugestão <:10barra10:438472637765779456>",
+                            value="**Nome**: {} \n"
+                            "**Apelido no seu server**: {} \n"
+                            "**Seu ID**: {} \n"
+                            "**Tag**: {} \n"
+                            "**Enviada através do server**: {}".format(user.name, user.nick, user.id, user.discriminator, message.server.name)
+                              )
+#            embsuges.add_field(name="Enviada através do server", value=message.server.name, inline=True)
+ #           embsuges.add_field(name="Nome", value=user.name)
+  #          embsuges.add_field(name='Apelido', value=user.nick)
+   #         embsuges.add_field(name="Seu Id", value=user.id)
+    #        embsuges.add_field(name="Tag", value=user.discriminator)
+            embsuges.set_footer(text="Este é um comando para sugestões sobre o BOT! nada mais")
             await client.send_message(shaiderwow, embed=embsuges)
             await client.send_message(message.channel, 'Sua sugestão foi enviada para o servidor de suporte :3')
             await client.send_message(canalsuges, embed=embsuges)
