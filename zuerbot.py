@@ -10,7 +10,7 @@ import time
 import youtube_dl
 import discord.ext.commands
 import requests
-
+import json
 
 players = {}
 config = None
@@ -74,11 +74,7 @@ async def on_message(message):
                             "**Tag**: {} \n"
                             "**Enviada através do server**: {}".format(user.name, user.nick, user.id, user.discriminator, message.server.name)
                               )
-#            embsuges.add_field(name="Enviada através do server", value=message.server.name, inline=True)
- #           embsuges.add_field(name="Nome", value=user.name)
-  #          embsuges.add_field(name='Apelido', value=user.nick)
-   #         embsuges.add_field(name="Seu Id", value=user.id)
-    #        embsuges.add_field(name="Tag", value=user.discriminator)
+
             embsuges.set_footer(text="Este é um comando para sugestões sobre o BOT! nada mais")
             await client.send_message(shaiderwow, embed=embsuges)
             await client.send_message(message.channel, 'Sua sugestão foi enviada para o servidor de suporte :3')
@@ -88,20 +84,72 @@ async def on_message(message):
 
 
 
+    if message.content.lower().startswith('ztstea'):
+        user = message.author
+        try:
+            steam1 = message.content[7:]
+            steam2 = requests.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=C17D1FB55BAAFBA0288B05AF103BC7B4&steamids=' + steam1 + '&format=json')
+            steam3 = requests.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=C17D1FB55BAAFBA0288B05AF103BC7B4&steamid=' + steam1 + '&format=json')
+            steamload1 = json.loads(steam2.text)
+            steamload2 = json.loads(steam3.text)
+            nomeste = steamload1['response']['players'][0]['personaname']
+            jogosste = steamload2['response']['game_count']
+        #    temposte = steamload1['response']['players'][0]['timecreated'] tempo estranho
+        #    ulonlineste = steamload1['response']['players'][0]['lastlogoff'] tempo estranho
+        #    jogandoste = steamload1['response']['players'][0]['gameextrainfo'] não da de ativar o comando sem estar jogando
+            idste = steamload1['response']['players'][0]['steamid']
+            linkste = steamload1['response']['players'][0]['profileurl']
+            avatarste = steamload1['response']['players'][0]['avatarfull']
+
+            embedsteam = discord.Embed(color=user.color)
+            embedsteam.add_field(
+                name='<:10barra10:438472637765779456> Aqui está a conta Steam que pediu, {}'.format(user.name),
+                value="**Nick:** {} \n"
+                      "**Total de jogos:** {} \n"
+                      "**ID Steam:** {} \n"
+                      "**Link do perfil:** {}"
+                      "".format(nomeste, jogosste, idste, linkste)
+            )
+            embedsteam.set_image(url=avatarste)
+            embedsteam.set_footer(text='#ZueiroAnonimoJogaNaSteam')
+            await client.send_message(message.channel, embed=embedsteam)
+        except discord.errors.HTTPException:
+            await client.send_message(message.channel, "Só consigo procurar contas por ID's por enquanto ;-; ")
+
     if message.content.lower().startswith('zfilme'):
+        user = message.author
         try:
             filme1 = message.content[7:]
-            filme2 = requests.get('http://www.omdbapi.com/?t=' + filme1 + '&apikey=------')
+            filme2 = requests.get('http://www.omdbapi.com/?apikey=c7ba758c&t=' + filme1 + '&type=movie')
             filme = json.loads(filme2.text)
             nomefil = (filme['Title'])
+            anofil = (filme['Year'])
+            imdbfil = (filme['imdbRating'])
+            duracaofil = (filme['Runtime'])
+            paisfil = (filme['Country'])
+            produtorafil = (filme['Production'])
+            linguagemfil = (filme['Language'])
+            diretorfil = (filme['Director'])
+            posterfil = (filme['Poster'])
 
 
-            embedfil = discord.Embed(color=azul)
-            embedfil.add_field(name='Titulo:', value="{}".format(nomefil))
-
+            embedfil = discord.Embed(color=user.color)
+            embedfil.add_field(name='<:10barra10:438472637765779456> Aqui está o filme 10 barra 10 que pediu, {}'.format(user.name),
+                               value="🎬 **Filme:** {} \n"
+                                     "                  📆 **Ano:** {} \n"
+                                     "⏱ **Duração:** {} \n"
+                                     "                  🔢 **Nota:** {} \n"
+                                     "🎦 **Diretor:** {} \n"
+                                     "                  🏨 **Produtora:** {} \n"
+                                     "🌍 **País:** {} \n"
+                                     "                  👅 **Linguagem:** {} \n" 
+                                     "".format(nomefil, anofil, duracaofil, imdbfil, diretorfil, produtorafil, paisfil, linguagemfil)
+                               )
+            embedfil.set_image(url=posterfil)
+            embedfil.set_footer(text="#ZueiroAninomoVirouCinéfolo")
             await client.send_message(message.channel, embed=embedfil)
         except discord.errors.HTTPException:
-            await client.send_message(message.channel, "Não consegui encontrar o filme!")
+            await client.send_message(message.channel, "Putz grila Nilce, não consegui encontrar o filme!  :C")
 
 
     if message.content.lower().startswith('zzztoc4r'):
@@ -376,9 +424,10 @@ async def on_message(message):
                                           '**zServerinfo : **Mostra as informações do servidor.\n'
                                           '**zBotinfo : **Mostra algumas informações sobre mim.\n'
                                           '**zUserinfo : **Mostra as informações do usuário mencionado ou as suas.\n'
-                                          '**zSteam : **Mostra o meu grupo da Steam.\n'
+                                          '**zGpsteam : **Mostra o meu grupo da Steam.\n'
+                                          '**zSteam** `<ID da conta>`**:** Eu lhe mostro informações sobre a conta Steam'
                                           '**zFlipcoin : **Me faz reagir com cara(😀) ou coroa(👑).\n'
-                                          '**zSerie : **Eu te mostro uma recomendação de série.\n'
+                                          '**zFilme** `<nome do filme>`**:** Eu te mostro informações do filme escolhido.\n'
                                           '**zGames : **Te dá o cargo do jogo caso você reaja com o emoji relativo ao mesmo.\n'
                                           '`Obs:Só funciona se o servidor tiver os cargos`\n'
                                           '**zPing : **Exibe meu tempo de resposta.\n'
@@ -611,7 +660,7 @@ async def on_message(message):
         embed3.set_footer(text="Copyright © 2018 - SHAIDERWOW - Zueiros Anonimous")
         await client.send_message(message.channel, embed=embed3)
 
-    if message.content.lower().startswith('zsteam'):
+    if message.content.lower().startswith('zgpsteam'):
         await client.send_message(message.channel, "```Entra lá bb``` \nhttps://goo.gl/R2mC2g")
 
     if message.content.lower().startswith('zgif'):
