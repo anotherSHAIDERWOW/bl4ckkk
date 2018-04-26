@@ -84,7 +84,7 @@ async def on_message(message):
 
 
 
-    if message.content.lower().startswith('ztstea'):
+    if message.content.lower().startswith('zsteam'):
         user = message.author
         try:
             steam1 = message.content[7:]
