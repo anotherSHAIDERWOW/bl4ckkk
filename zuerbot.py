@@ -155,7 +155,8 @@ async def on_message(message):
             embedsteam.set_footer(text='#ZueiroAnonimoJogaNaSteam')
             await client.send_message(message.channel, embed=embedsteam)
         except:
-            await client.send_message(message.channel, "Só consigo procurar contas por ID's por enquanto ;-; ")
+            await client.send_message(message.channel, "Só consigo procurar contas por ID's por enquanto ;-; \n"
+                                                       "infelizmente contas sem jogos não serão mostradas por bugs.")
 
     if message.content.lower().startswith('zfilme'):
         user = message.author
