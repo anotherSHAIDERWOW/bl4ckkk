@@ -126,6 +126,7 @@ async def on_message(message):
     if message.content.lower().startswith('zsteam'):
         user = message.author
         try:
+            testcmnd = '76561198168296588'
             steam1 = message.content[7:]
             steam2 = requests.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=C17D1FB55BAAFBA0288B05AF103BC7B4&steamids=' + steam1 + '&format=json')
             steam3 = requests.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=C17D1FB55BAAFBA0288B05AF103BC7B4&steamid=' + steam1 + '&format=json')
@@ -148,7 +149,7 @@ async def on_message(message):
                       "**Total de jogos:** {} \n"
                       "**ID Steam:** {} \n"
                       "**Link do perfil:** {}"
-                      "".format(nomeste, datetime.datetime.utcfromtimestamp(temposte).replace(tzinfo=datetime.timezone.utc), jogosste, idste, linkste)
+                      "".format(nomeste, time.strftime("%d %B %Y às %H:%M", time.localtime(temposte)), jogosste, idste, linkste)
             )
             embedsteam.set_image(url=avatarste)
             embedsteam.set_footer(text='#ZueiroAnonimoJogaNaSteam')
