@@ -89,31 +89,33 @@ async def on_message(message):
         user = message.author
         try:
             csgo1 = message.content[6:]
-        #    csgoname = requests.get(
-        #        'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=C17D1FB55BAAFBA0288B05AF103BC7B4&steamids=' + csgo1 + '&format=json')
+            csgoname = requests.get(
+                'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=C17D1FB55BAAFBA0288B05AF103BC7B4&steamids=' + csgo1 + '&format=json')
             csgo2 = requests.get('http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=C17D1FB55BAAFBA0288B05AF103BC7B4&steamid=' + csgo1 + '&l=br')
             csgoloads1 = json.loads(csgo2.text)
-        #    csgoloads2 = json.loads(csgoname.text)
-        #    namecsgo = csgoloads2['response']['players'][0]['personaname']
-            killscsgo = csgoloads1['playerstats']['stats'][0]['total_kills']
-            deathcsgo = csgoloads1['playerstats']['stats'][0]['total_deaths']
-            plantacsgo = csgoloads1['playerstats']['stats'][0]['total_planted_bombs']
-            defusecsgo = csgoloads1['playerstats']['stats'][0]['total_defused_bombs']
-        #    tempocsgo = csgoloads1['playerstats']['stats'][0]['total_time_played']
-            winscsgo = csgoloads1['playerstats']['stats'][0]['total_wins']
-            moneycsgo = csgoloads1['playerstats']['stats'][0]['total_money_earned']
+            csgoloads2 = json.loads(csgoname.text)
+            namecsgo = csgoloads2['response']['players'][0]['personaname']
+            killscsgo = csgoloads1['playerstats']['stats'][0]['value']#['total_kills']
+            deathcsgo = csgoloads1['playerstats']['stats'][1]['value']#['total_deaths']
+            plantacsgo = csgoloads1['playerstats']['stats'][3]['value']#['total_planted_bombs']
+            defusecsgo = csgoloads1['playerstats']['stats'][4]['value']#['total_defused_bombs']
+            tempocsgo = csgoloads1['playerstats']['stats'][2]['value']#['total_time_played']
+            winscsgo = csgoloads1['playerstats']['stats'][5]['value']#['total_wins']
+            moneycsgo = csgoloads1['playerstats']['stats'][7]['value']#['total_money_earned']
             thumbcsgo = 'https://orig00.deviantart.net/82ff/f/2015/340/b/b/counter_strike_global_offensive_png_icon_by_vezty-d87f3ww.png'
 
             embedcsgo = discord.Embed(color=user.color)
             embedcsgo.add_field(name='<:personcs:439190430924668939> Informações da conta <:personcs:439190430924668939>',
-                                value="<:globalcsgo:439190468337598474> **Nick Atual:** xx <:globalcsgo:439190468337598474>\n"
+                                value="<:globalcsgo:439190468337598474> **Nick Atual:** {} <:globalcsgo:439190468337598474>\n"
                                       "<:miracsgo:439190488780898315> **Total de Kills:** {}           <:armacsgo:439190272413532160> **Total de mortes:** {} \n"
-                                      "<:trcsgo:439190365980065792> **Bombas plantadas:** {}           <:ctcsgo:439190338364768256> **Total de bombas defusadas:** {} \n"
-                                      "<:a_csgo:439190388830371852> **Total de vitórias:** {}            <:b_csgo:439190449710956544> **Total de Money em partidas:** {} \n"
-                                      "<:x_csgo:439190408686469120> **Total de tempo jogado:** xx \n"
-                                      "".format(killscsgo, deathcsgo, plantacsgo, defusecsgo, winscsgo, moneycsgo, ))
+                                      "<:trcsgo:439190365980065792> **Bombas plantadas:** {}           <:ctcsgo:439190338364768256> **Bombas defusadas:** {} \n"
+                                      "<:a_csgo:439190388830371852> **Total de vitórias:** {} \n"
+                                      "<:b_csgo:439190449710956544> **Money ganho em partidas:** ${} \n"
+                                      "<:x_csgo:439190408686469120> **Total de tempo jogado:** {} \n"
+                                      "".format(namecsgo, killscsgo, deathcsgo, plantacsgo, defusecsgo, winscsgo, moneycsgo, time.strftime("%d dias e %H:%M horas", time.localtime(tempocsgo)))
+                                )
             embedcsgo.set_thumbnail(url=thumbcsgo)
-            embedcsgo.set_footer(text="Vem X1 noob, tenho Asiimov")
+            embedcsgo.set_footer(text="Seus Frags ultrapassam a barreira do -4")
             await client.send_message(message.channel, embed=embedcsgo)
         except discord.errors.HTTPException:
             await client.send_message(message.channel, "Só consigo procurar por ID's de conta Steam ;-; ")
@@ -149,7 +151,7 @@ async def on_message(message):
                       "**Total de jogos:** {} \n"
                       "**ID Steam:** {} \n"
                       "**Link do perfil:** {}"
-                      "".format(nomeste, time.strftime("%d %B %Y às %H:%M", time.localtime(temposte)), jogosste, idste, linkste)
+                      "".format(nomeste, time.strftime("%d %m %Y às %H:%M", time.localtime(temposte)), jogosste, idste, linkste)
             )
             embedsteam.set_image(url=avatarste)
             embedsteam.set_footer(text='#ZueiroAnonimoJogaNaSteam')
@@ -467,7 +469,8 @@ async def on_message(message):
                                           '**zBotinfo : **Mostra algumas informações sobre mim.\n'
                                           '**zUserinfo : **Mostra as informações do usuário mencionado ou as suas.\n'
                                           '**zGpsteam : **Mostra o meu grupo da Steam.\n'
-                                          '**zSteam** `<ID da conta>`**:** Eu lhe mostro informações sobre a conta Steam'
+                                          '**zSteam** `<ID da conta>`**:** Eu lhe mostro informações sobre a conta Steam. \n'
+                                          '**zCsgo** `<ID da Steam>`**:** Eu lhe mostro as informações sobre a conta de CS:GO\n'
                                           '**zFlipcoin : **Me faz reagir com cara(😀) ou coroa(👑).\n'
                                           '**zFilme** `<nome do filme>`**:** Eu te mostro informações do filme escolhido.\n'
                                           '**zGames : **Te dá o cargo do jogo caso você reaja com o emoji relativo ao mesmo.\n'
@@ -805,6 +808,7 @@ async def on_message(message):
     await client.add_reaction(botmsg, "📺")
     await client.add_reaction(botmsg, "⌛")
     await client.add_reaction(botmsg, "📦")
+    return None
 
     global msg_id
     msg_id = botmsg.id
