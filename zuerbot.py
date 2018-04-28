@@ -117,8 +117,8 @@ async def on_message(message):
             embedcsgo.set_thumbnail(url=thumbcsgo)
             embedcsgo.set_footer(text="Seus Frags ultrapassam a barreira do -4")
             await client.send_message(message.channel, embed=embedcsgo)
-        except discord.errors.HTTPException:
-            await client.send_message(message.channel, "Só consigo procurar por ID's de conta Steam ;-; ")
+        except:
+            await client.send_message(message.channel, "# Só consigo procurar por ID's de conta Steam ;-; ")
 
 
 
@@ -130,10 +130,12 @@ async def on_message(message):
         try:
             testcmnd = '76561198168296588'
             steam1 = message.content[7:]
+            steam4 = requests.get('http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=C17D1FB55BAAFBA0288B05AF103BC7B4&steamid=' + steam1 + '&format=json')
             steam2 = requests.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=C17D1FB55BAAFBA0288B05AF103BC7B4&steamids=' + steam1 + '&format=json')
             steam3 = requests.get('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=C17D1FB55BAAFBA0288B05AF103BC7B4&steamid=' + steam1 + '&format=json')
             steamload1 = json.loads(steam2.text)
             steamload2 = json.loads(steam3.text)
+            steamload3 = json.loads(steam4.text)
             nomeste = steamload1['response']['players'][0]['personaname']
             jogosste = steamload2['response']['game_count']
             temposte = steamload1['response']['players'][0]['timecreated']
@@ -142,6 +144,10 @@ async def on_message(message):
             idste = steamload1['response']['players'][0]['steamid']
             linkste = steamload1['response']['players'][0]['profileurl']
             avatarste = steamload1['response']['players'][0]['avatarfull']
+            recent1ste = steamload3['response']['games'][0]['name']
+        #    recent2ste = steamload3['response']['games'][1]['name']
+         #   recent3ste = steamload3['response']['games'][2]['name']
+          #  recent4ste = steamload3['response']['games'][3]['name']
 
             embedsteam = discord.Embed(color=user.color)
             embedsteam.add_field(
@@ -150,15 +156,16 @@ async def on_message(message):
                       "**Conta criada em:** {} \n"
                       "**Total de jogos:** {} \n"
                       "**ID Steam:** {} \n"
-                      "**Link do perfil:** {}"
-                      "".format(nomeste, time.strftime("%d %m %Y às %H:%M", time.localtime(temposte)), jogosste, idste, linkste)
+                      "**Link do perfil:** {} \n"
+                      "**Ultimo jogo jogado:** {} \n"
+                      "".format(nomeste, time.strftime("%d/%m/%Y às %H:%M", time.localtime(temposte)), jogosste, idste, linkste, recent1ste)
             )
-            embedsteam.set_image(url=avatarste)
+            embedsteam.set_thumbnail(url=avatarste)
             embedsteam.set_footer(text='#ZueiroAnonimoJogaNaSteam')
             await client.send_message(message.channel, embed=embedsteam)
         except:
-            await client.send_message(message.channel, "Só consigo procurar contas por ID's por enquanto ;-; \n"
-                                                       "infelizmente contas sem jogos não serão mostradas por bugs.")
+            await client.send_message(message.channel, "# Só consigo procurar contas por ID's por enquanto ;-; \n"
+                                                       "# infelizmente contas privadas não aparecerão aqui  :c .")
 
     if message.content.lower().startswith('zfilme'):
         user = message.author
