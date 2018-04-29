@@ -164,8 +164,26 @@ async def on_message(message):
             embedsteam.set_footer(text='#ZueiroAnonimoJogaNaSteam')
             await client.send_message(message.channel, embed=embedsteam)
         except:
-            await client.send_message(message.channel, "# Só consigo procurar contas por ID's por enquanto ;-; \n"
-                                                       "# infelizmente contas privadas não aparecerão aqui  :c .")
+            steam1priv = message.content[7:]
+            steam2priv = requests.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=C17D1FB55BAAFBA0288B05AF103BC7B4&steamids=' + steam1 + '&format=json')
+            steamload1priv = json.loads(steam2priv.text)
+            nomestepriv = steamload1priv['response']['players'][0]['personaname']
+            idstepriv = steamload1priv['response']['players'][0]['steamid']
+            linkstepriv = steamload1priv['response']['players'][0]['profileurl']
+            avatarstepriv = steamload1priv['response']['players'][0]['avatarfull']
+
+            embedsteampriv = discord.Embed(color=user.color)
+            embedsteampriv.add_field(
+                name=' Aqui está a conta Steam que pediu, {}'.format(user.name),
+                value="**Nick:** {} \n"
+                      "**ID Steam:** {} \n"
+                      "**Link do perfil:** {} \n"
+                      "`Este perfil possui áreas privadas, não consigo mostrar mais informações`"
+                      "".format(nomestepriv, idstepriv, linkstepriv)
+            )
+            embedsteampriv.set_thumbnail(url=avatarstepriv)
+            embedsteampriv.set_footer(text='#ZueiroAnonimoJogaNaSteam')
+            await client.send_message(message.channel, embed=embedsteampriv)
 
     if message.content.lower().startswith('zfilme'):
         user = message.author
