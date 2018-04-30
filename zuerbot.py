@@ -53,7 +53,6 @@ async def on_message(message):
 
 
 
-
     if message.content.lower().startswith('zsugestao'):
         try:
             canalsuges = discord.utils.get(client.get_all_channels(), id='437736462843248651')
@@ -68,7 +67,7 @@ async def on_message(message):
             )
             embsuges.set_thumbnail(url=user.avatar_url)
             embsuges.add_field(name='<:zueiroanonimosafadinho:438472983942660097>  Sugestão proposta:', value=sugestao1)
-            embsuges.add_field(name="<:10barra10:438472637765779456> Informações do usuário que enviou a sugestão <:10barra10:438472637765779456>",
+            embsuges.add_field(name="<a:zueiroanonimobotemoji:440504316613230592> Informações do usuário que enviou a sugestão <a:zueiroanonimobotemoji:440504316613230592>",
                             value="**Nome**: {} \n"
                             "**Apelido no seu server**: {} \n"
                             "**Seu ID**: {} \n"
@@ -123,8 +122,6 @@ async def on_message(message):
 
 
 
-
-
     if message.content.lower().startswith('zsteam'):
         user = message.author
         try:
@@ -151,7 +148,7 @@ async def on_message(message):
 
             embedsteam = discord.Embed(color=user.color)
             embedsteam.add_field(
-                name='<:10barra10:438472637765779456> Aqui está a conta Steam que pediu, {}'.format(user.name),
+                name='<a:zueiroanonimobotemoji:440504316613230592> Aqui está a conta Steam que pediu, {}'.format(user.name),
                 value="**Nick:** {} \n"
                       "**Conta criada em:** {} \n"
                       "**Total de jogos:** {} \n"
@@ -185,40 +182,40 @@ async def on_message(message):
             embedsteampriv.set_footer(text='#ZueiroAnonimoJogaNaSteam')
             await client.send_message(message.channel, embed=embedsteampriv)
 
+
+
     if message.content.lower().startswith('zfilme'):
         user = message.author
         try:
-            filme1 = message.content[7:]
-            filme2 = requests.get('http://www.omdbapi.com/?apikey=c7ba758c&t=' + filme1 + '&type=movie')
-            filme = json.loads(filme2.text)
-            nomefil = (filme['Title'])
-            anofil = (filme['Year'])
-            imdbfil = (filme['imdbRating'])
-            duracaofil = (filme['Runtime'])
-            paisfil = (filme['Country'])
-            produtorafil = (filme['Production'])
-            linguagemfil = (filme['Language'])
-            diretorfil = (filme['Director'])
-            posterfil = (filme['Poster'])
+            movie1 = message.content[7:]
+            movie2 = requests.get('https://api.themoviedb.org/3/search/movie?api_key=d9f2dc02f23bb44860dbb5fa196865d5&language=pt-br&query=' + movie1 + '/')
+            movie = json.loads(movie2.text)
+            nomemovie = (movie['results'][0]['title'])
+            nomeorigmovie = (movie['results'][0]['original_title'])
+            sinopsemovie = (movie['results'][0]['overview'])
+            datamovie = (movie['results'][0]['release_date'])
+            languagemovie = (movie['results'][0]['original_language'])
+            imdbmovie = (movie['results'][0]['vote_average'])
+            postermovie = (movie['results'][0]['poster_path'])
 
 
-            embedfil = discord.Embed(color=user.color)
-            embedfil.add_field(name='<:10barra10:438472637765779456> Aqui está o filme 10 barra 10 que pediu, {}'.format(user.name),
+
+            embedfilm = discord.Embed(color=user.color)
+            embedfilm.add_field(name='<a:zueiroanonimobotemoji:440504316613230592> Aqui está o filme 10 barra 10 que pediu, {}'.format(user.name),
                                value="🎬 **Filme:** {} \n"
-                                     "                  📆 **Ano:** {} \n"
-                                     "⏱ **Duração:** {} \n"
-                                     "                  🔢 **Nota:** {} \n"
-                                     "🎦 **Diretor:** {} \n"
-                                     "                  🏨 **Produtora:** {} \n"
-                                     "🌍 **País:** {} \n"
-                                     "                  👅 **Linguagem:** {} \n" 
-                                     "".format(nomefil, anofil, duracaofil, imdbfil, diretorfil, produtorafil, paisfil, linguagemfil)
+                                     "** Nome Original:** {} 🎬\n"
+                                     "📆 **Data de lançamento:** {} \n"
+                                     "👅 **Linguagem original:** {} \n"
+                                     "🔢 **Nota:** {} \n"
+                                     "🌍 **Sinopse:** {} \n" 
+                                     "".format(nomemovie, nomeorigmovie, datamovie, languagemovie, imdbmovie, sinopsemovie)
                                )
-            embedfil.set_image(url=posterfil)
-            embedfil.set_footer(text="#ZueiroAninomoVirouCinéfolo")
-            await client.send_message(message.channel, embed=embedfil)
+            embedfilm.set_thumbnail(url='https://image.tmdb.org/t/p/w600_and_h900_bestv2' + postermovie)
+            embedfilm.set_footer(text="#ZueiroAninomoVirouCinéfolo")
+            await client.send_message(message.channel, embed=embedfilm)
         except discord.errors.HTTPException:
             await client.send_message(message.channel, "Putz grila Nilce, não consegui encontrar o filme!  :C")
+
 
 
     if message.content.lower().startswith('zzztoc4r'):
@@ -483,7 +480,7 @@ async def on_message(message):
 
     if message.content.lower().startswith('zhelp'):
         user = message.author
-        embhelp2 = discord.Embed(title='<:zueiro:426887690101981195> Olá, {}. <:hm:426887690101981195>'.format(message.author.name), color=user.color,
+        embhelp2 = discord.Embed(title='<a:zueiroanonimobotemoji:440504316613230592> Olá, {}. <a:zueiroanonimobotemoji:440504316613230592>'.format(message.author.name), color=user.color,
                               description='No momento ainda não estou pronto,porém,posso lhe servir em algumas coisas.\n'
                                           'Vou deixar os meus comandos abaixo para ajudar.\n'
                                           '**zHelp : **Exibe esta mensagem.\n'
@@ -564,7 +561,7 @@ async def on_message(message):
     if message.content.lower().startswith('<@421862224454221824>'):
         user = message.author
         embpapaco = discord.Embed(
-            title='<:python:419662789997756419> Falou comigo, {}?'.format(message.author.name),
+            title='<a:zueiroanonimobotemoji:440504316613230592> Falou comigo, {}? <a:zueiroanonimobotemoji:440504316613230592>'.format(message.author.name),
             color=user.color,
             descriptino="VACILÃO MORRE CEDO",
         )
@@ -585,7 +582,7 @@ async def on_message(message):
 
     if message.content.lower().startswith('zaviso'):
         if not message.author.server_permissions.administrator:
-            return await client.send_message(message.channel,'Somente para ADMs do server, desculpa bb')
+            return await client.send_message(message.channel,'Somente para ADMs do server, desculpa bb <a:zueiroanonimobotemoji:440504316613230592>')
         try:
             user = message.mentions[0]
             msgg = message.content[6:]
@@ -637,7 +634,7 @@ async def on_message(message):
         try:
             member = message.mentions[0]
             embedusu = discord.Embed(
-                title='<:python:419660191244484609> Informações de: {} <:python:419660191244484609>'.format(
+                title='<a:zueiroanonimobotemoji:440504316613230592> Informações de: {} <a:zueiroanonimobotemoji:440504316613230592>'.format(
                     member.name),
                 color=member.color,
                 descriptino=None,
@@ -656,7 +653,7 @@ async def on_message(message):
         except:
             user = message.author
             embedusu1 = discord.Embed(
-                title='<:python:419660191244484609> Informações de: {} <:python:419660191244484609>'.format(
+                title='<a:zueiroanonimobotemoji:440504316613230592> Informações de: {} <a:zueiroanonimobotemoji:440504316613230592>'.format(
                     user.name),
                 color=user.color,
                 descriptino=None,
@@ -678,9 +675,9 @@ async def on_message(message):
         try:
             member = message.mentions[0]
             embed = discord.Embed(
-                title='<:python:419660191244484609> Avatar de: {} <:python:419660191244484609>'.format(member.name),
+                title='<a:zueiroanonimobotemoji:440504316613230592> Avatar de: {} <a:zueiroanonimobotemoji:440504316613230592>'.format(member.name),
                 color=member.color,
-                description='Reaja ao avatar de {}! <:python:419660191244484609>'.format(
+                description='Reaja ao avatar de {}! <a:zueiroanonimobotemoji:440504316613230592>'.format(
                     member.name))
             embed.set_image(url=member.avatar_url)
             avatar = await client.send_message(message.channel, embed=embed)
@@ -693,9 +690,9 @@ async def on_message(message):
         except:
             user = message.author
             embedavata = discord.Embed(
-                title='<:python:419660191244484609> Avatar de: {} <:python:419660191244484609>'.format(user.name),
+                title='<a:zueiroanonimobotemoji:440504316613230592> Avatar de: {} <a:zueiroanonimobotemoji:440504316613230592>'.format(user.name),
                 color=user.color,
-                description='Reaja ao avatar de {}! <:python:419660191244484609>'.format(
+                description='Reaja ao avatar de {}! <a:zueiroanonimobotemoji:440504316613230592>'.format(
                     user.name))
             embedavata.set_image(url=user.avatar_url)
             avatar2 = await client.send_message(message.channel, embed=embedavata)
@@ -713,7 +710,7 @@ async def on_message(message):
                       m.status == discord.Status.idle])
 
         embed3 = discord.Embed(
-            title="Informações do server <:python:419660191244484609> ",
+            title="Informações do server <a:zueiroanonimobotemoji:440504316613230592> ",
             color=amarelo,
             descriptino=None,
         )
