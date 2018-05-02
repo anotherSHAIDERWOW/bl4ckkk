@@ -579,6 +579,10 @@ async def on_message(message):
         await client.add_reaction(papaco, '🇴')
         await client.add_reaction(papaco, '🇱')
         await client.add_reaction(papaco, '🇪')
+        await client.wait_for_message(author=message.author, content="Não gracinha")
+        await client.send_message(message.channel, 'Ainda bem... até um outro dia')
+
+
 
     if message.content.lower().startswith('zaviso'):
         if not message.author.server_permissions.administrator:
