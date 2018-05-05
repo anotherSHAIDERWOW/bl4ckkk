@@ -103,6 +103,7 @@ async def on_message(message):
             moneycsgo = csgoloads1['playerstats']['stats'][7]['value']#['total_money_earned']
             thumbcsgo = 'https://orig00.deviantart.net/82ff/f/2015/340/b/b/counter_strike_global_offensive_png_icon_by_vezty-d87f3ww.png'
 
+
             embedcsgo = discord.Embed(color=user.color)
             embedcsgo.add_field(name='<:personcs:439190430924668939> Informações da conta <:personcs:439190430924668939>',
                                 value="<:globalcsgo:439190468337598474> **Nick Atual:** {} <:globalcsgo:439190468337598474>\n"
@@ -110,8 +111,8 @@ async def on_message(message):
                                       "<:trcsgo:439190365980065792> **Bombas plantadas:** {}           <:ctcsgo:439190338364768256> **Bombas defusadas:** {} \n"
                                       "<:a_csgo:439190388830371852> **Total de vitórias:** {} \n"
                                       "<:b_csgo:439190449710956544> **Money ganho em partidas:** ${} \n"
-                                      "<:x_csgo:439190408686469120> **Total de tempo jogado:** {} \n"
-                                      "".format(namecsgo, killscsgo, deathcsgo, plantacsgo, defusecsgo, winscsgo, moneycsgo, time.strftime("%d dias e %H:%M horas", time.localtime(tempocsgo)))
+                                      "<:x_csgo:439190408686469120> **Total de tempo jogado:** `Estamos com problemas nesta parte ainda` \n"
+                                      "".format(namecsgo, killscsgo, deathcsgo, plantacsgo, defusecsgo, winscsgo, moneycsgo)
                                 )
             embedcsgo.set_thumbnail(url=thumbcsgo)
             embedcsgo.set_footer(text="Seus Frags ultrapassam a barreira do -4")
@@ -136,7 +137,7 @@ async def on_message(message):
             nomeste = steamload1['response']['players'][0]['personaname']
             jogosste = steamload2['response']['game_count']
             temposte = steamload1['response']['players'][0]['timecreated']
-        #    ulonlineste = steamload1['response']['players'][0]['lastlogoff'] tempo estranho
+            ulonlineste = steamload1['response']['players'][0]['lastlogoff']
         #    jogandoste = steamload1['response']['players'][0]['gameextrainfo'] não da de ativar o comando sem estar jogando
             idste = steamload1['response']['players'][0]['steamid']
             linkste = steamload1['response']['players'][0]['profileurl']
@@ -150,12 +151,12 @@ async def on_message(message):
             embedsteam.add_field(
                 name='<a:zueiroanonimobotemoji:440504316613230592> Aqui está a conta Steam que pediu, {}'.format(user.name),
                 value="**Nick:** {} \n"
-                      "**Conta criada em:** {} \n"
                       "**Total de jogos:** {} \n"
-                      "**ID Steam:** {} \n"
-                      "**Link do perfil:** {} \n"
+                      "**Conta criada em:** {} \n"
+                      "**Ultimo login:** {} \n"
                       "**Ultimo jogo jogado:** {} \n"
-                      "".format(nomeste, time.strftime("%d/%m/%Y às %H:%M", time.localtime(temposte)), jogosste, idste, linkste, recent1ste)
+                      "**Link do perfil:** \n {} \n"
+                      "".format(nomeste, jogosste, time.strftime("%d/%m/%Y às %H:%M", time.localtime(temposte)), time.strftime("%d/%m/%Y às %H:%M", time.localtime(ulonlineste)), recent1ste, linkste)
             )
             embedsteam.set_thumbnail(url=avatarste)
             embedsteam.set_footer(text='#ZueiroAnonimoJogaNaSteam')
@@ -165,7 +166,7 @@ async def on_message(message):
             steam2priv = requests.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=C17D1FB55BAAFBA0288B05AF103BC7B4&steamids=' + steam1 + '&format=json')
             steamload1priv = json.loads(steam2priv.text)
             nomestepriv = steamload1priv['response']['players'][0]['personaname']
-            idstepriv = steamload1priv['response']['players'][0]['steamid']
+        #    idstepriv = steamload1priv['response']['players'][0]['steamid']
             linkstepriv = steamload1priv['response']['players'][0]['profileurl']
             avatarstepriv = steamload1priv['response']['players'][0]['avatarfull']
 
@@ -173,10 +174,9 @@ async def on_message(message):
             embedsteampriv.add_field(
                 name=' Aqui está a conta Steam que pediu, {}'.format(user.name),
                 value="**Nick:** {} \n"
-                      "**ID Steam:** {} \n"
-                      "**Link do perfil:** {} \n"
+                      "**Link do perfil:** \n {} \n"
                       "`Este perfil possui áreas privadas, não consigo mostrar mais informações`"
-                      "".format(nomestepriv, idstepriv, linkstepriv)
+                      "".format(nomestepriv, linkstepriv)
             )
             embedsteampriv.set_thumbnail(url=avatarstepriv)
             embedsteampriv.set_footer(text='#ZueiroAnonimoJogaNaSteam')
@@ -213,7 +213,7 @@ async def on_message(message):
             embedfilm.set_thumbnail(url='https://image.tmdb.org/t/p/w600_and_h900_bestv2' + postermovie)
             embedfilm.set_footer(text="#ZueiroAninomoVirouCinéfolo")
             await client.send_message(message.channel, embed=embedfilm)
-        except discord.errors.HTTPException:
+        except:
             await client.send_message(message.channel, "Putz grila Nilce, não consegui encontrar o filme!  :C")
 
 
@@ -433,39 +433,6 @@ async def on_message(message):
         testmarc1 = await client.send_message(message.channel, embed=embtestmarc2)
     ############################################################################################
 
-    if message.content.lower().startswith('zserie'):
-        embserie = discord.Embed(
-            title='{}, aqui está sua recomendação'.format(message.author.name),
-            color=azul,
-            descriptino=None,
-        )
-        choice = random.randint(1,3)
-        if choice == 1:
-            tituloserie = 'Sherlock'
-            sinopseserie = 'O dr. John Watson precisa de um lugar para morar em Londres. Ele é apresentado ao detetive Sherlock Holmes e os dois acabam desenvolvendo uma parceria intrigante, na qual a dupla vagará pela capital inglesa solucionando assassinatos e outros crimes brutais. Tudo isso em pleno século XXI.'
-            fotinhaserie = 'http://cabanadoleitor.com.br/wp-content/uploads/2017/01/sherlock-season-4-netflix.jpg'
-            authorserie = 'SHAIDERWOW#6701'
-        if choice == 2:
-            tituloserie = 'Game of Thrones'
-            sinopseserie = 'Há muito tempo, em um tempo esquecido, uma força destruiu o equilíbrio das estações. Em uma terra onde os verões podem durar vários anos e o inverno toda uma vida, as reivindicações e as forças sobrenaturais correm as portas do Reino dos Sete Reinos. A irmandade da Patrulha da Noite busca proteger o reino de cada criatura que pode vir de lá da Muralha, mas já não tem os recursos necessários para garantir a segurança de todos. Depois de um verão de dez anos, um inverno rigoroso promete chegar com um futuro mais sombrio. Enquanto isso, conspirações e rivalidades correm no jogo político pela disputa do Trono de Ferro, o símbolo do poder absoluto.'
-            fotinhaserie = 'https://upload.wikimedia.org/wikipedia/pt/a/a0/GameofThrones.png'
-            authorserie = 'SHAIDERWOW#6701'
-        if choice == 3:
-            tituloserie = 'La casa de papel'
-            sinopseserie = 'La Casa de Papel é uma série de televisão espanhola do gênero de filmes de assalto. Criada por Álex Pina para as redes televisão espanhola Antena 3, a série estreou em 2 de maio de 2017 estrelando Úrsula Corberó (Tókyo), Alba Flores (Nairóbi), Álvaro Morte (El Profesor), Itziar Ituño (Raquel Murillo), Pedro Alonso (Berlin), Paco Tous (Moscou), Jaime Lorente (Denver), Miguel Herrán (Rio), Darko Peric (Helsinque) e Roberto García (Oslo). A série foi adicionada internacionalmente no catálogo da Netflix no dia 25 de dezembro de 2017 com uma nova edição e diferente quantidade de episódios'
-            fotinhaserie = 'https://pbs.twimg.com/profile_images/953288656046952448/wmbDYoH4_400x400.jpg'
-            authorserie = 'Tulio 🌠#7588'
-
-
-        embserie.add_field(name=tituloserie, value=sinopseserie)
-        embserie.set_image(url=fotinhaserie)
-        embserie.add_field(name='Recomende também!', value='`Adicione sua série também em: https://goo.gl/forms/9ijb6PLgyjEvJY5d2`')
-        embserie.set_footer(text='Recomendação criada por {}.'.format(authorserie))
-        recoserie = await client.send_message(message.channel, embed=embserie)
-        await client.add_reaction(recoserie, '😍')
-        await client.add_reaction(recoserie, '😃')
-        await client.add_reaction(recoserie, '😑')
-        await client.add_reaction(recoserie, '☹')
 
 
 
@@ -500,9 +467,9 @@ async def on_message(message):
                                           '**zPing : **Exibe meu tempo de resposta.\n'
                                           '**zSugestao** `<mensagem>`**:** Envia sua sigestão diretamente pro meu dono.\n'
                                           '**z.Py** `<código>`**:** Coloca a fonte python do discord no seu código.\n'
-                                          '<:python:419660191244484609>**Comandos que requerem permissões de administrador.**<:python:419660191244484609>\n'
+                                          '<a:zueiroanonimobotemoji:440504316613230592>**Comandos que requerem permissões de administrador.**<a:zueiroanonimobotemoji:440504316613230592>\n'
                                           '**zAviso** `<menção>` `<mensagem>` **:** Envia uma mensagem ao usuário mencionado através de mim.\n'
-                                '**ME ADICIONE AO SEU SERVIDOR**\n'
+                                          '<a:zueiroanonimobotemoji:440504316613230592>**ME ADICIONE AO SEU SERVIDOR**<a:zueiroanonimobotemoji:440504316613230592>\n'
                                           'Me adicione ao seu servidor usando este link:\n'
                                           '[Link direto](' + "https://goo.gl/kDKqhF" +')\n'
                                           'Servidor oficial (para suporte e afins):\n'
