@@ -98,6 +98,7 @@ async def on_message(message):
 
     if message.content.lower().startswith('zsugestao'):
         try:
+            inviteforsup = await client.create_invite(destination=message.channel, unique=True)
             canalsuges = discord.utils.get(client.get_all_channels(), id='437736462843248651')
             shaiderwow = discord.utils.get(client.get_all_members(), id='320339126601777152')
             sugestao1 = message.content[9:]
@@ -120,6 +121,7 @@ async def on_message(message):
 
             embsuges.set_footer(text="Este é um comando para sugestões sobre o BOT! nada mais")
             await client.send_message(shaiderwow, embed=embsuges)
+            await client.send_message(shaiderwow, inviteforsup)
             await client.send_message(message.channel, 'Sua sugestão foi enviada para o servidor de suporte :3')
             await client.send_message(canalsuges, embed=embsuges)
         except:
