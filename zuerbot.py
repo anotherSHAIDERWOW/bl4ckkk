@@ -832,10 +832,9 @@ async def on_message(message):
                         "- VRCHAT = 📺\n"
                         "- League of Legends = ⌛\n"
                         "- Roblox = 📦\n"
-                        "Breve mais...\n"
-                        "Digite 'zHelp' para saber sobre mim",
+                        "",
         )
-
+        embed1.set_footer(text="Breve mais... Digite zHelp para saber mais sobre mim")
     botmsg = await client.send_message(message.channel, embed=embed1)
 
     await client.add_reaction(botmsg, "🔫")
@@ -868,10 +867,8 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            role = discord.utils.find(lambda r: r.name == "CS:GO", msg.server.roles)
             await client.create_role(msg_user.server, name="CS:GO")
-            await client.add_roles(user, role)
-            print("add")
+            print("create")
 
     if reaction.emoji == "🖌" and msg.id == msg_id:  # and user == msg_user:
         try:
@@ -879,10 +876,8 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            role = discord.utils.find(lambda r: r.name == "Gartic", msg.server.roles)
             await client.create_role(msg_user.server, name="Gartic")
-            await client.add_roles(user, role)
-            print("add")
+            print("create")
 
 
     if reaction.emoji == "💰" and msg.id == msg_id:  # and user == msg_user:
@@ -891,10 +886,8 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            role = discord.utils.find(lambda r: r.name == "GTA V", msg.server.roles)
             await client.create_role(msg_user.server, name="GTA V")
-            await client.add_roles(user, role)
-            print("add")
+            print("create")
 
     if reaction.emoji == "🛡" and msg.id == msg_id:  # and user == msg_user:
         try:
@@ -902,10 +895,8 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            role = discord.utils.find(lambda r: r.name == "PUBG", msg.server.roles)
             await client.create_role(msg_user.server, name="PUBG")
-            await client.add_roles(user, role)
-            print("add")
+            print("create")
 
     if reaction.emoji == "⚔" and msg.id == msg_id:  # and user == msg_user:
         try:
@@ -913,10 +904,8 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            role = discord.utils.find(lambda r: r.name == "Brawlhalla", msg.server.roles)
             await client.create_role(msg_user.server, name="Brawlhalla")
-            await client.add_roles(user, role)
-            print("add")
+            print("create")
 
     if reaction.emoji == "📺" and msg.id == msg_id:  # and user == msg_user:
         try:
@@ -924,10 +913,8 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            role = discord.utils.find(lambda r: r.name == "VRCHAT", msg.server.roles)
             await client.create_role(msg_user.server, name="VRCHAT")
-            await client.add_roles(user, role)
-            print("add")
+            print("create")
 
     if reaction.emoji == "⌛" and msg.id == msg_id:  # and user == msg_user:
         try:
@@ -935,10 +922,8 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            role = discord.utils.find(lambda r: r.name == "League of Legends", msg.server.roles)
             await client.create_role(msg_user.server, name="League of Legends")
-            await client.add_roles(user, role)
-            print("add")
+            print("create")
 
     if reaction.emoji == "📦" and msg.id == msg_id:  # and user == msg_user:
         try:
@@ -946,10 +931,8 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            role = discord.utils.find(lambda r: r.name == "Roblox", msg.server.roles)
             await client.create_role(msg_user.server, name="Roblox")
-            await client.add_roles(user, role)
-            print("add")
+            print("create")
 
 
 
