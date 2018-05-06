@@ -514,7 +514,7 @@ async def on_message(message):
                                           '**z.Py** `<código>`**:** Coloca a fonte python do discord no seu código.\n'
                                           '<a:zueiroanonimobotemoji:440504316613230592>**Comandos que requerem permissões de administrador.**<a:zueiroanonimobotemoji:440504316613230592>\n'
                                           '**zAviso** `<menção>` `<mensagem>` **:** Envia uma mensagem ao usuário mencionado através de mim.\n'
-                                          '**zKick** `<menção>` **:** Kika o usuário mencionado do servidor'
+                                          '**zKick** `<menção>` **:** Kika o usuário mencionado do servidor \n'
                                           '<a:zueiroanonimobotemoji:440504316613230592>**ME ADICIONE AO SEU SERVIDOR**<a:zueiroanonimobotemoji:440504316613230592>\n'
                                           'Me adicione ao seu servidor usando este link:\n'
                                           '[Link direto](' + "https://goo.gl/kDKqhF" +')\n'
