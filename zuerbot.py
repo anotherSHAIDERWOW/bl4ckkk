@@ -51,6 +51,49 @@ async def on_ready():
 @client.event
 async def on_message(message):
 
+ #   if message.content.lower().startswith('zzueiro-logs'):
+  #      server = message.server
+   #     await client.create_channel(server, 'zueiro-logs', type=discord.ChannelType.text)
+
+    if message.content.lower().startswith("zconvite"):
+        invitelinknew = await client.create_invite(destination = message.channel, unique = True)
+        embedMsginv=discord.Embed(color=message.author.color)
+        embedMsginv.add_field(name="Convite para o servidor {}".format(message.server.name), value=invitelinknew)
+        embedMsginv.set_footer(text="#Convide seus amigos")
+        await client.send_message(message.channel, embed=embedMsginv)
+
+    if message.content.lower().startswith('zkick'):
+        if not message.author.server_permissions.kick_members:
+            user = message.mentions[0]
+            author = message.author
+            embkick = discord.Embed(color=amarelo)
+            embkick.add_field(name="Alá {}, o {} tentou te kikar sem ser ADM".format(user, author), value="<a:zueiroanonimobotemoji:440504316613230592>")
+            embkick.set_image(url='https://media.discordapp.net/attachments/440679680530710560/442450061004111874/unknown.png?width=459&height=248')
+            embkick.set_footer(text='Vacilão morre cedo')
+            return await client.send_message(message.channel, embed=embkick)
+        try:
+            author = message.author
+            user = message.mentions[0]
+            embkick2 = discord.Embed(color=author.color)
+            embkick2.add_field(name="<a:zueiroanonimobotemoji:440504316613230592> **EXPULSÃO**",
+                              value="**Usuário expulso:** {} \n"
+                                    "**Comando realizado por:** {} \n"
+                                    "".format(user, author)
+                              )
+            embkick2.set_thumbnail(url=user.avatar_url)
+            embkick2.set_footer(text="ID = {}".format(user.id))
+            await client.send_message(message.channel,embed=embkick2)
+            return await client.kick(member=user)
+        except discord.errors.Forbidden:
+            author = message.author
+            embkick3 = discord.Embed(color=amarelo)
+            embkick3.add_field(name="Eu banir alguém de cargo mais alto que o meu ? kkk tu sonha demais {}".format(author), value="<a:zueiroanonimobotemoji:440504316613230592>")
+            embkick3.set_image(url='https://pbs.twimg.com/media/C4aWOX8XAAI9MX7.jpg')
+            embkick3.set_footer(text='PS: Assim tu me fode mano')
+            return await client.send_message(message.channel, embed=embkick3)
+        except:
+            return await client.send_message(message.channel, "Você deve especificar um usuário para expulsar, baby")
+
 
 
     if message.content.lower().startswith('zsugestao'):
@@ -463,12 +506,13 @@ async def on_message(message):
                                           '**zFlipcoin : **Me faz reagir com cara(😀) ou coroa(👑).\n'
                                           '**zFilme** `<nome do filme>`**:** Eu te mostro informações do filme escolhido.\n'
                                           '**zGames : **Te dá o cargo do jogo caso você reaja com o emoji relativo ao mesmo.\n'
-                                          '`Obs:Só funciona se o servidor tiver os cargos`\n'
                                           '**zPing : **Exibe meu tempo de resposta.\n'
                                           '**zSugestao** `<mensagem>`**:** Envia sua sigestão diretamente pro meu dono.\n'
+                                          '**zConvite:** Gera um link para convidar outros à este servidor'
                                           '**z.Py** `<código>`**:** Coloca a fonte python do discord no seu código.\n'
                                           '<a:zueiroanonimobotemoji:440504316613230592>**Comandos que requerem permissões de administrador.**<a:zueiroanonimobotemoji:440504316613230592>\n'
                                           '**zAviso** `<menção>` `<mensagem>` **:** Envia uma mensagem ao usuário mencionado através de mim.\n'
+                                          '**zKick** `<menção>` **:** Kika o usuário mencionado do servidor'
                                           '<a:zueiroanonimobotemoji:440504316613230592>**ME ADICIONE AO SEU SERVIDOR**<a:zueiroanonimobotemoji:440504316613230592>\n'
                                           'Me adicione ao seu servidor usando este link:\n'
                                           '[Link direto](' + "https://goo.gl/kDKqhF" +')\n'
@@ -555,12 +599,11 @@ async def on_message(message):
         if not message.author.server_permissions.administrator:
             return await client.send_message(message.channel,'Somente para ADMs do server, desculpa bb <a:zueiroanonimobotemoji:440504316613230592>')
         try:
+            author = message.author
             user = message.mentions[0]
             msgg = message.content[6:]
-            await client.send_message(user, msgg)
-
+            await client.send_message(user, "**{} lhe mandou um aviso com a seguinte mensagem:** \n {}".format(author, msgg))
         except:
-
             await client.send_message(message.channel, 'Escreva algo para eu enviar no privado deste usuário.')
 
     if message.content.lower().startswith('zping'):
@@ -572,7 +615,7 @@ async def on_message(message):
         await client.edit_message(pingm0, embed=pingm1)
 
 
-    if message.content.lower().startswith('zdiga'):
+    if message.content.lower().startswith('zd1ga'):
 
         try:
 
@@ -699,7 +742,7 @@ async def on_message(message):
         await client.send_message(message.channel, embed=embed3)
 
     if message.content.lower().startswith('zgpsteam'):
-        await client.send_message(message.channel, "```Entra lá bb``` \nhttps://goo.gl/R2mC2g")
+        await client.send_message(message.channel, "**Entra lá bb** \nhttps://goo.gl/R2mC2g")
 
     if message.content.lower().startswith('zgif'):
         embgif = discord.Embed(
@@ -746,7 +789,6 @@ async def on_message(message):
         embgif.set_image(url=linkdogif)
         await client.send_message(message.channel, embed=embgif)
 
-
     if message.content.lower().startswith('zflipcoin'):
         choice = random.randint(1, 2)
         if choice == 1:
@@ -776,6 +818,7 @@ async def on_message(message):
             await client.send_message(message.channel, embed=embed4)
 
     if message.content.lower().startswith("zgames"):
+        server = message.server
         embed1 = discord.Embed(
             title="Escolha seus jogos!",
             color=roxo,
@@ -801,7 +844,7 @@ async def on_message(message):
     await client.add_reaction(botmsg, "📺")
     await client.add_reaction(botmsg, "⌛")
     await client.add_reaction(botmsg, "📦")
-    return None
+
 
     global msg_id
     msg_id = botmsg.id
@@ -810,49 +853,101 @@ async def on_message(message):
     msg_user = message.author
 
 
+
+
 @client.event
 async def on_reaction_add(reaction, user):
     msg = reaction.message
 
+
     if reaction.emoji == "🔫" and msg.id == msg_id:  # and user == msg_user:
-        role = discord.utils.find(lambda r: r.name == "CS:GO", msg.server.roles)
-        await client.add_roles(user, role)
-        print("add")
+        try:
+            role = discord.utils.find(lambda r: r.name == "CS:GO", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            role = discord.utils.find(lambda r: r.name == "CS:GO", msg.server.roles)
+            await client.create_role(msg_user.server, name="CS:GO")
+            await client.add_roles(user, role)
+            print("add")
 
     if reaction.emoji == "🖌" and msg.id == msg_id:  # and user == msg_user:
-        role = discord.utils.find(lambda r: r.name == "Gartic", msg.server.roles)
-        await client.add_roles(user, role)
-        print("add")
+        try:
+            role = discord.utils.find(lambda r: r.name == "Gartic", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            role = discord.utils.find(lambda r: r.name == "Gartic", msg.server.roles)
+            await client.create_role(msg_user.server, name="Gartic")
+            await client.add_roles(user, role)
+            print("add")
+
 
     if reaction.emoji == "💰" and msg.id == msg_id:  # and user == msg_user:
-        role = discord.utils.find(lambda r: r.name == "GTA V", msg.server.roles)
-        await client.add_roles(user, role)
-        print("add")
+        try:
+            role = discord.utils.find(lambda r: r.name == "GTA V", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            role = discord.utils.find(lambda r: r.name == "GTA V", msg.server.roles)
+            await client.create_role(msg_user.server, name="GTA V")
+            await client.add_roles(user, role)
+            print("add")
 
     if reaction.emoji == "🛡" and msg.id == msg_id:  # and user == msg_user:
-        role = discord.utils.find(lambda r: r.name == "PUBG", msg.server.roles)
-        await client.add_roles(user, role)
-        print("add")
+        try:
+            role = discord.utils.find(lambda r: r.name == "PUBG", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            role = discord.utils.find(lambda r: r.name == "PUBG", msg.server.roles)
+            await client.create_role(msg_user.server, name="PUBG")
+            await client.add_roles(user, role)
+            print("add")
 
     if reaction.emoji == "⚔" and msg.id == msg_id:  # and user == msg_user:
-        role = discord.utils.find(lambda r: r.name == "Brawlhalla", msg.server.roles)
-        await client.add_roles(user, role)
-        print("add")
+        try:
+            role = discord.utils.find(lambda r: r.name == "Brawlhalla", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            role = discord.utils.find(lambda r: r.name == "Brawlhalla", msg.server.roles)
+            await client.create_role(msg_user.server, name="Brawlhalla")
+            await client.add_roles(user, role)
+            print("add")
 
     if reaction.emoji == "📺" and msg.id == msg_id:  # and user == msg_user:
-        role = discord.utils.find(lambda r: r.name == "VRCHAT", msg.server.roles)
-        await client.add_roles(user, role)
-        print("add")
+        try:
+            role = discord.utils.find(lambda r: r.name == "VRCHAT", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            role = discord.utils.find(lambda r: r.name == "VRCHAT", msg.server.roles)
+            await client.create_role(msg_user.server, name="VRCHAT")
+            await client.add_roles(user, role)
+            print("add")
 
     if reaction.emoji == "⌛" and msg.id == msg_id:  # and user == msg_user:
-        role = discord.utils.find(lambda r: r.name == "League of Legends", msg.server.roles)
-        await client.add_roles(user, role)
-        print("add")
+        try:
+            role = discord.utils.find(lambda r: r.name == "League of Legends", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            role = discord.utils.find(lambda r: r.name == "League of Legends", msg.server.roles)
+            await client.create_role(msg_user.server, name="League of Legends")
+            await client.add_roles(user, role)
+            print("add")
 
     if reaction.emoji == "📦" and msg.id == msg_id:  # and user == msg_user:
-        role = discord.utils.find(lambda r: r.name == "Roblox", msg.server.roles)
-        await client.add_roles(user, role)
-        print("add")
+        try:
+            role = discord.utils.find(lambda r: r.name == "Roblox", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            role = discord.utils.find(lambda r: r.name == "Roblox", msg.server.roles)
+            await client.create_role(msg_user.server, name="Roblox")
+            await client.add_roles(user, role)
+            print("add")
 
 
 
