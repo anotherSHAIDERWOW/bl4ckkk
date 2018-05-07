@@ -82,19 +82,17 @@ async def on_message(message):
                               )
             embkick2.set_thumbnail(url=user.avatar_url)
             embkick2.set_footer(text="ID = {}".format(user.id))
-            await client.send_message(message.channel,embed=embkick2)
-            return await client.kick(member=user)
+            await client.kick(member=user)
+            return await client.send_message(message.channel,embed=embkick2)
         except discord.errors.Forbidden:
             author = message.author
             embkick3 = discord.Embed(color=amarelo)
-            embkick3.add_field(name="Eu banir alguém de cargo mais alto que o meu ? kkk tu sonha demais {}".format(author), value="<a:zueiroanonimobotemoji:440504316613230592>")
+            embkick3.add_field(name="Eu expulsar alguém de cargo mais alto que o meu ? kkk tu sonha demais {}".format(author), value="<a:zueiroanonimobotemoji:440504316613230592>")
             embkick3.set_image(url='https://pbs.twimg.com/media/C4aWOX8XAAI9MX7.jpg')
             embkick3.set_footer(text='PS: Assim tu me fode mano')
             return await client.send_message(message.channel, embed=embkick3)
         except:
             return await client.send_message(message.channel, "Você deve especificar um usuário para expulsar, baby")
-
-
 
     if message.content.lower().startswith('zsugestao'):
         try:
@@ -126,8 +124,6 @@ async def on_message(message):
             await client.send_message(canalsuges, embed=embsuges)
         except:
             await client.send_message(message.channel, 'Desculpe, não entendi')
-
-
 
     if message.content.lower().startswith('zcsgo'):
         user = message.author
@@ -164,9 +160,6 @@ async def on_message(message):
             await client.send_message(message.channel, embed=embedcsgo)
         except:
             await client.send_message(message.channel, "# Só consigo procurar por ID's de conta Steam ;-; ")
-
-
-
 
     if message.content.lower().startswith('zsteam'):
         user = message.author
@@ -227,8 +220,6 @@ async def on_message(message):
             embedsteampriv.set_footer(text='#ZueiroAnonimoJogaNaSteam')
             await client.send_message(message.channel, embed=embedsteampriv)
 
-
-
     if message.content.lower().startswith('zfilme'):
         user = message.author
         try:
@@ -261,7 +252,37 @@ async def on_message(message):
         except:
             await client.send_message(message.channel, "Putz grila Nilce, não consegui encontrar o filme!  :C")
 
+    if message.content.lower().startswith('zserie'):
+        user = message.author
+        try:
+            serie1 = message.content[7:]
+            serie2 = requests.get('https://api.themoviedb.org/3/search/tv?api_key=d9f2dc02f23bb44860dbb5fa196865d5&language=pt-br&query=' + serie1 + '/')
+            serie = json.loads(serie2.text)
+            nomeserie = (serie['results'][0]['name'])
+            nomeorigserie = (serie['results'][0]['original_name'])
+            sinopseserie = (serie['results'][0]['overview'])
+            dataserie = (serie['results'][0]['first_air_date'])
+            languageserie = (serie['results'][0]['original_language'])
+            imdbserie = (serie['results'][0]['vote_average'])
+            posterserie = (serie['results'][0]['poster_path'])
 
+
+
+            embedserie = discord.Embed(color=user.color)
+            embedserie.add_field(name='<a:zueiroanonimobotemoji:440504316613230592> Aqui está a série 10 barra 10 que pediu, {}'.format(user.name),
+                               value="🎬 **Série:** {} \n"
+                                     "** Nome Original:** {} 🎬\n"
+                                     "📆 **Data do 1° episódio:** {} \n"
+                                     "👅 **Linguagem original:** {} \n"
+                                     "🔢 **Nota:** {} \n"
+                                     "🌍 **Sinopse:** {} \n" 
+                                     "".format(nomeserie, nomeorigserie, dataserie, languageserie, imdbserie, sinopseserie)
+                               )
+            embedserie.set_thumbnail(url='https://image.tmdb.org/t/p/w600_and_h900_bestv2' + posterserie)
+            embedserie.set_footer(text="#ZueiroAninomoMaratonaSéries")
+            await client.send_message(message.channel, embed=embedserie)
+        except:
+            await client.send_message(message.channel, "Putz grila Nilce, não consegui encontrar a série!  :C")
 
     if message.content.lower().startswith('zzztoc4r'):
         #role = discord.utils.get(message.server.roles, name='DJ')
@@ -273,7 +294,6 @@ async def on_message(message):
         player.start()
         await client.send_message(message.channel, "💽``Tocando agora: {}``".format(player.title))
 
-
     if message.content.startswith('ztist'):
         counter = 0
         tmp = await client.send_message(message.channel, 'Calculating messages...')
@@ -282,6 +302,7 @@ async def on_message(message):
                 counter += 1
 
         await client.edit_message(tmp, 'You have {} messages.'.format(counter))
+
     elif message.content.startswith('zsleep'):
         await asyncio.sleep(5)
         await client.send_message(message.channel, 'Done sleeping')
@@ -320,8 +341,6 @@ async def on_message(message):
             embedmusic.add_field(name='Duração', value='{} segundos'.format(player.duration))
             embedmusic.add_field(name="Música requisitada por", value='{}'.format(message.author.name))
             await client.send_message(message.channel, embed=embedmusic)
-
-
 
     ###################################INFO-LABNEGRO##################################
     if message.content.lower().startswith('zbotslabnegro'):
@@ -478,10 +497,6 @@ async def on_message(message):
         testmarc1 = await client.send_message(message.channel, embed=embtestmarc2)
     ############################################################################################
 
-
-
-
-
     if message.content.lower().startswith('z.py'):
         usermsgcod = message.content[4:]
         try:
@@ -507,6 +522,7 @@ async def on_message(message):
                                           '**zCsgo** `<ID da Steam>`**:** Eu lhe mostro as informações sobre a conta de CS:GO\n'
                                           '**zFlipcoin : **Me faz reagir com cara(😀) ou coroa(👑).\n'
                                           '**zFilme** `<nome do filme>`**:** Eu te mostro informações do filme escolhido.\n'
+                                          '**zSerie** `<nome da serie>`**:** Eu te mostro informações da serie escolhida.\n'
                                           '**zGames : **Te dá o cargo do jogo caso você reaja com o emoji relativo ao mesmo.\n'
                                           '**zPing : **Exibe meu tempo de resposta.\n'
                                           '**zSugestao** `<mensagem>`**:** Envia sua sigestão diretamente pro meu dono.\n'
@@ -521,8 +537,6 @@ async def on_message(message):
                                           'Servidor oficial (para suporte e afins):\n'
                                           '[Link direto](' + "http://discord.me/zueirosanonimous" + ')\n')
         await client.send_message(message.channel, embed=embhelp2)
-
-
 
     if message.content.lower().startswith('zzhelpantigasso'):
         user = message.author
@@ -569,8 +583,6 @@ async def on_message(message):
         embhelp99.add_field(name='Só pra enfatizar...', value='Este bot ainda está em desenvolvimento')
         await client.send_message(message.channel, embed=embhelp99)
 
-
-
     if message.content.lower().startswith('<@421862224454221824>'):
         user = message.author
         embpapaco = discord.Embed(
@@ -595,8 +607,6 @@ async def on_message(message):
         await client.wait_for_message(author=message.author, content="Não gracinha")
         await client.send_message(message.channel, 'Ainda bem... até um outro dia')
 
-
-
     if message.content.lower().startswith('zaviso'):
         if not message.author.server_permissions.administrator:
             return await client.send_message(message.channel,'Somente para ADMs do server, desculpa bb <a:zueiroanonimobotemoji:440504316613230592>')
@@ -616,7 +626,6 @@ async def on_message(message):
         pingm1 = discord.Embed(title='Pong!', description=':ping_pong: Ping - %.01f segundos' % ping, color=0x15ff00)
         await client.edit_message(pingm0, embed=pingm1)
 
-
     if message.content.lower().startswith('zd1ga'):
 
         try:
@@ -627,9 +636,6 @@ async def on_message(message):
         except:
 
             await client.send_message(message.channel, 'Escreva algo para eu repetir.')
-
-
-
 
     elif message.content.lower().startswith('zbotinfo'):
         embedbotin = discord.Embed(
@@ -686,7 +692,6 @@ async def on_message(message):
             embedusu1.add_field(name="Tag", value=user.discriminator)
             await client.send_message(message.channel, embed=embedusu1)
 
-
     elif message.content.lower().startswith('zavatar'):
         try:
             member = message.mentions[0]
@@ -717,7 +722,6 @@ async def on_message(message):
             await client.add_reaction(avatar2, '😂')
             await client.add_reaction(avatar2, '😱')
             await client.add_reaction(avatar2, '💩')
-
 
     elif message.content.lower().startswith('zserverinfo'):
         server = message.server
@@ -823,45 +827,62 @@ async def on_message(message):
         server = message.server
         embed1 = discord.Embed(
             title="Escolha seus jogos!",
-            color=roxo,
-            description="- CS:GO = 🔫\n"
-                        "- Gartic  =  🖌 \n"
-                        "- GTA V  = 💰\n"
-                        "- PUBG = 🛡\n"
-                        "- Brawlhalla = ⚔\n"
-                        "- VRCHAT = 📺\n"
-                        "- League of Legends = ⌛\n"
-                        "- Roblox = 📦\n"
-                        "",
+            color=roxo
         )
+        embed1.add_field(name="<a:zueiroanonimobotemoji:440504316613230592>",
+                         value="**CS:GO =** <:person_csgo:439190430924668939>\n"
+                        "**Gartic  =**  <:gartic:442757221411979284> \n"
+                        "**GTA V  =** <:gtav:442822601295790080>\n"
+                        "**PUBG =** <:pubg:442758461810409482>\n"
+                        "**Brawlhalla =** <:brawlhalla:442757169675370497>\n"
+                        "**VRCHAT =** <:vrchat:442758209585807361>\n"
+                        "**League of Legends =** <:lol:442758156850823168>\n"
+                        "**Roblox =** <:roblox:442757513939648522>\n"
+                        ""
+                         )
+        embed1.add_field(name="<a:zueiroanonimobotemoji:440504316613230592>",
+                         value="**Minecraft =** <:minecraft:442757343646580757>\n"
+                        "**Rainbow Six  =**  <:r6:442757819926577152> \n"
+                        "**Overwatch  =** <:overwatch:442758257799462913>\n"
+                        "**Paladins =** <:paladins:442823168810549249>\n"
+                        "**Warframe =** <:warframe:442758505816915980>\n"
+                        "**Black Squad =** <:blacksquad:442822965718024201>\n"
+                        "**Rocket League =** <:rocketleague:442822713195757569>\n"
+                        "**Fortnite =** <:fortnite:442823029278638080>\n"
+                        ""
+                         )
         embed1.set_footer(text="Breve mais... Digite zHelp para saber mais sobre mim")
-    botmsg = await client.send_message(message.channel, embed=embed1)
+        botmsg = await client.send_message(message.channel, embed=embed1)
 
-    await client.add_reaction(botmsg, "🔫")
-    await client.add_reaction(botmsg, "🖌")
-    await client.add_reaction(botmsg, "💰")
-    await client.add_reaction(botmsg, "🛡")
-    await client.add_reaction(botmsg, "⚔")
-    await client.add_reaction(botmsg, "📺")
-    await client.add_reaction(botmsg, "⌛")
-    await client.add_reaction(botmsg, "📦")
+        await client.add_reaction(botmsg, "person_csgo:439190430924668939")
+        await client.add_reaction(botmsg, "gartic:442757221411979284")
+        await client.add_reaction(botmsg, "gtav:442822601295790080")
+        await client.add_reaction(botmsg, "pubg:442758461810409482")
+        await client.add_reaction(botmsg, "brawlhalla:442757169675370497")
+        await client.add_reaction(botmsg, "vrchat:442758209585807361")
+        await client.add_reaction(botmsg, "lol:442758156850823168")
+        await client.add_reaction(botmsg, "roblox:442757513939648522")
+        await client.add_reaction(botmsg, "minecraft:442757343646580757")
+        await client.add_reaction(botmsg, "r6:442757819926577152")
+        await client.add_reaction(botmsg, "overwatch:442758257799462913")
+        await client.add_reaction(botmsg, "paladins:442823168810549249")
+        await client.add_reaction(botmsg, "warframe:442758505816915980")
+        await client.add_reaction(botmsg, "blacksquad:442822965718024201")
+        await client.add_reaction(botmsg, "rocketleague:442822713195757569")
+        await client.add_reaction(botmsg, "fortnite:442823029278638080")
 
 
-    global msg_id
-    msg_id = botmsg.id
+        global msg_id
+        msg_id = botmsg.id
 
-    global msg_user
-    msg_user = message.author
-
-
-
+        global msg_user
+        msg_user = message.author
 
 @client.event
 async def on_reaction_add(reaction, user):
     msg = reaction.message
 
-
-    if reaction.emoji == "🔫" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "439190430924668939" and msg.id == msg_id:  # and user == msg_user:
         try:
             role = discord.utils.find(lambda r: r.name == "CS:GO", msg.server.roles)
             await client.add_roles(user, role)
@@ -870,7 +891,7 @@ async def on_reaction_add(reaction, user):
             await client.create_role(msg_user.server, name="CS:GO")
             print("create")
 
-    if reaction.emoji == "🖌" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442757221411979284" and msg.id == msg_id:  # and user == msg_user:
         try:
             role = discord.utils.find(lambda r: r.name == "Gartic", msg.server.roles)
             await client.add_roles(user, role)
@@ -879,8 +900,7 @@ async def on_reaction_add(reaction, user):
             await client.create_role(msg_user.server, name="Gartic")
             print("create")
 
-
-    if reaction.emoji == "💰" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442822601295790080" and msg.id == msg_id:  # and user == msg_user:
         try:
             role = discord.utils.find(lambda r: r.name == "GTA V", msg.server.roles)
             await client.add_roles(user, role)
@@ -889,7 +909,7 @@ async def on_reaction_add(reaction, user):
             await client.create_role(msg_user.server, name="GTA V")
             print("create")
 
-    if reaction.emoji == "🛡" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442758461810409482" and msg.id == msg_id:  # and user == msg_user:
         try:
             role = discord.utils.find(lambda r: r.name == "PUBG", msg.server.roles)
             await client.add_roles(user, role)
@@ -898,7 +918,7 @@ async def on_reaction_add(reaction, user):
             await client.create_role(msg_user.server, name="PUBG")
             print("create")
 
-    if reaction.emoji == "⚔" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442757169675370497" and msg.id == msg_id:  # and user == msg_user:
         try:
             role = discord.utils.find(lambda r: r.name == "Brawlhalla", msg.server.roles)
             await client.add_roles(user, role)
@@ -907,7 +927,7 @@ async def on_reaction_add(reaction, user):
             await client.create_role(msg_user.server, name="Brawlhalla")
             print("create")
 
-    if reaction.emoji == "📺" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442758209585807361" and msg.id == msg_id:  # and user == msg_user:
         try:
             role = discord.utils.find(lambda r: r.name == "VRCHAT", msg.server.roles)
             await client.add_roles(user, role)
@@ -916,7 +936,7 @@ async def on_reaction_add(reaction, user):
             await client.create_role(msg_user.server, name="VRCHAT")
             print("create")
 
-    if reaction.emoji == "⌛" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442758156850823168" and msg.id == msg_id:  # and user == msg_user:
         try:
             role = discord.utils.find(lambda r: r.name == "League of Legends", msg.server.roles)
             await client.add_roles(user, role)
@@ -925,7 +945,7 @@ async def on_reaction_add(reaction, user):
             await client.create_role(msg_user.server, name="League of Legends")
             print("create")
 
-    if reaction.emoji == "📦" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442757513939648522" and msg.id == msg_id:  # and user == msg_user:
         try:
             role = discord.utils.find(lambda r: r.name == "Roblox", msg.server.roles)
             await client.add_roles(user, role)
@@ -934,52 +954,159 @@ async def on_reaction_add(reaction, user):
             await client.create_role(msg_user.server, name="Roblox")
             print("create")
 
+    if reaction.emoji.id == "442757343646580757" and msg.id == msg_id:  # and user == msg_user:
+        try:
+            role = discord.utils.find(lambda r: r.name == "Minecraft", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            await client.create_role(msg_user.server, name="Minecraft")
+            print("create")
 
+    if reaction.emoji.id == "442757819926577152" and msg.id == msg_id:  # and user == msg_user:
+        try:
+            role = discord.utils.find(lambda r: r.name == "Rainbow Six", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            await client.create_role(msg_user.server, name="Rainbow Six")
+            print("create")
 
+    if reaction.emoji.id == "442758257799462913" and msg.id == msg_id:  # and user == msg_user:
+        try:
+            role = discord.utils.find(lambda r: r.name == "Overwatch", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            await client.create_role(msg_user.server, name="Overwatch")
+            print("create")
 
+    if reaction.emoji.id == "442823168810549249" and msg.id == msg_id:  # and user == msg_user:
+        try:
+            role = discord.utils.find(lambda r: r.name == "Paladins", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            await client.create_role(msg_user.server, name="Paladins")
+            print("create")
 
+    if reaction.emoji.id == "442758505816915980" and msg.id == msg_id:  # and user == msg_user:
+        try:
+            role = discord.utils.find(lambda r: r.name == "Warframe", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            await client.create_role(msg_user.server, name="Warframe")
+            print("create")
+
+    if reaction.emoji.id == "442822965718024201" and msg.id == msg_id:  # and user == msg_user:
+        try:
+            role = discord.utils.find(lambda r: r.name == "Black Squad", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            await client.create_role(msg_user.server, name="Black Squad")
+            print("create")
+
+    if reaction.emoji.id == "442822713195757569" and msg.id == msg_id:  # and user == msg_user:
+        try:
+            role = discord.utils.find(lambda r: r.name == "Rocket League", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            await client.create_role(msg_user.server, name="Rocket League")
+            print("create")
+
+    if reaction.emoji.id == "442823029278638080" and msg.id == msg_id:  # and user == msg_user:
+        try:
+            role = discord.utils.find(lambda r: r.name == "Fortnite", msg.server.roles)
+            await client.add_roles(user, role)
+            print("add")
+        except:
+            await client.create_role(msg_user.server, name="Fortnite")
+            print("create")
 
 @client.event
 async def on_reaction_remove(reaction, user):
     msg = reaction.message
 
-    if reaction.emoji == "🔫" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "439190430924668939" and msg.id == msg_id:  # and user == msg_user:
         role = discord.utils.find(lambda r: r.name == "CS:GO", msg.server.roles)
         await client.remove_roles(user, role)
         print("remove")
 
-    if reaction.emoji == "🖌" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442757221411979284" and msg.id == msg_id:  # and user == msg_user:
         role = discord.utils.find(lambda r: r.name == "Gartic", msg.server.roles)
         await client.remove_roles(user, role)
         print("remove")
 
-    if reaction.emoji == "💰" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442822601295790080" and msg.id == msg_id:  # and user == msg_user:
         role = discord.utils.find(lambda r: r.name == "GTA V", msg.server.roles)
         await client.remove_roles(user, role)
         print("remove")
 
-    if reaction.emoji == "🛡" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442758461810409482" and msg.id == msg_id:  # and user == msg_user:
         role = discord.utils.find(lambda r: r.name == "PUBG", msg.server.roles)
         await client.remove_roles(user, role)
         print("remove")
 
-    if reaction.emoji == "⚔" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442757169675370497" and msg.id == msg_id:  # and user == msg_user:
         role = discord.utils.find(lambda r: r.name == "Brawlhalla", msg.server.roles)
         await client.remove_roles(user, role)
         print("remove")
 
-    if reaction.emoji == "📺" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442758209585807361" and msg.id == msg_id:  # and user == msg_user:
         role = discord.utils.find(lambda r: r.name == "VRCHAT", msg.server.roles)
         await client.remove_roles(user, role)
         print("remove")
 
-    if reaction.emoji == "⌛" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442758156850823168" and msg.id == msg_id:  # and user == msg_user:
         role = discord.utils.find(lambda r: r.name == "League of Legends", msg.server.roles)
         await client.remove_roles(user, role)
         print("remove")
 
-    if reaction.emoji == "📦" and msg.id == msg_id:  # and user == msg_user:
+    if reaction.emoji.id == "442757513939648522" and msg.id == msg_id:  # and user == msg_user:
         role = discord.utils.find(lambda r: r.name == "Roblox", msg.server.roles)
+        await client.remove_roles(user, role)
+        print("remove")
+
+    if reaction.emoji.id == "442757343646580757" and msg.id == msg_id:  # and user == msg_user:
+        role = discord.utils.find(lambda r: r.name == "Minecraft", msg.server.roles)
+        await client.remove_roles(user, role)
+        print("remove")
+
+    if reaction.emoji.id == "442757819926577152" and msg.id == msg_id:  # and user == msg_user:
+        role = discord.utils.find(lambda r: r.name == "Rainbow Six", msg.server.roles)
+        await client.remove_roles(user, role)
+        print("remove")
+
+    if reaction.emoji.id == "442758257799462913" and msg.id == msg_id:  # and user == msg_user:
+        role = discord.utils.find(lambda r: r.name == "Overwatch", msg.server.roles)
+        await client.remove_roles(user, role)
+        print("remove")
+
+    if reaction.emoji.id == "442823168810549249" and msg.id == msg_id:  # and user == msg_user:
+        role = discord.utils.find(lambda r: r.name == "Paladins", msg.server.roles)
+        await client.remove_roles(user, role)
+        print("remove")
+
+    if reaction.emoji.id == "442758505816915980" and msg.id == msg_id:  # and user == msg_user:
+        role = discord.utils.find(lambda r: r.name == "Warframe", msg.server.roles)
+        await client.remove_roles(user, role)
+        print("remove")
+
+    if reaction.emoji.id == "442822965718024201" and msg.id == msg_id:  # and user == msg_user:
+        role = discord.utils.find(lambda r: r.name == "Black Squad", msg.server.roles)
+        await client.remove_roles(user, role)
+        print("remove")
+
+    if reaction.emoji.id == "442822713195757569" and msg.id == msg_id:  # and user == msg_user:
+        role = discord.utils.find(lambda r: r.name == "Rocket League", msg.server.roles)
+        await client.remove_roles(user, role)
+        print("remove")
+
+    if reaction.emoji.id == "442823029278638080" and msg.id == msg_id:  # and user == msg_user:
+        role = discord.utils.find(lambda r: r.name == "Fortnite", msg.server.roles)
         await client.remove_roles(user, role)
         print("remove")
 
@@ -988,7 +1115,7 @@ async def on_reaction_remove(reaction, user):
 async def on_member_join(member):
     canal = client.get_channel("417466650451771394")
     regras = client.get_channel("420007865894567946")
-    msg = "Bem Vindo ao {}, {}\n Quem sou eu ? eu sou um BOT muito gente boa S2\n Para ver meus comandos digite `zHelp`".format(member.server.name, member.mention)
+    msg = "Bem Vindo ao {}, {}\n Quem sou eu ? eu sou um BOT muito gente boa S2\n Para ver meus comandos digite `zHelp` no servidor \n para me adicionar ao seu servidor acesse: https://goo.gl/kDKqhF".format(member.server.name, member.mention)
     await client.send_message(member, msg)  # substitua canal por member para enviar a msg no DM do membro
 
 
