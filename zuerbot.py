@@ -122,6 +122,7 @@ async def on_message(message):
             await client.send_message(shaiderwow, inviteforsup)
             await client.send_message(message.channel, 'Sua sugestão foi enviada para o servidor de suporte :3')
             await client.send_message(canalsuges, embed=embsuges)
+            await client.send_message(message.channel, '```Mensagem IMPORTANTE ! \n Apesar de sua mensagem ter sido enviada ao servidor, só existe uma pessoa que trabalha neste bot. \n Blz, mas... oq houve ? Fui vitima de um vírus chamado GandCrab V3, do qual somente pagando 600 dólares poderei recuperar meu computador. \n O que isso tem a ver com o bot ? Bom... até eu ter um computador de volta, não poderei atualizar o Zueiro Anonimo nem nada do tipo, não tenho o apoio de ninguem para continuá-lo... então, me desculpem ;-; \n Caso puderem fazer alguma doação como forma de ajuda, estarei aceitando somente em PicPay, minha conta é a @shaiderwow \n Isso é tudo... obrigado... e talvez, Adeus...```')
         except:
             await client.send_message(message.channel, 'Desculpe, não entendi')
 
