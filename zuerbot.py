@@ -13,6 +13,7 @@ import requests
 import json
 import datetime
 
+
 players = {}
 config = None
 client = discord.Client()
