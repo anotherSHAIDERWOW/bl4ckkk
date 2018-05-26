@@ -672,10 +672,10 @@ async def on_message(message):
 
     if message.content.lower().startswith('zping'):
         timep = time.time()
-        emb = discord.Embed(title='Aguarde', color=0x565656)
+        emb = discord.Embed(title='Aguarde...', color=0x565656)
         pingm0 = await client.send_message(message.channel, embed=emb)
         ping = time.time() - timep
-        pingm1 = discord.Embed(title='Pong!', description=':ping_pong: Ping - %.01f segundos' % ping, color=0x15ff00)
+        pingm1 = discord.Embed(title='Pong!', description='<a:zueiroanonimobotemoji:440504316613230592> Ping - %.01f segundos' % ping, color=0x15ff00)
         await client.edit_message(pingm0, embed=pingm1)
 
     if message.content.lower().startswith('zdiga'):
@@ -687,7 +687,7 @@ async def on_message(message):
         embedbotin = discord.Embed(
             title=" <:python:419660191244484609> Olá, sou o Zueiro Anonimo <:python:419660191244484609> ",
             color=amarelo,
-            descriptino="Discord BOT Básico - sendo atualizado cada vez mais",
+            descriptino="Discord BOT Básico - Um botizinho com o programa HUEBR injetado na veia",
         )
         embedbotin.set_thumbnail(url=client.user.avatar_url)
         embedbotin.add_field(name='Discord BOT Básico', value='Sendo atualizado cada vez mais')
