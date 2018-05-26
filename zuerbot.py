@@ -13,7 +13,6 @@ import requests
 import json
 import datetime
 
-
 players = {}
 config = None
 client = discord.Client()
@@ -688,10 +687,10 @@ async def on_message(message):
         embedbotin = discord.Embed(
             title=" <:python:419660191244484609> Olá, sou o Zueiro Anonimo <:python:419660191244484609> ",
             color=amarelo,
-            descriptino="Discord BOT Básico - Um botizinho com o programa HUEBR injetado na veia",
+            descriptino="Oinn",
         )
         embedbotin.set_thumbnail(url=client.user.avatar_url)
-        embedbotin.add_field(name='Discord BOT Básico', value='Sendo atualizado cada vez mais')
+        embedbotin.add_field(name='Discord BOT Básico', value='Um botizinho com o programa HUEBR injetado na veia')
         embedbotin.add_field(name='Meu site:', value='https://zueiro-anonimo.glitch.me')
         embedbotin.add_field(name='Ultima atualização minha:', value='26/05/2018')
         embedbotin.add_field(name='Criado em:', value='24/03/2018')
