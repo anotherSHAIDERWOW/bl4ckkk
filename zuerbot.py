@@ -44,6 +44,24 @@ async def on_ready():
     print(client.user.id)
     print('https://discord.gg/CmszJUV')
 
+async def up_time():
+    await client.wait_until_ready()
+    global minutes
+    minutes = 0
+    global hour
+    hour = 0
+    global seconds
+    seconds = 0
+    while not client.is_closed:
+        await asyncio.sleep(1)
+        seconds += 1
+        if minutes == 60:
+            minutes = 0
+            hour += 1
+        if seconds == 60:
+            minutes += 1
+            seconds = 0
+client.loop.create_task(up_time())
 
 
 
@@ -644,6 +662,7 @@ async def on_message(message):
         )
         embpapaco.set_image(
             url='https://images-ext-2.discordapp.net/external/UuIdfaTGI15OWrW9tZnlXD-rjkhVSzsuQXhUh7463Pg/https/i.imgur.com/T8auOavh.jpg?width=764&height=430')
+        embpapaco.set_footer(text="Para ver meus comandos utilize zHelp")
         papaco = await client.send_message(message.channel, embed=embpapaco)
         #   🇧 🇺  🇳  🇩  🇦  ➖   🇲  🇴  🇱  🇪
         await client.add_reaction(papaco, '🇧')
@@ -683,21 +702,21 @@ async def on_message(message):
             await client.send_message(message.channel, message.content[5:])
             await client.delete_message(message)
 
-    elif message.content.lower().startswith('zbotinfo'):
+    if message.content.lower().startswith('zbotinfo'):
         embedbotin = discord.Embed(
             title=" <:python:419660191244484609> Olá, sou o Zueiro Anonimo <:python:419660191244484609> ",
-            color=amarelo,
             descriptino="Oinn",
         )
         embedbotin.set_thumbnail(url=client.user.avatar_url)
-        embedbotin.add_field(name='Discord BOT Básico', value='Um botizinho com o programa HUEBR injetado na veia')
-        embedbotin.add_field(name='Meu site:', value='https://zueiro-anonimo.glitch.me')
-        embedbotin.add_field(name='Ultima atualização minha:', value='26/05/2018')
-        embedbotin.add_field(name='Criado em:', value='24/03/2018')
-        embedbotin.add_field(name='Estou online em',
+        embedbotin.add_field(name='<a:zueiroanonimobotemoji:440504316613230592> Discord BOT Básico', value='Um botizinho com o programa HUEBR injetado na veia')
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Meu site:', value='https://goo.gl/8Ti3eh')
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online faz:', value='`{} hrs {} min e {} segs`'.format(hour, minutes, seconds))
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Ultima atualização:', value='`27/05/2018`')
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Criado em:', value='`24/03/2018`')
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online em',
                              value='` ' + (str(len(client.servers))) + ' `  Serve(s) <:python:419660191244484609> ')
-        embedbotin.add_field(name='Em contato com', value=str(len(set(client.get_all_members()))) + ' usuarios')
-        embedbotin.set_footer(text="Copyright © 2018 - Criado por SHAIDERWOW#6701 - Quer saber mais ? digite zHelp")
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Em contato com', value='`' + str(len(set(client.get_all_members()))) + ' usuarios`')
+        embedbotin.set_footer(text="Criado por SHAIDERWOW#6701 - Copyright © 2018 - Quer saber mais ? digite zHelp", icon_url="https://images-ext-1.discordapp.net/external/OMP4WooSTGR7TMyMtuRSyDPApIIB3f2POTZV6PPLBgM/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/320339126601777152/6044af07c657f2d82a2b5bcfbed01d3d.webp")
         await client.send_message(message.channel, embed=embedbotin)
 
     elif message.content.lower().startswith('zuserinfo'):
