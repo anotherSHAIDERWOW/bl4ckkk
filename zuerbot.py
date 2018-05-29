@@ -711,7 +711,7 @@ async def on_message(message):
         embedbotin.add_field(name='<a:zueiroanonimobotemoji:440504316613230592> Discord BOT Básico', value='Um botizinho com o programa HUEBR injetado na veia')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Meu site:', value='https://goo.gl/8Ti3eh')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online faz:', value='`{} hrs {} min e {} segs`'.format(hour, minutes, seconds))
-        embedbotin.add_field(name='<a:nyancat:450290566802964480> Ultima atualização:', value='`27/05/2018`')
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Ultima atualização:', value='`29/05/2018`')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Criado em:', value='`24/03/2018`')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online em',
                              value='` ' + (str(len(client.servers))) + ' `  Serve(s) <:python:419660191244484609> ')
@@ -719,9 +719,14 @@ async def on_message(message):
         embedbotin.set_footer(text="Criado por SHAIDERWOW#6701 - Copyright © 2018 - Quer saber mais ? digite zHelp", icon_url="https://images-ext-1.discordapp.net/external/OMP4WooSTGR7TMyMtuRSyDPApIIB3f2POTZV6PPLBgM/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/320339126601777152/6044af07c657f2d82a2b5bcfbed01d3d.webp")
         await client.send_message(message.channel, embed=embedbotin)
 
-    elif message.content.lower().startswith('zuserinfo'):
+    if message.content.lower().startswith('zuserinfo'):
         try:
             member = message.mentions[0]
+            statusgamememb = str(member.game)
+            statusnickmemb = str(member.nick)
+            statusonmemb = str(member.status)
+            tempoxx1x = member.joined_at
+            rolesmemb = ([role.name for role in member.roles if role.name != "@everyone"])
             embedusu = discord.Embed(
                 title='<a:zueiroanonimobotemoji:440504316613230592> Informações de: {} <a:zueiroanonimobotemoji:440504316613230592>'.format(
                     member.name),
@@ -729,18 +734,22 @@ async def on_message(message):
                 descriptino=None,
             )
             embedusu.set_thumbnail(url=member.avatar_url)
-            embedusu.add_field(name="Seu Nome", value=member.name)
-            embedusu.add_field(name='Seu apelido neste server', value=member.nick)
-            embedusu.add_field(name="Seu ID", value=member.id)
-            embedusu.add_field(name="Status", value=member.status)
-            embedusu.add_field(name='Jogando:', value=member.game)
-            embedusu.add_field(name="Entrou no server em", value=member.joined_at)
-            embedusu.add_field(name="Maior Cargo ", value=member.top_role)
-            embedusu.add_field(name="Cor", value=member.color)
-            embedusu.add_field(name="Tag", value=member.discriminator)
+            embedusu.add_field(name="<a:nyancat:450290566802964480> Seu nome", value="{}`#{}`".format(member.name, member.discriminator))
+            embedusu.add_field(name='<a:nyancat:450290566802964480> Seu apelido aqui:', value=statusnickmemb.replace('None', 'Não tem'))
+            embedusu.add_field(name="<a:nyancat:450290566802964480> Seu ID", value="`{}`".format(member.id))
+            embedusu.add_field(name="<a:nyancat:450290566802964480> Status", value=statusonmemb.replace("online","<:online:438399398808911882>").replace("offline","<:offline:438399398762905600>").replace("dnd","<:dnd:438399396548313091>").replace("idle","<:idle:438399398796460032>").replace("stream","<:stream:438399396963418131>"))
+            embedusu.add_field(name='<a:nyancat:450290566802964480> Jogando:', value=statusgamememb.replace('None', 'Nada ;-;'))
+            embedusu.add_field(name="<a:nyancat:450290566802964480> Criado em:", value=member.created_at.strftime("%d/%m/%Y às %H:%M"))
+            embedusu.add_field(name="<a:nyancat:450290566802964480> Maior Cargo: ", value="`{}`".format(member.top_role))
+            embedusu.add_field(name='<a:nyancat:450290566802964480> Cargos:', value="```{}```".format(rolesmemb))
             await client.send_message(message.channel, embed=embedusu)
         except:
             user = message.author
+            statusgameuse = str(message.author.game)
+            statusnickuse = str(message.author.nick)
+            statusonuse = str(message.author.status)
+            rolesuse = ([role.name for role in user.roles if role.name != "@everyone"])
+            tempoxx2x = user.joined_at
             embedusu1 = discord.Embed(
                 title='<a:zueiroanonimobotemoji:440504316613230592> Informações de: {} <a:zueiroanonimobotemoji:440504316613230592>'.format(
                     user.name),
@@ -748,15 +757,15 @@ async def on_message(message):
                 descriptino=None,
             )
             embedusu1.set_thumbnail(url=user.avatar_url)
-            embedusu1.add_field(name="Seu Nome", value=user.name)
-            embedusu1.add_field(name='Seu apelido neste server', value=user.nick)
-            embedusu1.add_field(name="Seu Id", value=user.id)
-            embedusu1.add_field(name="Status", value=user.status)
-            embedusu1.add_field(name='Jogando:', value=user.game)
-            embedusu1.add_field(name="Entrou no server em", value=user.joined_at)
-            embedusu1.add_field(name="Maior Cargo ", value=user.top_role)
-            embedusu1.add_field(name="Cor", value=user.color)
-            embedusu1.add_field(name="Tag", value=user.discriminator)
+            embedusu1.add_field(name="<a:nyancat:450290566802964480> Seu Nome", value="{}`#{}`".format(user.name, user.discriminator))
+            embedusu1.add_field(name='<a:nyancat:450290566802964480> Seu apelido aqui:', value=statusnickuse.replace('None', 'Não tem'))
+            embedusu1.add_field(name="<a:nyancat:450290566802964480> Seu ID", value="`{}`".format(user.id))
+            embedusu1.add_field(name="<a:nyancat:450290566802964480> Status", value=statusonuse.replace("online","<:online:438399398808911882>").replace("offline","<:offline:438399398762905600>").replace("dnd","<:dnd:438399396548313091>").replace("idle","<:idle:438399398796460032>").replace("stream","<:stream:438399396963418131>"))
+            embedusu1.add_field(name='<a:nyancat:450290566802964480> Jogando:', value=statusgameuse.replace('None', 'Nada ;-;'))
+            embedusu1.add_field(name="<a:nyancat:450290566802964480> Criado em:", value=user.created_at.strftime("%d/%m/%Y às %H:%M"))
+            embedusu1.add_field(name="<a:nyancat:450290566802964480> Maior Cargo:", value="`{}`".format(user.top_role))
+            embedusu1.add_field(name='<a:nyancat:450290566802964480> Cargos:', value="```{}```".format(rolesuse))
+
             await client.send_message(message.channel, embed=embedusu1)
 
     elif message.content.lower().startswith('zavatar'):
@@ -790,28 +799,32 @@ async def on_message(message):
             await client.add_reaction(avatar2, '😱')
             await client.add_reaction(avatar2, '💩')
 
-    elif message.content.lower().startswith('zserverinfo'):
+    if message.content.lower().startswith('zserverinfo'):
         server = message.server
         online = len([m.status for m in message.server.members
-                      if m.status == discord.Status.online or
-                      m.status == discord.Status.idle])
+                      if m.status == discord.Status.online])
+        offline = len([m.status for m in message.server.members
+                      if m.status == discord.Status.offline])
+        dnd = len([m.status for m in message.server.members
+                      if m.status == discord.Status.dnd])
+        idle = len([m.status for m in message.server.members
+                      if m.status == discord.Status.idle])
+        cargosserv = [role.name for role in message.server.roles if role.name != "@everyone"]
 
         embed3 = discord.Embed(
             title="Informações do server <a:zueiroanonimobotemoji:440504316613230592> ",
-            color=amarelo,
             descriptino=None,
         )
-        embed3.add_field(name="Server name", value=message.server.name, inline=True)
-        embed3.add_field(name="Criado em", value=message.server.created_at.strftime("%d %b %Y %H:%M"))
-        embed3.add_field(name="Server ID", value=message.server.id, inline=True)
-        embed3.add_field(name="Dono", value=message.server.owner.mention)
-        embed3.add_field(name="Numero de cargos", value=len(message.server.roles), inline=True)
-        embed3.add_field(name="Membros", value=len(message.server.members), inline=True)
-        embed3.add_field(name="Online", value=f"**{online}/{len(message.server.members)}**")
-        embed3.add_field(name="Região do Server", value=str(message.server.region).title())
-        embed3.add_field(name="Emojis", value=f"{len(message.server.emojis)}/100")
+        embed3.add_field(name="<a:nyancat:450290566802964480> Nome do server", value=message.server.name, inline=True)
+        embed3.add_field(name="<a:nyancat:450290566802964480> Criado em", value=message.server.created_at.strftime("%d/%m/%Y às %H:%M"))
+        embed3.add_field(name="<a:nyancat:450290566802964480> Server ID", value=message.server.id, inline=True)
+        embed3.add_field(name="<a:nyancat:450290566802964480> Dono", value=message.server.owner.mention)
+        embed3.add_field(name="<a:nyancat:450290566802964480> Região do Server", value=str(message.server.region).title())
+        embed3.add_field(name="<a:nyancat:450290566802964480> Emojis", value=f"{len(message.server.emojis)}/100")
+        embed3.add_field(name="<a:nyancat:450290566802964480> Membros ({}):".format(len(message.server.members)), value=f"**{online}<:online:438399398808911882> {offline}<:offline:438399398762905600> \n{dnd}<:dnd:438399396548313091> {idle}<:idle:438399398796460032>**")
+        embed3.add_field(name="<a:nyancat:450290566802964480> Cargos ({}):".format(len(message.server.roles)), value="```{}```".format(cargosserv))
         embed3.set_thumbnail(url=message.server.icon_url)
-        embed3.set_footer(text="Copyright © 2018 - SHAIDERWOW - Zueiros Anonimous")
+        embed3.set_footer(text="Criado por SHAIDERWOW#6701 - Copyright © 2018 - Quer saber mais ? digite zHelp", icon_url="https://images-ext-1.discordapp.net/external/OMP4WooSTGR7TMyMtuRSyDPApIIB3f2POTZV6PPLBgM/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/320339126601777152/6044af07c657f2d82a2b5bcfbed01d3d.webp")
         await client.send_message(message.channel, embed=embed3)
 
     if message.content.lower().startswith('zgpsteam'):
