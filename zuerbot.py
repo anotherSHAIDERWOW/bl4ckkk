@@ -209,7 +209,7 @@ async def on_message(message):
         except:
             await client.send_message(message.channel, 'Desculpe, não entendi')
 
-    if message.content.lower().startswith('zzcsgo'):
+    if message.content.lower().startswith('zcsgo'):
         user = message.author
         try:
             csgo1 = message.content[6:]
@@ -254,7 +254,7 @@ async def on_message(message):
             await client.wait_for_reaction(message=zzsteamid, user=message.author, emoji="🗑")
             await client.delete_message(zzsteamid)
 
-    if message.content.lower().startswith('zzsteam'):
+    if message.content.lower().startswith('zsteam'):
         user = message.author
         try:
             testcmnd = '76561198168296588'
