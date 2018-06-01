@@ -46,6 +46,8 @@ async def on_ready():
 
 async def up_time():
     await client.wait_until_ready()
+    global days
+    days = 0
     global minutes
     minutes = 0
     global hour
@@ -55,6 +57,9 @@ async def up_time():
     while not client.is_closed:
         await asyncio.sleep(1)
         seconds += 1
+        if hour == 24:
+            hour = 0
+            days += 1
         if minutes == 60:
             minutes = 0
             hour += 1
@@ -77,20 +82,30 @@ async def on_message(message):
         await client.change_presence(game=discord.Game(name=game))
         await client.send_message(message.channel, "Cóe criador, mudei meu status pra: " + game + "")
 
-    if message.content.lower().startswith("z!eval"):
+    if message.content.lower().startswith("z?eval"):
          if not message.author.id == '320339126601777152':
             return await client.send_message(message.channel, '**Permissão insuficiente**')
          try:
             embedeval1 = discord.Embed(title='\n', description='\n')
             embedeval1.add_field(name='**:inbox_tray: Entrada**', value='```' + message.content[7:] + '```')
             embedeval1.add_field(name='**:outbox_tray: Saída**', value='```' + str(eval(message.content[7:])) + '```')
-            await client.send_message(message.channel, embed=embedeval1)
+            eval1 = await client.send_message(message.channel, embed=embedeval1)
+            await client.add_reaction(eval1, "☑")
+            await client.add_reaction(eval1, "🗑")
+            await client.wait_for_reaction(message=eval1, user=message.author, emoji="🗑")
+            await client.delete_message(eval1)
+            await client.delete_message(message)
 
          except Exception as e:
             embedeval = discord.Embed(title='\n', description='\n')
             embedeval.add_field(name='**:inbox_tray: Entrada**', value='```' + message.content[7:] + '```')
             embedeval.add_field(name='**:outbox_tray: Saída**', value='```' + repr(e) + '```')
-            await client.send_message(message.channel, embed=embedeval)
+            eval2 = await client.send_message(message.channel, embed=embedeval)
+            await client.add_reaction(eval2, "❎")
+            await client.add_reaction(eval2, "🗑")
+            await client.wait_for_reaction(message=eval2, user=message.author, emoji="🗑")
+            await client.delete_message(eval2)
+            await client.delete_message(message)
 
     if message.content.lower().startswith("zconvite"):
         invitelinknew = await client.create_invite(destination = message.channel, unique = True)
@@ -288,6 +303,18 @@ async def on_message(message):
             embedsteampriv.set_thumbnail(url=avatarstepriv)
             embedsteampriv.set_footer(text='#ZueiroAnonimoJogaNaSteam')
             await client.send_message(message.channel, embed=embedsteampriv)
+
+    if message.content.lower().startswith('zsteam') or message.content.lower().startswith('zcsgo'):
+        await asyncio.sleep(5)
+        zzsteamid = await client.send_message(message.channel,
+                                              "Olá, os comandos `zSteam` e `zCSGO` funcionam somente com o seu ID Steam\n"
+                                              "Exemplo: `zSteam 76561198168296588`\n"
+                                              "Não sabe sua ID ? Acesse: `steamidfinder.com`\n"
+                                              "`Obs. Seu ID será o steamID64`\n"
+                                              "**Clique na lixeira para excluir esta mensagem**")
+        await client.add_reaction(zzsteamid, "🗑")
+        await client.wait_for_reaction(message=zzsteamid, user=message.author, emoji="🗑")
+        await client.delete_message(zzsteamid)
 
     if message.content.lower().startswith('zfilme'):
         user = message.author
@@ -576,37 +603,47 @@ async def on_message(message):
 
     if message.content.lower().startswith('zhelp'):
         user = message.author
+        embhelp3 = discord.Embed(title="Não tema! Sua ajuda chegou", color=user.color,
+                                 description="Não se preocupe, não somos igual a Correios, a lista de comandos já foi entregue em seu privado."
+                                 )
+        embhelp3.add_field(name="Abaixo está meu site, sinta-se livre em compartilha-lo para sua família ❤",
+                           value="https://zueiro-anonimo.glitch.me \n `breve mais coisas no site`")
+        embhelp3.set_thumbnail(url="https://cdn.discordapp.com/emojis/440504316613230592.gif")
+        embhelp3.set_footer(icon_url=user.avatar_url, text="Comando utilizado por {}".format(user.name))
+        #
         embhelp2 = discord.Embed(title='<a:zueiroanonimobotemoji:440504316613230592> Olá, {}. <a:zueiroanonimobotemoji:440504316613230592>'.format(message.author.name), color=user.color,
-                              description='No momento ainda não estou pronto,porém,posso lhe servir em algumas coisas.\n'
-                                          'Vou deixar os meus comandos abaixo para ajudar.\n'
-                                          '**zHelp : **Exibe esta mensagem.\n'
-                                          '**zGif : **Envia um gif aleatório.\n'
-                                          '**zVotar** `<mensagem>` **:** Faz uma votação por reactions.\n'
-                                          '**zAvatar : **Mostra o avatar do usuário mencionado ou do seu.\n'
-                                          '**zServerinfo : **Mostra as informações do servidor.\n'
-                                          '**zBotinfo : **Mostra algumas informações sobre mim.\n'
-                                          '**zUserinfo : **Mostra as informações do usuário mencionado ou as suas.\n'
+                              description='No momento ainda não estou pronto, porém, posso lhe servir em algumas coisas.\n'
+                                          '\n'
+                                          '<a:zueiroanonimobotemoji:440504316613230592>**Comandos públicos**<a:zueiroanonimobotemoji:440504316613230592>\n'
+                                          '\n'
+                                          '**zHelp :** **Exibe esta mensagem.**\n'
+                                          '**zVotar `<mensagem>` :** Faz uma votação por reactions.\n'
+                                          '**zAvatar :** Mostra o avatar do usuário mencionado ou do seu.\n'
+                                          '**zServerinfo :** **Mostra as informações do servidor.**\n'
+                                          '**zBotinfo :** **Mostra algumas informações sobre mim.**\n'
+                                          '**zUserinfo :** **Mostra as informações do usuário mencionado ou as suas.**\n'
                                           '**zGpsteam : **Mostra o meu grupo da Steam.\n'
-                                          '**zSteam** `<ID da conta>`**:** Eu lhe mostro informações sobre a conta Steam. \n'
-                                          '**zCsgo** `<ID da Steam>`**:** Eu lhe mostro as informações sobre a conta de CS:GO\n'
-                                          '**zFlipcoin : **Me faz reagir com cara(😀) ou coroa(👑).\n'
-                                          '**zFilme** `<nome do filme>`**:** Eu te mostro informações do filme escolhido.\n'
-                                          '**zSerie** `<nome da serie>`**:** Eu te mostro informações da serie escolhida.\n'
-                                          '**zGames : **Te dá o cargo do jogo caso você reaja com o emoji relativo ao mesmo.\n'
-                                          '**zPing : **Exibe meu tempo de resposta.\n'
-                                          '**zSugestao** `<mensagem>`**:** Envia sua sugestão diretamente pro meu dono.\n'
+                                          '**zSteam `<ID da conta>`:** **Eu lhe mostro informações sobre a conta Steam.** \n'
+                                          '**zCsgo `<ID da Steam>`:** **Eu lhe mostro as informações sobre a conta de CS:GO**\n'
+                                          '**zFlipcoin :** Me faz reagir com cara(😀) ou coroa(👑).\n'
+                                          '**zFilme `<nome do filme>`:** Eu te mostro informações do filme escolhido.\n'
+                                          '**zSerie `<nome da serie>`:** Eu te mostro informações da serie escolhida.\n'
+                                          '**zGames :** Te dá o cargo do jogo caso você reaja com o emoji relativo ao mesmo.\n'
+                                          '**zPing :** Exibe meu tempo de resposta.\n'
+                                          '**zSugestao `<mensagem>`:** Envia sua sugestão diretamente pro meu dono.\n'
                                           '**zConvite:** Gera um link para convidar outros à este servidor. \n'
-                                          '**z.Py** `<código>`**:** Coloca a fonte python do discord no seu código.\n'
+                                          '\n'
                                           '<a:zueiroanonimobotemoji:440504316613230592>**Comandos que requerem permissões de administrador.**<a:zueiroanonimobotemoji:440504316613230592>\n'
-                                          '**zAviso** `<menção>` `<mensagem>` **:** Envia uma mensagem ao usuário mencionado através de mim.\n'
-                                          '**zBan** `<menção>` **:** Bane o usuário mencionado do servidor. \n'
-                                          '**zKick** `<menção>` **:** Kika o usuário mencionado do servidor. \n'
-                                          '<a:zueiroanonimobotemoji:440504316613230592>**ME ADICIONE AO SEU SERVIDOR**<a:zueiroanonimobotemoji:440504316613230592>\n'
-                                          'Me adicione ao seu servidor usando este link:\n'
-                                          '[Link direto](' + "https://goo.gl/kDKqhF" +')\n'
-                                          'Servidor oficial (para suporte e afins):\n'
-                                          '[Link direto](' + "http://discord.me/zueirosanonimous" + ')\n')
-        await client.send_message(message.channel, embed=embhelp2)
+                                          '\n'
+                                          '**zAviso `<menção>` `<mensagem>` :** Envia uma mensagem ao usuário mencionado através de mim.\n'
+                                          '**zBan `<menção>` :** **Bane o usuário mencionado do servidor.** \n'
+                                          '**zKick `<menção>` :** Kika o usuário mencionado do servidor. \n'
+                                          '\n'
+                                          '<a:zueiroanonimobotemoji:440504316613230592>**Obrigado**<a:zueiroanonimobotemoji:440504316613230592>\n'
+                                                                                                    '\n'
+                                           'Obs. **descrição em negrito** = O comando é NOVO, ou foi ATUALIZADO')
+        await client.send_message(message.author, embed=embhelp2)
+        await client.send_message(message.channel, embed=embhelp3)
 
     if message.content.lower().startswith('zzhelpantigasso'):
         user = message.author
@@ -710,11 +747,11 @@ async def on_message(message):
         embedbotin.set_thumbnail(url=client.user.avatar_url)
         embedbotin.add_field(name='<a:zueiroanonimobotemoji:440504316613230592> Discord BOT Básico', value='Um botizinho com o programa HUEBR injetado na veia')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Meu site:', value='https://goo.gl/8Ti3eh')
-        embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online faz:', value='`{} hrs {} min e {} segs`'.format(hour, minutes, seconds))
-        embedbotin.add_field(name='<a:nyancat:450290566802964480> Ultima atualização:', value='`29/05/2018`')
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online faz:', value='`{} dias, {} hrs e {} min`'.format(days, hour, minutes))
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Ultima atualização:', value='`01/06/2018`')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Criado em:', value='`24/03/2018`')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online em',
-                             value='` ' + (str(len(client.servers))) + ' `  Serve(s) <:python:419660191244484609> ')
+                             value='` ' + (str(len(client.servers))) + ' `  Server(s) <:python:419660191244484609> ')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Em contato com', value='`' + str(len(set(client.get_all_members()))) + ' usuarios`')
         embedbotin.set_footer(text="Criado por SHAIDERWOW#6701 - Copyright © 2018 - Quer saber mais ? digite zHelp", icon_url="https://images-ext-1.discordapp.net/external/OMP4WooSTGR7TMyMtuRSyDPApIIB3f2POTZV6PPLBgM/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/320339126601777152/6044af07c657f2d82a2b5bcfbed01d3d.webp")
         await client.send_message(message.channel, embed=embedbotin)
@@ -809,6 +846,7 @@ async def on_message(message):
                       if m.status == discord.Status.dnd])
         idle = len([m.status for m in message.server.members
                       if m.status == discord.Status.idle])
+        bots = len([member.bot for member in message.server.members if member.bot])
         cargosserv = [role.name for role in message.server.roles if role.name != "@everyone"]
 
         embed3 = discord.Embed(
@@ -821,8 +859,8 @@ async def on_message(message):
         embed3.add_field(name="<a:nyancat:450290566802964480> Dono", value=message.server.owner.mention)
         embed3.add_field(name="<a:nyancat:450290566802964480> Região do Server", value=str(message.server.region).title())
         embed3.add_field(name="<a:nyancat:450290566802964480> Emojis", value=f"{len(message.server.emojis)}/100")
-        embed3.add_field(name="<a:nyancat:450290566802964480> Membros ({}):".format(len(message.server.members)), value=f"**{online}<:online:438399398808911882> {offline}<:offline:438399398762905600> \n{dnd}<:dnd:438399396548313091> {idle}<:idle:438399398796460032>**")
-        embed3.add_field(name="<a:nyancat:450290566802964480> Cargos ({}):".format(len(message.server.roles)), value="```{}```".format(cargosserv))
+        embed3.add_field(name="<a:nyancat:450290566802964480> Membros ({}):".format(len(message.server.members)), value=f"**{online}<:online:438399398808911882> {offline}<:offline:438399398762905600> \n{dnd}<:dnd:438399396548313091> {idle}<:idle:438399398796460032> \n{bots}<:bot:437248340724416514>**")
+        embed3.add_field(name="<a:nyancat:450290566802964480> Cargos ({}):".format(len(message.server.roles)), value=",  ".join(cargosserv))
         embed3.set_thumbnail(url=message.server.icon_url)
         embed3.set_footer(text="Criado por SHAIDERWOW#6701 - Copyright © 2018 - Quer saber mais ? digite zHelp", icon_url="https://images-ext-1.discordapp.net/external/OMP4WooSTGR7TMyMtuRSyDPApIIB3f2POTZV6PPLBgM/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/320339126601777152/6044af07c657f2d82a2b5bcfbed01d3d.webp")
         await client.send_message(message.channel, embed=embed3)
