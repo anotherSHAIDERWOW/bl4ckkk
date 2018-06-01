@@ -209,7 +209,7 @@ async def on_message(message):
         except:
             await client.send_message(message.channel, 'Desculpe, não entendi')
 
-    if message.content.lower().startswith('zcsgo'):
+    if message.content.lower().startswith('zzcsgo'):
         user = message.author
         try:
             csgo1 = message.content[6:]
@@ -243,9 +243,18 @@ async def on_message(message):
             embedcsgo.set_footer(text="Seus Frags ultrapassam a barreira do -4")
             await client.send_message(message.channel, embed=embedcsgo)
         except:
-            await client.send_message(message.channel, "# Só consigo procurar por ID's de conta Steam ;-; ")
+            await asyncio.sleep(1)
+            zzsteamid = await client.send_message(message.channel,
+                                                  "Olá, os comandos `zSteam` e `zCSGO` funcionam somente com o seu ID Steam\n"
+                                                  "Exemplo: `zCSGO 76561198168296588`\n"
+                                                  "Não sabe sua ID ? Acesse: `steamidfinder.com`\n"
+                                                  "`Obs. Seu ID será o steamID64`\n"
+                                                  "**Clique na lixeira para excluir esta mensagem**")
+            await client.add_reaction(zzsteamid, "🗑")
+            await client.wait_for_reaction(message=zzsteamid, user=message.author, emoji="🗑")
+            await client.delete_message(zzsteamid)
 
-    if message.content.lower().startswith('zsteam'):
+    if message.content.lower().startswith('zzsteam'):
         user = message.author
         try:
             testcmnd = '76561198168296588'
@@ -283,7 +292,7 @@ async def on_message(message):
             embedsteam.set_thumbnail(url=avatarste)
             embedsteam.set_footer(text='#ZueiroAnonimoJogaNaSteam')
             await client.send_message(message.channel, embed=embedsteam)
-        except:
+        except KeyError:
             steam1priv = message.content[7:]
             steam2priv = requests.get('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=C17D1FB55BAAFBA0288B05AF103BC7B4&steamids=' + steam1 + '&format=json')
             steamload1priv = json.loads(steam2priv.text)
@@ -303,18 +312,17 @@ async def on_message(message):
             embedsteampriv.set_thumbnail(url=avatarstepriv)
             embedsteampriv.set_footer(text='#ZueiroAnonimoJogaNaSteam')
             await client.send_message(message.channel, embed=embedsteampriv)
-
-    if message.content.lower().startswith('zsteam') or message.content.lower().startswith('zcsgo'):
-        await asyncio.sleep(5)
-        zzsteamid = await client.send_message(message.channel,
-                                              "Olá, os comandos `zSteam` e `zCSGO` funcionam somente com o seu ID Steam\n"
-                                              "Exemplo: `zSteam 76561198168296588`\n"
-                                              "Não sabe sua ID ? Acesse: `steamidfinder.com`\n"
-                                              "`Obs. Seu ID será o steamID64`\n"
-                                              "**Clique na lixeira para excluir esta mensagem**")
-        await client.add_reaction(zzsteamid, "🗑")
-        await client.wait_for_reaction(message=zzsteamid, user=message.author, emoji="🗑")
-        await client.delete_message(zzsteamid)
+        except json.decoder.JSONDecodeError:
+            await asyncio.sleep(1)
+            zzsteamid = await client.send_message(message.channel,
+                                                  "Olá, os comandos `zSteam` e `zCSGO` funcionam somente com o seu ID Steam\n"
+                                                  "Exemplo: `zSteam 76561198168296588`\n"
+                                                  "Não sabe sua ID ? Acesse: `steamidfinder.com`\n"
+                                                  "`Obs. Seu ID será o steamID64`\n"
+                                                  "**Clique na lixeira para excluir esta mensagem**")
+            await client.add_reaction(zzsteamid, "🗑")
+            await client.wait_for_reaction(message=zzsteamid, user=message.author, emoji="🗑")
+            await client.delete_message(zzsteamid)
 
     if message.content.lower().startswith('zfilme'):
         user = message.author
