@@ -32,7 +32,7 @@ azul = 0x0000FF
 vermelho = 0xFF0000
 amarelo = 0xFFFF00
 roxo = 0x690FC3
-msg_id = None
+msg_id = None 
 msg_user = None
 
 global listadevips
