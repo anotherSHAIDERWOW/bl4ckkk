@@ -677,6 +677,7 @@ async def on_message(message):
                                           '**zSugestao `<mensagem>`:** Envia sua sugestão diretamente pro meu dono.\n'
                                           '**zConvite:** Gera um link para convidar outros à este servidor. \n'
                                           '**zSS `<mensagem>`:** **SimSimi do Zueiro Anonimo** S2 \n'
+                                          '**zADDss `<mensagem>`:** **Adiciona questões novas à SimSimi** \n'
                                           '\n'
                                           '<a:zueiroanonimobotemoji:440504316613230592>**Comandos que requerem permissões de administrador.**<a:zueiroanonimobotemoji:440504316613230592>\n'
                                           '\n'
