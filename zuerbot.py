@@ -35,11 +35,12 @@ roxo = 0x690FC3
 msg_id = None
 msg_user = None
 
-
+global listadevips
+listadevips = ["320339126601777152","387478527064276992"]
 
 @client.event
 async def on_ready():
-    print('BOT ONLINE - Testando')
+    print('BOT ONLINE')
     print(client.user.name)
     print(client.user.id)
     print('https://discord.gg/CmszJUV')
@@ -54,7 +55,7 @@ async def up_time():
     hour = 0
     global seconds
     seconds = 0
-    while not client.is_closed:
+    while client._is_ready:
         await asyncio.sleep(1)
         seconds += 1
         if hour == 24:
@@ -81,6 +82,41 @@ async def on_message(message):
         game = message.content[9:]
         await client.change_presence(game=discord.Game(name=game))
         await client.send_message(message.channel, "Cóe criador, mudei meu status pra: " + game + "")
+
+    if message.content.lower().startswith('zss'):
+        user = message.author.mention
+        sserro1 = message.content[4:]
+        fraseerross = "\n**Não foi encontrado uma resposta para** `{}`**,** \npor favor adicione uma com o comando abaixo: \n `zADDss <pergunta>`".format(sserro1)
+        try:
+            simsimi1 = message.content[4:]
+            simsimiapi = requests.get(
+                'https://dogewebsite.glitch.me/api/v1/responses/get-question&question=' + simsimi1 + '')
+            simsimiapi1 = json.loads(simsimiapi.text)
+            statussimsimi = simsimiapi1['code']
+            respostasimsimi = simsimiapi1['response']
+            xxxsimsimi = "{}, {}".format(user, respostasimsimi)
+            await client.send_message(message.channel, xxxsimsimi.replace("Não encontrado!", fraseerross))
+        except:
+            simsimierro = await client.send_message(message.channel, "Buguei")
+
+    if message.content.lower().startswith('zaddss'):
+        user = message.author.mention
+        try:
+            addquestss = message.content[7:]
+            def check(msg):
+                return msg.content.startswith('')
+            await client.send_message(message.channel, "O que eu devo responder quando disserem:\n `{}` ?".format(addquestss))
+            message = await client.wait_for_message(author=message.author, check=check)
+            addrespss = message.content[len(''):].strip()
+            addsimsimiapi = requests.get(
+                'https://dogewebsite.glitch.me/api/v1/responses/set-response&question=' + addquestss + '&answer=' + addrespss + '')
+            addsimsimiapi1 = json.loads(addsimsimiapi.text)
+            addrespostasimsimi = addsimsimiapi1['response']
+            simsimiaddsucess = "Sucesso <3 Agora quando me disserem `{}`, eu direi `{}`".format(addquestss, addrespss)
+            xxxsimsimi = "{}, {}".format(user, addrespostasimsimi)
+            await client.send_message(message.channel, xxxsimsimi.replace("Sucesso!", simsimiaddsucess))
+        except:
+            await client.send_message(message.channel, "Buguei")
 
     if message.content.lower().startswith("z?eval"):
          if not message.author.id == '320339126601777152':
@@ -627,9 +663,9 @@ async def on_message(message):
                                           '**zHelp :** **Exibe esta mensagem.**\n'
                                           '**zVotar `<mensagem>` :** Faz uma votação por reactions.\n'
                                           '**zAvatar :** Mostra o avatar do usuário mencionado ou do seu.\n'
-                                          '**zServerinfo :** **Mostra as informações do servidor.**\n'
-                                          '**zBotinfo :** **Mostra algumas informações sobre mim.**\n'
-                                          '**zUserinfo :** **Mostra as informações do usuário mencionado ou as suas.**\n'
+                                          '**zServerinfo :** Mostra as informações do servidor.\n'
+                                          '**zBotinfo :** Mostra algumas informações sobre mim.\n'
+                                          '**zUserinfo :** Mostra as informações do usuário mencionado ou as suas.\n'
                                           '**zGpsteam : **Mostra o meu grupo da Steam.\n'
                                           '**zSteam `<ID da conta>`:** **Eu lhe mostro informações sobre a conta Steam.** \n'
                                           '**zCsgo `<ID da Steam>`:** **Eu lhe mostro as informações sobre a conta de CS:GO**\n'
@@ -640,11 +676,12 @@ async def on_message(message):
                                           '**zPing :** Exibe meu tempo de resposta.\n'
                                           '**zSugestao `<mensagem>`:** Envia sua sugestão diretamente pro meu dono.\n'
                                           '**zConvite:** Gera um link para convidar outros à este servidor. \n'
+                                          '**zSS `<mensagem>`:** **SimSimi do Zueiro Anonimo** S2 \n'
                                           '\n'
                                           '<a:zueiroanonimobotemoji:440504316613230592>**Comandos que requerem permissões de administrador.**<a:zueiroanonimobotemoji:440504316613230592>\n'
                                           '\n'
                                           '**zAviso `<menção>` `<mensagem>` :** Envia uma mensagem ao usuário mencionado através de mim.\n'
-                                          '**zBan `<menção>` :** **Bane o usuário mencionado do servidor.** \n'
+                                          '**zBan `<menção>` :** Bane o usuário mencionado do servidor. \n'
                                           '**zKick `<menção>` :** Kika o usuário mencionado do servidor. \n'
                                           '\n'
                                           '<a:zueiroanonimobotemoji:440504316613230592>**Obrigado**<a:zueiroanonimobotemoji:440504316613230592>\n'
@@ -756,7 +793,7 @@ async def on_message(message):
         embedbotin.add_field(name='<a:zueiroanonimobotemoji:440504316613230592> Discord BOT Básico', value='Um botizinho com o programa HUEBR injetado na veia')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Meu site:', value='https://goo.gl/8Ti3eh')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online faz:', value='`{} dias, {} hrs e {} min`'.format(days, hour, minutes))
-        embedbotin.add_field(name='<a:nyancat:450290566802964480> Ultima atualização:', value='`01/06/2018`')
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Ultima atualização:', value='`03/06/2018`')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Criado em:', value='`24/03/2018`')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online em',
                              value='` ' + (str(len(client.servers))) + ' `  Server(s) <:python:419660191244484609> ')
