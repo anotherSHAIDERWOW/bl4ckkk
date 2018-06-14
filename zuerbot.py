@@ -32,11 +32,16 @@ azul = 0x0000FF
 vermelho = 0xFF0000
 amarelo = 0xFFFF00
 roxo = 0x690FC3
-msg_id = None 
+msg_id = None
 msg_user = None
 
+global blacklist
+blacklist = ["417691696982130688"]
 global listadevips
-listadevips = ["320339126601777152","387478527064276992"]
+listadevips = ["320339126601777152","232309115865661440","206230808208474113","236948199393329152"]
+global numlistadevips
+numlistadevips = len(listadevips)
+
 
 @client.event
 async def on_ready():
@@ -73,6 +78,16 @@ client.loop.create_task(up_time())
 
 @client.event
 async def on_message(message):
+    if message.author == client.user:
+        return
+    if message.content.lower().startswith("zhelp"):
+        if message.author.id in blacklist:
+                await client.send_message(message.channel, "{}, Você foi banido da minha vida\nNunca mais poderá usar meus comandos ;-;".format(message.author.mention))
+                return
+    if message.author.id in blacklist:
+        return
+
+    user_id = message.author.id
 
  #   if message.content.lower().startswith('zzueiro-logs'):
   #      server = message.server
@@ -737,29 +752,32 @@ async def on_message(message):
         await client.send_message(message.channel, embed=embhelp99)
 
     if message.content.lower().startswith('<@421862224454221824>'):
-        user = message.author
-        embpapaco = discord.Embed(
-            title='<a:zueiroanonimobotemoji:440504316613230592> Falou comigo, {}? <a:zueiroanonimobotemoji:440504316613230592>'.format(message.author.name),
-            color=user.color,
-            descriptino="VACILÃO MORRE CEDO",
-        )
-        embpapaco.set_image(
-            url='https://images-ext-2.discordapp.net/external/UuIdfaTGI15OWrW9tZnlXD-rjkhVSzsuQXhUh7463Pg/https/i.imgur.com/T8auOavh.jpg?width=764&height=430')
-        embpapaco.set_footer(text="Para ver meus comandos utilize zHelp")
-        papaco = await client.send_message(message.channel, embed=embpapaco)
-        #   🇧 🇺  🇳  🇩  🇦  ➖   🇲  🇴  🇱  🇪
-        await client.add_reaction(papaco, '🇧')
-        await client.add_reaction(papaco, '🇺')
-        await client.add_reaction(papaco, '🇳')
-        await client.add_reaction(papaco, '🇩')
-        await client.add_reaction(papaco, '🇦')
-        await client.add_reaction(papaco, '➖')
-        await client.add_reaction(papaco, '🇲')
-        await client.add_reaction(papaco, '🇴')
-        await client.add_reaction(papaco, '🇱')
-        await client.add_reaction(papaco, '🇪')
-        await client.wait_for_message(author=message.author, content="Não gracinha")
-        await client.send_message(message.channel, 'Ainda bem... até um outro dia')
+        if message.author.id in [y.id for y in message.server.members if y.bot]:
+            return
+        else:
+            user = message.author
+            embpapaco = discord.Embed(
+                title='<a:zueiroanonimobotemoji:440504316613230592> Falou comigo, {}? <a:zueiroanonimobotemoji:440504316613230592>'.format(message.author.name),
+                color=user.color,
+                descriptino="VACILÃO MORRE CEDO",
+            )
+            embpapaco.set_image(
+                url='https://images-ext-2.discordapp.net/external/UuIdfaTGI15OWrW9tZnlXD-rjkhVSzsuQXhUh7463Pg/https/i.imgur.com/T8auOavh.jpg?width=764&height=430')
+            embpapaco.set_footer(text="Para ver meus comandos utilize zHelp")
+            papaco = await client.send_message(message.channel, embed=embpapaco)
+            #   🇧 🇺  🇳  🇩  🇦  ➖   🇲  🇴  🇱  🇪
+            await client.add_reaction(papaco, '🇧')
+            await client.add_reaction(papaco, '🇺')
+            await client.add_reaction(papaco, '🇳')
+            await client.add_reaction(papaco, '🇩')
+            await client.add_reaction(papaco, '🇦')
+            await client.add_reaction(papaco, '➖')
+            await client.add_reaction(papaco, '🇲')
+            await client.add_reaction(papaco, '🇴')
+            await client.add_reaction(papaco, '🇱')
+            await client.add_reaction(papaco, '🇪')
+            await client.wait_for_message(author=message.author, content="Não gracinha")
+            await client.send_message(message.channel, 'Ainda bem... até um outro dia')
 
     if message.content.lower().startswith('zaviso'):
         if not message.author.server_permissions.administrator:
@@ -785,26 +803,11 @@ async def on_message(message):
             await client.send_message(message.channel, message.content[5:])
             await client.delete_message(message)
 
-    if message.content.lower().startswith('zbotinfo'):
-        embedbotin = discord.Embed(
-            title=" <:python:419660191244484609> Olá, sou o Zueiro Anonimo <:python:419660191244484609> ",
-            descriptino="Oinn",
-        )
-        embedbotin.set_thumbnail(url=client.user.avatar_url)
-        embedbotin.add_field(name='<a:zueiroanonimobotemoji:440504316613230592> Discord BOT Básico', value='Um botizinho com o programa HUEBR injetado na veia')
-        embedbotin.add_field(name='<a:nyancat:450290566802964480> Meu site:', value='https://goo.gl/8Ti3eh')
-        embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online faz:', value='`{} dias, {} hrs e {} min`'.format(days, hour, minutes))
-        embedbotin.add_field(name='<a:nyancat:450290566802964480> Ultima atualização:', value='`03/06/2018`')
-        embedbotin.add_field(name='<a:nyancat:450290566802964480> Criado em:', value='`24/03/2018`')
-        embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online em',
-                             value='` ' + (str(len(client.servers))) + ' `  Server(s) <:python:419660191244484609> ')
-        embedbotin.add_field(name='<a:nyancat:450290566802964480> Em contato com', value='`' + str(len(set(client.get_all_members()))) + ' usuarios`')
-        embedbotin.set_footer(text="Criado por SHAIDERWOW#6701 - Copyright © 2018 - Quer saber mais ? digite zHelp", icon_url="https://images-ext-1.discordapp.net/external/OMP4WooSTGR7TMyMtuRSyDPApIIB3f2POTZV6PPLBgM/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/320339126601777152/6044af07c657f2d82a2b5bcfbed01d3d.webp")
-        await client.send_message(message.channel, embed=embedbotin)
-
     if message.content.lower().startswith('zuserinfo'):
         try:
+            member_id = message.mentions[0].id
             member = message.mentions[0]
+            vipstatus = member.id in listadevips
             statusgamememb = str(member.game)
             statusnickmemb = str(member.nick)
             statusonmemb = str(member.status)
@@ -817,17 +820,23 @@ async def on_message(message):
                 descriptino=None,
             )
             embedusu.set_thumbnail(url=member.avatar_url)
-            embedusu.add_field(name="<a:nyancat:450290566802964480> Seu nome", value="{}`#{}`".format(member.name, member.discriminator))
-            embedusu.add_field(name='<a:nyancat:450290566802964480> Seu apelido aqui:', value=statusnickmemb.replace('None', 'Não tem'))
+            embedusu.add_field(name="<a:nyancat:450290566802964480> Seu nome",value="{}`#{}`".format(member.name, member.discriminator))
+            embedusu.add_field(name='<a:nyancat:450290566802964480> Seu apelido aqui:',value=statusnickmemb.replace('None', 'Não tem'))
             embedusu.add_field(name="<a:nyancat:450290566802964480> Seu ID", value="`{}`".format(member.id))
-            embedusu.add_field(name="<a:nyancat:450290566802964480> Status", value=statusonmemb.replace("online","<:online:438399398808911882>").replace("offline","<:offline:438399398762905600>").replace("dnd","<:dnd:438399396548313091>").replace("idle","<:idle:438399398796460032>").replace("stream","<:stream:438399396963418131>"))
-            embedusu.add_field(name='<a:nyancat:450290566802964480> Jogando:', value=statusgamememb.replace('None', 'Nada ;-;'))
-            embedusu.add_field(name="<a:nyancat:450290566802964480> Criado em:", value=member.created_at.strftime("%d/%m/%Y às %H:%M"))
+            embedusu.add_field(name="<a:nyancat:450290566802964480> Status",value=statusonmemb.replace("online", "<:online:438399398808911882>").replace("offline","<:offline:438399398762905600>").replace("dnd", "<:dnd:438399396548313091>").replace("idle","<:idle:438399398796460032>").replace("stream", "<:stream:438399396963418131>"))
+            embedusu.add_field(name='<a:nyancat:450290566802964480> Jogando:',value=statusgamememb.replace('None', 'Nada ;-;'))
+            embedusu.add_field(name="<a:nyancat:450290566802964480> Criado em:",value=member.created_at.strftime("%d/%m/%Y às %H:%M"))
+            embedusu.add_field(name="<a:zueiro_frog:451893503681626114> Zueiro VIP ? <a:zueiro_frog:451893503681626114>", value="{}".format(vipstatus).replace("False", "<a:zueiro_frog:451893503681626114> 🇳 🇦 🇴 <a:zueiro_frog:451893503681626114>").replace("True", "<a:zueiro_frog:451893503681626114> 🇻 🇮 🇵 <a:zueiro_frog:451893503681626114>"))
+        #    embedusu.add_field(name="<a:nyancat:450290566802964480> Level:", value="**{}** ({} XP)".format(level, get_xp(member_id)))
             embedusu.add_field(name="<a:nyancat:450290566802964480> Maior Cargo: ", value="`{}`".format(member.top_role))
             embedusu.add_field(name='<a:nyancat:450290566802964480> Cargos:', value="```{}```".format(rolesmemb))
+            embedusu.set_footer(text="O sistema de VIP's e o sistema de Niveis ainda estão em fase de testes!")
             await client.send_message(message.channel, embed=embedusu)
+            #🇻 🇮 🇵
+            #🇳 🇦 🇴
         except:
             user = message.author
+            vipstatus2 = user.id in listadevips
             statusgameuse = str(message.author.game)
             statusnickuse = str(message.author.nick)
             statusonuse = str(message.author.status)
@@ -840,16 +849,44 @@ async def on_message(message):
                 descriptino=None,
             )
             embedusu1.set_thumbnail(url=user.avatar_url)
-            embedusu1.add_field(name="<a:nyancat:450290566802964480> Seu Nome", value="{}`#{}`".format(user.name, user.discriminator))
-            embedusu1.add_field(name='<a:nyancat:450290566802964480> Seu apelido aqui:', value=statusnickuse.replace('None', 'Não tem'))
+            embedusu1.add_field(name="<a:nyancat:450290566802964480> Seu Nome",value="{}`#{}`".format(user.name, user.discriminator))
+            embedusu1.add_field(name='<a:nyancat:450290566802964480> Seu apelido aqui:',value=statusnickuse.replace('None', 'Não tem'))
             embedusu1.add_field(name="<a:nyancat:450290566802964480> Seu ID", value="`{}`".format(user.id))
-            embedusu1.add_field(name="<a:nyancat:450290566802964480> Status", value=statusonuse.replace("online","<:online:438399398808911882>").replace("offline","<:offline:438399398762905600>").replace("dnd","<:dnd:438399396548313091>").replace("idle","<:idle:438399398796460032>").replace("stream","<:stream:438399396963418131>"))
-            embedusu1.add_field(name='<a:nyancat:450290566802964480> Jogando:', value=statusgameuse.replace('None', 'Nada ;-;'))
-            embedusu1.add_field(name="<a:nyancat:450290566802964480> Criado em:", value=user.created_at.strftime("%d/%m/%Y às %H:%M"))
+            embedusu1.add_field(name="<a:nyancat:450290566802964480> Status",value=statusonuse.replace("online", "<:online:438399398808911882>").replace("offline","<:offline:438399398762905600>").replace("dnd", "<:dnd:438399396548313091>").replace("idle","<:idle:438399398796460032>").replace("stream", "<:stream:438399396963418131>"))
+            embedusu1.add_field(name='<a:nyancat:450290566802964480> Jogando:',value=statusgameuse.replace('None', 'Nada ;-;'))
+            embedusu1.add_field(name="<a:nyancat:450290566802964480> Criado em:",value=user.created_at.strftime("%d/%m/%Y às %H:%M"))
+            embedusu1.add_field(name="<a:zueiro_frog:451893503681626114> Zueiro VIP ? <a:zueiro_frog:451893503681626114>",value="{}".format(vipstatus2).replace("False", "<a:zueiro_frog:451893503681626114> 🇳 🇦 🇴 <a:zueiro_frog:451893503681626114>").replace("True", "<a:zueiro_frog:451893503681626114> 🇻 🇮 🇵 <a:zueiro_frog:451893503681626114>"))
+        #    embedusu1.add_field(name="<a:nyancat:450290566802964480> Level:", value="**{}** ({} XP)".format(level, get_xp(message.author.id)))
             embedusu1.add_field(name="<a:nyancat:450290566802964480> Maior Cargo:", value="`{}`".format(user.top_role))
             embedusu1.add_field(name='<a:nyancat:450290566802964480> Cargos:', value="```{}```".format(rolesuse))
-
+            embedusu1.set_footer(text="O sistema de VIP's e o sistema de Niveis ainda estão em fase de testes!")
             await client.send_message(message.channel, embed=embedusu1)
+
+    if message.content.lower().startswith('zbotinfo'):
+        embedbotin = discord.Embed(
+            title=" <:python:419660191244484609> Olá, sou o Zueiro Anonimo <:python:419660191244484609> ",
+            descriptino="Oinn",
+        )
+        embedbotin.set_thumbnail(url=client.user.avatar_url)
+        embedbotin.add_field(name='<a:zueiroanonimobotemoji:440504316613230592> Discord BOT Básico', value='Um botizinho com o programa HUEBR injetado na veia')
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Meu site:', value='https://goo.gl/8Ti3eh')
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online faz:', value='`{} dias, {} hrs e {} min`'.format(days, hour, minutes))
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Ultima atualização:', value='`13/06/2018`')
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Criado em:', value='`24/03/2018`')
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online em',value='` ' + (str(len(client.servers))) + ' `  Server(s) <:python:419660191244484609> ')
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Em contato com', value='`' + str(len(set(client.get_all_members()))) + ' usuarios`')
+        embedbotin.add_field(name="<a:nyancat:450290566802964480> Zueiro VIP's",value="Tenho `{}` usuários vips no momento\n`Sistema VIP ainda está em BETA`".format(numlistadevips))
+        embedbotin.set_footer(text="Criado por SHAIDERWOW#6701 - Copyright © 2018 - Quer saber mais ? digite zHelp", icon_url="https://images-ext-1.discordapp.net/external/OMP4WooSTGR7TMyMtuRSyDPApIIB3f2POTZV6PPLBgM/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/320339126601777152/6044af07c657f2d82a2b5bcfbed01d3d.webp")
+        await client.send_message(message.channel, embed=embedbotin)
+        
+    if message.content.lower().startswith('zvip'):
+        #cargo = message.content[5:]
+        if not message.author.id in listadevips:
+            return await client.send_message(message.channel, "O VIP atual custa 10 Reais, para tê-lo fale com o meu criador, e somente com ele \n Obs. não aconselho a comprar nada, (ainda) não existem comandos para VIP's.... ou será que existem... :3")
+        try:
+            return await client.send_message(message.channel, "Vc é VIP  :3 Uau")
+        except:
+            return await client.send_message(message.channel, "Vc é um VIP mt foda S2")
 
     elif message.content.lower().startswith('zavatar'):
         try:
