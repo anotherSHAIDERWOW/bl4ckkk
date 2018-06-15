@@ -1312,19 +1312,19 @@ async def on_reaction_remove(reaction, user):
         print("remove")
 
 
-@client.event
-async def on_member_join(member):
-    canal = client.get_channel("417466650451771394")
-    regras = client.get_channel("420007865894567946")
-    msg = "Bem Vindo ao {}, {}\n Quem sou eu ? eu sou um BOT muito gente boa S2\n Para ver meus comandos digite `zHelp` no servidor \n para me adicionar ao seu servidor acesse: https://goo.gl/kDKqhF".format(member.server.name, member.mention)
-    await client.send_message(member, msg)  # substitua canal por member para enviar a msg no DM do membro
+#@client.event
+#async def on_member_join(member):
+ #   canal = client.get_channel("417466650451771394")
+  #  regras = client.get_channel("420007865894567946")
+   # msg = "Bem Vindo ao {}, {}\n Quem sou eu ? eu sou um BOT muito gente boa S2\n Para ver meus comandos digite `zHelp` no servidor \n para me adicionar ao seu servidor acesse: https://goo.gl/kDKqhF".format(member.server.name, member.mention)
+    #await client.send_message(member, msg)  # substitua canal por member para enviar a msg no DM do membro
 
 
-@client.event
-async def on_member_remove(member):
-    canal = client.get_channel("417466650451771394")
-    msg = "Adeus garotinho juvenil {}, este server será sua falta".format(member.mention)
-    await client.send_message(member, msg)  # substitua canal por member para enviar a msg no DM do membro
+#@client.event
+#async def on_member_remove(member):
+ #   canal = client.get_channel("417466650451771394")
+  #  msg = "Adeus garotinho juvenil {}, este server será sua falta".format(member.mention)
+   # await client.send_message(member, msg)  # substitua canal por member para enviar a msg no DM do membro
 
 
 client.run(token)
