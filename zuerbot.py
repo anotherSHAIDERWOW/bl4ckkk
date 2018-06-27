@@ -38,7 +38,7 @@ msg_user = None
 global blacklist
 blacklist = ["417691696982130688"]
 global listadevips
-listadevips = ["320339126601777152","232309115865661440","206230808208474113","236948199393329152"]
+listadevips = ["320339126601777152","387478527064276992","232309115865661440","206230808208474113","236948199393329152"]
 global numlistadevips
 numlistadevips = len(listadevips)
 
@@ -96,7 +96,19 @@ async def on_message(message):
     if message.content.startswith('zpresence') and message.author.id == "320339126601777152":
         game = message.content[9:]
         await client.change_presence(game=discord.Game(name=game))
-        await client.send_message(message.channel, "Cóe criador, mudei meu status pra: " + game + "")
+        await client.send_message(message.channel, "Cóe criador, mudei minha presence para:\n **Jogando** " + game + "")
+
+    if message.content.startswith('zlistadevips'):
+        if not message.author.id == '320339126601777152':
+            return await client.send_message(message.channel, '**Permissão insuficiente**')
+        try:
+            mencionar = []
+            for ids in listadevips:
+                member = '<@{}>'.format(ids)
+                mencionar.append(member)
+            await client.send_message(message.channel, ' '.join(mencionar))
+        except:
+            await client.send_message(message.channel, "Deu erro, filhão")
 
     if message.content.lower().startswith('zss'):
         user = message.author.mention
@@ -460,7 +472,7 @@ async def on_message(message):
 
     elif message.content.startswith('zsleep'):
         await asyncio.sleep(5)
-        await client.send_message(message.channel, 'Done sleeping')
+        await client.send_message(message.channel, 'Pronto, dormi já')
 
 ##############################BOT MUSIC##################################
     if message.content.startswith('zzzentr4r'):
@@ -661,50 +673,53 @@ async def on_message(message):
             await client.send_message(message.channel, 'Esqueceu de por o código, bb.')
 
     if message.content.lower().startswith('zhelp'):
-        user = message.author
-        embhelp3 = discord.Embed(title="Não tema! Sua ajuda chegou", color=user.color,
-                                 description="Não se preocupe, não somos igual a Correios, a lista de comandos já foi entregue em seu privado."
-                                 )
-        embhelp3.add_field(name="Abaixo está meu site, sinta-se livre em compartilha-lo para sua família ❤",
-                           value="https://zueiro-anonimo.glitch.me \n `breve mais coisas no site`")
-        embhelp3.set_thumbnail(url="https://cdn.discordapp.com/emojis/440504316613230592.gif")
-        embhelp3.set_footer(icon_url=user.avatar_url, text="Comando utilizado por {}".format(user.name))
-        #
-        embhelp2 = discord.Embed(title='<a:zueiroanonimobotemoji:440504316613230592> Olá, {}. <a:zueiroanonimobotemoji:440504316613230592>'.format(message.author.name), color=user.color,
-                              description='No momento ainda não estou pronto, porém, posso lhe servir em algumas coisas.\n'
-                                          '\n'
-                                          '<a:zueiroanonimobotemoji:440504316613230592>**Comandos públicos**<a:zueiroanonimobotemoji:440504316613230592>\n'
-                                          '\n'
-                                          '**zHelp :** **Exibe esta mensagem.**\n'
-                                          '**zVotar `<mensagem>` :** Faz uma votação por reactions.\n'
-                                          '**zAvatar :** Mostra o avatar do usuário mencionado ou do seu.\n'
-                                          '**zServerinfo :** Mostra as informações do servidor.\n'
-                                          '**zBotinfo :** Mostra algumas informações sobre mim.\n'
-                                          '**zUserinfo :** Mostra as informações do usuário mencionado ou as suas.\n'
-                                          '**zGpsteam : **Mostra o meu grupo da Steam.\n'
-                                          '**zSteam `<ID da conta>`:** **Eu lhe mostro informações sobre a conta Steam.** \n'
-                                          '**zCsgo `<ID da Steam>`:** **Eu lhe mostro as informações sobre a conta de CS:GO**\n'
-                                          '**zFlipcoin :** Me faz reagir com cara(😀) ou coroa(👑).\n'
-                                          '**zFilme `<nome do filme>`:** Eu te mostro informações do filme escolhido.\n'
-                                          '**zSerie `<nome da serie>`:** Eu te mostro informações da serie escolhida.\n'
-                                          '**zGames :** Te dá o cargo do jogo caso você reaja com o emoji relativo ao mesmo.\n'
-                                          '**zPing :** Exibe meu tempo de resposta.\n'
-                                          '**zSugestao `<mensagem>`:** Envia sua sugestão diretamente pro meu dono.\n'
-                                          '**zConvite:** Gera um link para convidar outros à este servidor. \n'
-                                          '**zSS `<mensagem>`:** **SimSimi do Zueiro Anonimo** S2 \n'
-                                          '**zADDss `<mensagem>`:** **Adiciona questões novas à SimSimi** \n'
-                                          '\n'
-                                          '<a:zueiroanonimobotemoji:440504316613230592>**Comandos que requerem permissões de administrador.**<a:zueiroanonimobotemoji:440504316613230592>\n'
-                                          '\n'
-                                          '**zAviso `<menção>` `<mensagem>` :** Envia uma mensagem ao usuário mencionado através de mim.\n'
-                                          '**zBan `<menção>` :** Bane o usuário mencionado do servidor. \n'
-                                          '**zKick `<menção>` :** Kika o usuário mencionado do servidor. \n'
-                                          '\n'
-                                          '<a:zueiroanonimobotemoji:440504316613230592>**Obrigado**<a:zueiroanonimobotemoji:440504316613230592>\n'
-                                                                                                    '\n'
-                                           'Obs. **descrição em negrito** = O comando é NOVO, ou foi ATUALIZADO')
-        await client.send_message(message.author, embed=embhelp2)
-        await client.send_message(message.channel, embed=embhelp3)
+        try:
+            user = message.author
+            embhelp3 = discord.Embed(title="Não tema! Sua ajuda chegou", color=user.color,
+                                     description="Não se preocupe, não somos igual a Correios, a lista de comandos já foi entregue em seu privado."
+                                     )
+            embhelp3.add_field(name="Abaixo está meu site, sinta-se livre em compartilha-lo para sua família ❤",
+                               value="https://zueiro-anonimo.glitch.me \n `breve mais coisas no site`")
+            embhelp3.set_thumbnail(url="https://cdn.discordapp.com/emojis/440504316613230592.gif")
+            embhelp3.set_footer(icon_url=user.avatar_url, text="Comando utilizado por {}".format(user.name))
+            #
+            embhelp2 = discord.Embed(title='<a:zueiroanonimobotemoji:440504316613230592> Olá, {}. <a:zueiroanonimobotemoji:440504316613230592>'.format(message.author.name), color=user.color,
+                                  description='No momento ainda não estou pronto, porém, posso lhe servir em algumas coisas.\n'
+                                              '\n'
+                                              '<a:zueiroanonimobotemoji:440504316613230592>**Comandos públicos**<a:zueiroanonimobotemoji:440504316613230592>\n'
+                                              '\n'
+                                              '**zHelp :** **Exibe esta mensagem.**\n'
+                                              '**zVotar `<mensagem>` :** Faz uma votação por reactions.\n'
+                                              '**zAvatar :** Mostra o avatar do usuário mencionado ou do seu.\n'
+                                              '**zServerinfo :** Mostra as informações do servidor.\n'
+                                              '**zBotinfo :** Mostra algumas informações sobre mim.\n'
+                                              '**zUserinfo :** Mostra as informações do usuário mencionado ou as suas.\n'
+                                              '**zGpsteam : **Mostra o meu grupo da Steam.\n'
+                                              '**zSteam `<ID da conta>`:** **Eu lhe mostro informações sobre a conta Steam.** \n'
+                                              '**zCsgo `<ID da Steam>`:** **Eu lhe mostro as informações sobre a conta de CS:GO**\n'
+                                              '**zFlipcoin :** Me faz reagir com cara(😀) ou coroa(👑).\n'
+                                              '**zFilme `<nome do filme>`:** Eu te mostro informações do filme escolhido.\n'
+                                              '**zSerie `<nome da serie>`:** Eu te mostro informações da serie escolhida.\n'
+                                              '**zGames :** Te dá o cargo do jogo caso você reaja com o emoji relativo ao mesmo.\n'
+                                              '**zPing :** Exibe meu tempo de resposta.\n'
+                                              '**zSugestao `<mensagem>`:** Envia sua sugestão diretamente pro meu dono.\n'
+                                              '**zConvite:** Gera um link para convidar outros à este servidor. \n'
+                                              '**zSS `<mensagem>`:** **SimSimi do Zueiro Anonimo** S2 \n'
+                                              '**zADDss `<mensagem>`:** **Adiciona questões novas à SimSimi** \n'
+                                              '\n'
+                                              '<a:zueiroanonimobotemoji:440504316613230592>**Comandos que requerem permissões de administrador.**<a:zueiroanonimobotemoji:440504316613230592>\n'
+                                              '\n'
+                                              '**zAviso `<menção>` `<mensagem>` :** Envia uma mensagem ao usuário mencionado através de mim.\n'
+                                              '**zBan `<menção>` :** Bane o usuário mencionado do servidor. \n'
+                                              '**zKick `<menção>` :** Kika o usuário mencionado do servidor. \n'
+                                              '\n'
+                                              '<a:zueiroanonimobotemoji:440504316613230592>**Obrigado**<a:zueiroanonimobotemoji:440504316613230592>\n'
+                                                                                                        '\n'
+                                               'Obs. **descrição em negrito** = O comando é NOVO, ou foi ATUALIZADO')
+            await client.send_message(message.author, embed=embhelp2)
+            await client.send_message(message.channel, embed=embhelp3)
+        except:
+            await client.send_message(message.channel, "Olha, você deve ter bloqueado mensagens no seu privado... infelizmente não poderei mandar meus comando para você enquanto estiver me bloqueando ;-;")
 
     if message.content.lower().startswith('zzhelpantigasso'):
         user = message.author
@@ -878,11 +893,11 @@ async def on_message(message):
         embedbotin.add_field(name="<a:nyancat:450290566802964480> Zueiro VIP's",value="Tenho `{}` usuários vips no momento\n`Sistema VIP ainda está em BETA`".format(numlistadevips))
         embedbotin.set_footer(text="Criado por SHAIDERWOW#6701 - Copyright © 2018 - Quer saber mais ? digite zHelp", icon_url="https://images-ext-1.discordapp.net/external/OMP4WooSTGR7TMyMtuRSyDPApIIB3f2POTZV6PPLBgM/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/320339126601777152/6044af07c657f2d82a2b5bcfbed01d3d.webp")
         await client.send_message(message.channel, embed=embedbotin)
-        
+
     if message.content.lower().startswith('zvip'):
         #cargo = message.content[5:]
         if not message.author.id in listadevips:
-            return await client.send_message(message.channel, "O VIP atual custa 10 Reais, para tê-lo fale com o meu criador, e somente com ele \n Obs. não aconselho a comprar nada, (ainda) não existem comandos para VIP's.... ou será que existem... :3")
+            return await client.send_message(message.channel, "O VIP atual custa 1000 Reais, para tê-lo fale com o meu criador, e somente com ele \n Obs. não aconselho a comprar nada, (ainda) não existem comandos para VIP's.... ou será que existem... :3")
         try:
             return await client.send_message(message.channel, "Vc é VIP  :3 Uau")
         except:
@@ -920,33 +935,73 @@ async def on_message(message):
             await client.add_reaction(avatar2, '💩')
 
     if message.content.lower().startswith('zserverinfo'):
-        server = message.server
-        online = len([m.status for m in message.server.members
-                      if m.status == discord.Status.online])
-        offline = len([m.status for m in message.server.members
-                      if m.status == discord.Status.offline])
-        dnd = len([m.status for m in message.server.members
-                      if m.status == discord.Status.dnd])
-        idle = len([m.status for m in message.server.members
-                      if m.status == discord.Status.idle])
-        bots = len([member.bot for member in message.server.members if member.bot])
-        cargosserv = [role.name for role in message.server.roles if role.name != "@everyone"]
+        try:
+            server = message.server
+            online = len([m.status for m in message.server.members
+                          if m.status == discord.Status.online])
+            offline = len([m.status for m in message.server.members
+                           if m.status == discord.Status.offline])
+            dnd = len([m.status for m in message.server.members
+                       if m.status == discord.Status.dnd])
+            idle = len([m.status for m in message.server.members
+                        if m.status == discord.Status.idle])
+            bots = len([member.bot for member in message.server.members if member.bot])
+            cargosserv = [role.name for role in message.server.roles if role.name != "@everyone"]
 
-        embed3 = discord.Embed(
-            title="Informações do server <a:zueiroanonimobotemoji:440504316613230592> ",
-            descriptino=None,
-        )
-        embed3.add_field(name="<a:nyancat:450290566802964480> Nome do server", value=message.server.name, inline=True)
-        embed3.add_field(name="<a:nyancat:450290566802964480> Criado em", value=message.server.created_at.strftime("%d/%m/%Y às %H:%M"))
-        embed3.add_field(name="<a:nyancat:450290566802964480> Server ID", value=message.server.id, inline=True)
-        embed3.add_field(name="<a:nyancat:450290566802964480> Dono", value=message.server.owner.mention)
-        embed3.add_field(name="<a:nyancat:450290566802964480> Região do Server", value=str(message.server.region).title())
-        embed3.add_field(name="<a:nyancat:450290566802964480> Emojis", value=f"{len(message.server.emojis)}/100")
-        embed3.add_field(name="<a:nyancat:450290566802964480> Membros ({}):".format(len(message.server.members)), value=f"**{online}<:online:438399398808911882> {offline}<:offline:438399398762905600> \n{dnd}<:dnd:438399396548313091> {idle}<:idle:438399398796460032> \n{bots}<:bot:437248340724416514>**")
-        embed3.add_field(name="<a:nyancat:450290566802964480> Cargos ({}):".format(len(message.server.roles)), value=",  ".join(cargosserv))
-        embed3.set_thumbnail(url=message.server.icon_url)
-        embed3.set_footer(text="Criado por SHAIDERWOW#6701 - Copyright © 2018 - Quer saber mais ? digite zHelp", icon_url="https://images-ext-1.discordapp.net/external/OMP4WooSTGR7TMyMtuRSyDPApIIB3f2POTZV6PPLBgM/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/320339126601777152/6044af07c657f2d82a2b5bcfbed01d3d.webp")
-        await client.send_message(message.channel, embed=embed3)
+            embed3 = discord.Embed(
+                title="Informações do server <a:zueiroanonimobotemoji:440504316613230592> ",
+                descriptino=None,
+            )
+            embed3.add_field(name="<a:nyancat:450290566802964480> Nome do server", value=message.server.name, inline=True)
+            embed3.add_field(name="<a:nyancat:450290566802964480> Criado em",
+                             value=message.server.created_at.strftime("%d/%m/%Y às %H:%M"))
+            embed3.add_field(name="<a:nyancat:450290566802964480> Server ID", value=message.server.id, inline=True)
+            embed3.add_field(name="<a:nyancat:450290566802964480> Dono", value=message.server.owner.mention)
+            embed3.add_field(name="<a:nyancat:450290566802964480> Região do Server",
+                             value=str(message.server.region).title())
+            embed3.add_field(name="<a:nyancat:450290566802964480> Emojis", value=f"{len(message.server.emojis)}/100")
+            embed3.add_field(name="<a:nyancat:450290566802964480> Membros ({}):".format(len(message.server.members)),
+                             value=f"**{online}<:online:438399398808911882> {offline}<:offline:438399398762905600> \n{dnd}<:dnd:438399396548313091> {idle}<:idle:438399398796460032> \n{bots}<:bot:437248340724416514>**")
+            embed3.add_field(name="<a:nyancat:450290566802964480> Cargos ({}):".format(len(message.server.roles)),
+                             value=",  ".join(cargosserv))
+            embed3.set_thumbnail(url=message.server.icon_url)
+            embed3.set_footer(text="Criado por SHAIDERWOW#6701 - Copyright © 2018 - Quer saber mais ? digite zHelp",
+                              icon_url="https://images-ext-1.discordapp.net/external/OMP4WooSTGR7TMyMtuRSyDPApIIB3f2POTZV6PPLBgM/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/320339126601777152/6044af07c657f2d82a2b5bcfbed01d3d.webp")
+            await client.send_message(message.channel, embed=embed3)
+        except:
+            server = message.server
+            online = len([m.status for m in message.server.members
+                          if m.status == discord.Status.online])
+            offline = len([m.status for m in message.server.members
+                           if m.status == discord.Status.offline])
+            dnd = len([m.status for m in message.server.members
+                       if m.status == discord.Status.dnd])
+            idle = len([m.status for m in message.server.members
+                        if m.status == discord.Status.idle])
+            bots = len([member.bot for member in message.server.members if member.bot])
+            cargosserv = [role.name for role in message.server.roles if role.name != "@everyone"]
+
+            embed33 = discord.Embed(
+                title="Informações do server <a:zueiroanonimobotemoji:440504316613230592> ",
+                descriptino=None,
+            )
+            embed33.add_field(name="<a:nyancat:450290566802964480> Nome do server", value=message.server.name,
+                             inline=True)
+            embed33.add_field(name="<a:nyancat:450290566802964480> Criado em",
+                             value=message.server.created_at.strftime("%d/%m/%Y às %H:%M"))
+            embed33.add_field(name="<a:nyancat:450290566802964480> Server ID", value=message.server.id, inline=True)
+            embed33.add_field(name="<a:nyancat:450290566802964480> Dono", value=message.server.owner.mention)
+            embed33.add_field(name="<a:nyancat:450290566802964480> Região do Server",
+                             value=str(message.server.region).title())
+            embed33.add_field(name="<a:nyancat:450290566802964480> Emojis", value=f"{len(message.server.emojis)}/100")
+            embed33.add_field(name="<a:nyancat:450290566802964480> Membros ({}):".format(len(message.server.members)),
+                             value=f"**{online}<:online:438399398808911882> {offline}<:offline:438399398762905600> \n{dnd}<:dnd:438399396548313091> {idle}<:idle:438399398796460032> \n{bots}<:bot:437248340724416514>**")
+            embed33.add_field(name="<a:nyancat:450290566802964480> Cargos:",
+                             value="{} cargos ? uau".format(len(message.server.roles)))
+            embed33.set_thumbnail(url=message.server.icon_url)
+            embed33.set_footer(text="Criado por SHAIDERWOW#6701 - Copyright © 2018 - Quer saber mais ? digite zHelp",
+                              icon_url="https://images-ext-1.discordapp.net/external/OMP4WooSTGR7TMyMtuRSyDPApIIB3f2POTZV6PPLBgM/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/320339126601777152/6044af07c657f2d82a2b5bcfbed01d3d.webp")
+            await client.send_message(message.channel, embed=embed33)
 
     if message.content.lower().startswith('zgpsteam'):
         await client.send_message(message.channel, "**Entra lá bb** \nhttps://goo.gl/R2mC2g")
