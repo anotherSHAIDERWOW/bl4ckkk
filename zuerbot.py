@@ -12,7 +12,7 @@ import discord.ext.commands
 import requests
 import json
 import datetime
-import supp.py
+#import supp.py
 
 players = {}
 config = None
