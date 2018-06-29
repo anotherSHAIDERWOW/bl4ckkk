@@ -96,7 +96,7 @@ async def on_message(message):
     #
     #
     
-        if message.content.startswith("zTermos&Condições"):
+    if message.content.startswith("zTermos&Condições"):
         if not message.channel.id == "461613280251871232":
             return
         else:
