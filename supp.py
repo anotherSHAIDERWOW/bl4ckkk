@@ -88,4 +88,4 @@ async def on_message(message):
             await client.add_reaction(regmesg, "a:zueiroanonimobotemoji:440504316613230592")
 
 
-client.run(token)
+#client.run(token)
