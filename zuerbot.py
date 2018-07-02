@@ -1198,7 +1198,7 @@ async def on_message(message):
 
         notificação = message.content[10:]
         fundovid = Image.open('prvideo.png')
-        fontevid = ImageFont.truetype('arial.ttf', 15)
+        fontevid = ImageFont.truetype('Arial.ttf', 15)
         #fonte = ImageFont.truetype('Adventure.otf', 70)
         escrevervid = ImageDraw.Draw(fundovid)
         escrevervid.text(xy=(120, 40), text=notificação, fill=(0, 0, 0), font=fontevid)
@@ -1215,8 +1215,8 @@ async def on_message(message):
             avatar = avatar.resize((100, 100))#;
 
             fundomyvid = Image.open('myvideo.png')
-            fontemyvid = ImageFont.truetype('arial.ttf', 15)
-            fontemyvid2 = ImageFont.truetype('arial.ttf', 18)
+            fontemyvid = ImageFont.truetype('Arial.ttf', 15)
+            fontemyvid2 = ImageFont.truetype('Arial.ttf', 18)
             #fonte = ImageFont.truetype('Adventure.otf', 70)
             escrevermyvid = ImageDraw.Draw(fundomyvid)
             if len(message.content) <= 69:
@@ -1242,8 +1242,8 @@ async def on_message(message):
 
             #notificação = message.content[8:]
             fundomyvid = Image.open('myvideo.png')
-            fontemyvid = ImageFont.truetype('arial.ttf', 15)
-            fontemyvid2 = ImageFont.truetype('arial.ttf', 18)
+            fontemyvid = ImageFont.truetype('Arial.ttf', 15)
+            fontemyvid2 = ImageFont.truetype('Arial.ttf', 18)
             escrevermyvid = ImageDraw.Draw(fundomyvid)
             if len(message.content) <= 50:
                 notificação = message.content[8:]
@@ -1317,7 +1317,7 @@ async def on_message(message):
             x1a = message.content[9:]
             x1 = x1a.split(", ")
             fundoharry = Image.open('harry.png')
-            fonteharry = ImageFont.truetype('arial.ttf', 30)
+            fonteharry = ImageFont.truetype('Arial.ttf', 30)
             #fonte = ImageFont.truetype('Adventure.otf', 70)
             escreverharry = ImageDraw.Draw(fundoharry)
             escreverharry.text(xy=(10, 210), text=x1[0], fill=(0, 0, 0), font=fonteharry)
@@ -1333,7 +1333,7 @@ async def on_message(message):
         #x1 = message.content[8:]
         #x1 = x1a.split(", ")
         fundobarry = Image.open('barryal.png')
-        fontebarry = ImageFont.truetype('arial.ttf', 25)
+        fontebarry = ImageFont.truetype('Arial.ttf', 25)
         # fonte = ImageFont.truetype('Adventure.otf', 70)
         escreverbarry = ImageDraw.Draw(fundobarry)
         if len(message.content) <= 38:
@@ -1361,8 +1361,8 @@ async def on_message(message):
             x1 = x1a.split(", ")
             fundobobspon= Image.open('bobspon.png')
             #txt = Image.new('L', (500, 50))
-            fontebobspon = ImageFont.truetype('arial.ttf', 15)
-            fontebobspon2 = ImageFont.truetype('arial.ttf', 10)
+            fontebobspon = ImageFont.truetype('Arial.ttf', 15)
+            fontebobspon2 = ImageFont.truetype('Arial.ttf', 10)
             escreverbobspon = ImageDraw.Draw(fundobobspon)
             escreverbobspon2 = ImageDraw.Draw(fundobobspon)
             escreverbobspon.text(xy=(92, 40), text=x1[0], fill=(0, 0, 0), font=fontebobspon)
