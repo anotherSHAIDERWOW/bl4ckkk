@@ -13,7 +13,7 @@ import requests
 import json
 import datetime
 from io import BytesIO
-from PIL import Image, ImageDraw, ImageFont, ImageOps
+#from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 players = {}
 config = None
