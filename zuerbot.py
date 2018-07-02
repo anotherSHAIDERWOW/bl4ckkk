@@ -13,7 +13,7 @@ import requests
 import json
 import datetime
 from io import BytesIO
-#from PIL import Image, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 players = {}
 config = None
@@ -829,12 +829,17 @@ async def on_message(message):
             await client.send_message(message.channel, 'Escreva algo para eu enviar no privado deste usuário.')
 
     if message.content.lower().startswith('zping'):
-        timep = time.time()
-        emb = discord.Embed(title='Aguarde...', color=0x565656)
-        pingm0 = await client.send_message(message.channel, embed=emb)
-        ping = time.time() - timep
-        pingm1 = discord.Embed(title='Pong!', description='<a:zueiroanonimobotemoji:440504316613230592> Ping - %.01f segundos' % ping, color=0x15ff00)
-        await client.edit_message(pingm0, embed=pingm1)
+       ping = os.popen('ping 157.240.12.35 -n 1')
+       result = ping.readlines()
+       msLine = result[-1].strip()
+       texto = msLine[28:].replace("M¡nimo = ", "").replace(" ximo = ", " ").replace(" Max ", "").replace(" M‚dia = ", " ").replace(",", " ").replace(" ", "").replace("ms", "")+"ms"
+       timepx = time.time()
+       emb = discord.Embed(title='Aguarde...', color=0x565656)
+       pingmx0 = await client.send_message(message.channel, embed=emb)
+       pingx = time.time() - timepx
+       embedping = discord.Embed(description="<a:zueiroanonimobotemoji:440504316613230592> - **PING:** " + texto +"\n**Tempo de resposta:** %.01f segs" % pingx,
+                             color=0xff0080)
+       await client.edit_message(pingmx0, embed=embedping)
 
     if message.content.lower().startswith('zdiga'):
         if message.author.id == '320339126601777152':
