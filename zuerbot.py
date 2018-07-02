@@ -1638,8 +1638,9 @@ async def on_member_join(member):
         fundo.paste(avatar, (20, 85), avatar)
         fundo.save('bv.png')
         #fundo.show()
-        await client.send_message(channel, "{} <3".format(member.mention))
+        #await client.send_message(channel, "{} <3".format(member.mention))
         await client.send_file(channel, 'bv.png')
+        await client.send_message(channel, "{} ❤ Se divirta bb".format(member.mention))
 
 
 
