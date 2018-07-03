@@ -1197,32 +1197,32 @@ async def on_message(message):
         
         
         if message.content.startswith("shfalls"):
-        try:
-            member = message.mentions[0]
-            url = requests.get(member.avatar_url)
-            avatar = Image.open(BytesIO(url.content))
-            avatar = avatar.resize((90, 105))
+            try:
+                member = message.mentions[0]
+                url = requests.get(member.avatar_url)
+                avatar = Image.open(BytesIO(url.content))
+                avatar = avatar.resize((90, 105))
 
-            fundofalls = Image.open('falls.png')
-            frentefalls = Image.open('falls.png')
-            fundofalls.paste(avatar, (255, 25))
-            fundofalls.paste(avatar, (257, 227))
-            fundofalls.paste(frentefalls, (0, 0), frentefalls)
-            fundofalls.save('falls1.png')
-            await client.send_file(message.channel, 'falls1.png')
-        except:
-            member = message.author
-            url = requests.get(member.avatar_url)
-            avatar = Image.open(BytesIO(url.content))
-            avatar = avatar.resize((90, 105))
+                fundofalls = Image.open('falls.png')
+                frentefalls = Image.open('falls.png')
+                fundofalls.paste(avatar, (255, 25))
+                fundofalls.paste(avatar, (257, 227))
+                fundofalls.paste(frentefalls, (0, 0), frentefalls)
+                fundofalls.save('falls1.png')
+                await client.send_file(message.channel, 'falls1.png')
+            except:
+                member = message.author
+                url = requests.get(member.avatar_url)
+                avatar = Image.open(BytesIO(url.content))
+                avatar = avatar.resize((90, 105))
 
-            fundofalls = Image.open('falls.png')
-            frentefalls = Image.open('falls.png')
-            fundofalls.paste(avatar, (255, 25))
-            fundofalls.paste(avatar, (257, 227))
-            fundofalls.paste(frentefalls, (0, 0), frentefalls)
-            fundofalls.save('falls1.png')
-            await client.send_file(message.channel, 'falls1.png')
+                fundofalls = Image.open('falls.png')
+                frentefalls = Image.open('falls.png')
+                fundofalls.paste(avatar, (255, 25))
+                fundofalls.paste(avatar, (257, 227))
+                fundofalls.paste(frentefalls, (0, 0), frentefalls)
+                fundofalls.save('falls1.png')
+                await client.send_file(message.channel, 'falls1.png')
 
     if message.content.startswith("sh5contra1"):
         try:
