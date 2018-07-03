@@ -1194,6 +1194,82 @@ async def on_message(message):
         fundo.save('bv.png')
         #fundo.show()
         await client.send_file(message.channel, 'bv.png')
+        
+        
+        if message.content.startswith("shfalls"):
+        try:
+            member = message.mentions[0]
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            avatar = avatar.resize((90, 105))
+
+            fundofalls = Image.open('falls.png')
+            frentefalls = Image.open('falls.png')
+            fundofalls.paste(avatar, (255, 25))
+            fundofalls.paste(avatar, (257, 227))
+            fundofalls.paste(frentefalls, (0, 0), frentefalls)
+            fundofalls.save('falls1.png')
+            await client.send_file(message.channel, 'falls1.png')
+        except:
+            member = message.author
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            avatar = avatar.resize((90, 105))
+
+            fundofalls = Image.open('falls.png')
+            frentefalls = Image.open('falls.png')
+            fundofalls.paste(avatar, (255, 25))
+            fundofalls.paste(avatar, (257, 227))
+            fundofalls.paste(frentefalls, (0, 0), frentefalls)
+            fundofalls.save('falls1.png')
+            await client.send_file(message.channel, 'falls1.png')
+
+    if message.content.startswith("sh5contra1"):
+        try:
+            member = message.mentions[0]
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            avatar = avatar.resize((86, 87));
+            bigsize = (avatar.size[0] * 3, avatar.size[1] * 3)
+            mask = Image.new('L', bigsize, 0)
+            draw = ImageDraw.Draw(mask)
+            draw.ellipse((0, 0) + bigsize, fill=255)
+            mask = mask.resize(avatar.size, Image.ANTIALIAS)
+            avatar.putalpha(mask)
+
+            output = ImageOps.fit(avatar, mask.size, centering=(0.5, 0.5))
+            output.putalpha(mask)
+            output.save('avatar.png')
+
+            fundo5contra1 = Image.open('5contra1.png')
+            frente5contra1 = Image.open('5contra1.png')
+            fundo5contra1.paste(avatar, (512, 287), avatar)
+            #fundo5contra1.paste(frente5contra1, (0, 0), frente5contra1)
+            fundo5contra1.save('5contra11.png')
+            await client.send_file(message.channel, '5contra11.png')
+        except:
+            member = message.author
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            avatar = avatar.resize((86, 87));
+            bigsize = (avatar.size[0] * 3, avatar.size[1] * 3)
+            mask = Image.new('L', bigsize, 0)
+            draw = ImageDraw.Draw(mask)
+            draw.ellipse((0, 0) + bigsize, fill=255)
+            mask = mask.resize(avatar.size, Image.ANTIALIAS)
+            avatar.putalpha(mask)
+
+            output = ImageOps.fit(avatar, mask.size, centering=(0.5, 0.5))
+            output.putalpha(mask)
+            output.save('avatar.png')
+
+            fundo5contra1 = Image.open('5contra1.png')
+            frente5contra1 = Image.open('5contra1.png')
+            fundo5contra1.paste(avatar, (512, 287), avatar)
+            #fundo5contra1.paste(frente5contra1, (0, 0), frente5contra1)
+            fundo5contra1.save('5contra11.png')
+            await client.send_file(message.channel, '5contra11.png')    
+    
 
     if message.content.startswith("shprvideo"):
 
