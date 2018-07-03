@@ -1196,8 +1196,8 @@ async def on_message(message):
         await client.send_file(message.channel, 'bv.png')
         
         
-        if message.content.startswith("shfalls"):
-            try:
+    if message.content.startswith("shfalls"):
+        try:
                 member = message.mentions[0]
                 url = requests.get(member.avatar_url)
                 avatar = Image.open(BytesIO(url.content))
@@ -1210,7 +1210,7 @@ async def on_message(message):
                 fundofalls.paste(frentefalls, (0, 0), frentefalls)
                 fundofalls.save('falls1.png')
                 await client.send_file(message.channel, 'falls1.png')
-            except:
+        except:
                 member = message.author
                 url = requests.get(member.avatar_url)
                 avatar = Image.open(BytesIO(url.content))
