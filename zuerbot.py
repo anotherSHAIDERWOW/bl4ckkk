@@ -80,6 +80,7 @@ client.loop.create_task(up_time())
 
 @client.event
 async def on_message(message):
+    
     if message.author == client.user:
         return
     if message.content.lower().startswith("zhelp"):
