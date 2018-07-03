@@ -376,7 +376,7 @@ async def on_message(message):
                       "".format(nomeste, jogosste, time.strftime("%d/%m/%Y às %H:%M", time.localtime(temposte)), time.strftime("%d/%m/%Y às %H:%M", time.localtime(ulonlineste)), recent1ste, linkste)
             )
             embedsteam.set_thumbnail(url=avatarste)
-            embedsteam.set_footer(text='#ZueiroAnonimoJogaNaSteam')
+            embedsteam.set_footer(text='#ZueiroTambémJogaNaSteam')
             await client.send_message(message.channel, embed=embedsteam)
         except KeyError:
             steam1priv = message.content[7:]
@@ -396,7 +396,7 @@ async def on_message(message):
                       "".format(nomestepriv, linkstepriv)
             )
             embedsteampriv.set_thumbnail(url=avatarstepriv)
-            embedsteampriv.set_footer(text='#ZueiroAnonimoJogaNaSteam')
+            embedsteampriv.set_footer(text='#ZueiroTambémJogaNaSteam')
             await client.send_message(message.channel, embed=embedsteampriv)
         except json.decoder.JSONDecodeError:
             await asyncio.sleep(1)
@@ -567,7 +567,7 @@ async def on_message(message):
                 '**Link pra invite:** bit.ly/LoriSBOT, '
                 '**LP:** Python, '
                 '**Prefixo:** `L!` \n'
-                '✅**Nome do bot:** Zueiro Anonimo#9641, '
+                '✅**Nome do bot:** ?????????????#9641, '
                 '**Id do bot:** 421862224454221824, '
                 '**Dono do bot:** SHAIDERWOW#6701, '
                 '**Id do dono:** 320339126601777152, '
@@ -727,7 +727,7 @@ async def on_message(message):
                                               '**zPing :** Exibe meu tempo de resposta.\n'
                                               '**zSugestao `<mensagem>`:** Envia sua sugestão diretamente pro meu dono.\n'
                                               '**zConvite:** Gera um link para convidar outros à este servidor. \n'
-                                              '**zSS `<mensagem>`:** **SimSimi do Zueiro Anonimo** S2 \n'
+                                              '**zSS `<mensagem>`:** **SimSimi** S2 \n'
                                               '**zADDss `<mensagem>`:** **Adiciona questões novas à SimSimi** \n'
                                               '\n'
                                               '<a:zueiroanonimobotemoji:440504316613230592>**Comandos que requerem permissões de administrador.**<a:zueiroanonimobotemoji:440504316613230592>\n'
@@ -766,7 +766,7 @@ async def on_message(message):
         embhelp1.add_field(name='zVotar + (mensagem)', value='Faz uma votação de ✅ ou ❌ na sua mensagem')
         embhelp1.add_field(name='zAvatar + (usuário)', value='Mostra o avatar do usuário mencionado, junto com reações')
         embhelp1.add_field(name='zServerinfo', value='Mostra informações do servidor em que o BOT está')
-        embhelp1.add_field(name='zBotinfo', value='Mostra minhas informações, ou seja, as informações do Zueiro Anonimo')
+        embhelp1.add_field(name='zBotinfo', value='Mostra minhas informações')
         embhelp1.add_field(name='zUserinfo + (usuário)', value='Mostra suas informações, caso mencione alguém, mostrará a do usuário mencionado')
         embhelp1.add_field(name='zSteam', value='Mostra meu grupo da Steam')
         embhelp1.add_field(name='zFlipcoin', value='Famoso "cara ou coroa", o BOT reagirá se for cara(😀) ou coroa(👑)')
@@ -907,7 +907,7 @@ async def on_message(message):
 
     if message.content.lower().startswith('zbotinfo'):
         embedbotin = discord.Embed(
-            title=" <:python:419660191244484609> Olá, sou o Zueiro Anonimo <:python:419660191244484609> ",
+            title=" <:python:419660191244484609> Olá... <:python:419660191244484609> ",
             descriptino="Oinn",
         )
         embedbotin.set_thumbnail(url=client.user.avatar_url)
