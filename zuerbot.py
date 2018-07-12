@@ -1108,59 +1108,6 @@ async def on_message(message):
                     value="Comando incompleto, digite algo após `zVotar` para criar uma votação", inline=False)
             await client.send_message(message.channel, embed=embed4)
 
-    if message.content.lower().startswith("zgames"):
-        server = message.server
-        embed1 = discord.Embed(
-            title="Escolha seus jogos!",
-            color=roxo
-        )
-        embed1.add_field(name="<a:zueiroanonimobotemoji:440504316613230592>",
-                         value="**CS:GO =** <:person_csgo:439190430924668939>\n"
-                        "**Gartic  =**  <:gartic:442757221411979284> \n"
-                        "**GTA V  =** <:gtav:442822601295790080>\n"
-                        "**PUBG =** <:pubg:442758461810409482>\n"
-                        "**Brawlhalla =** <:brawlhalla:442757169675370497>\n"
-                        "**VRCHAT =** <:vrchat:442758209585807361>\n"
-                        "**League of Legends =** <:lol:442758156850823168>\n"
-                        "**Roblox =** <:roblox:442757513939648522>\n"
-                        ""
-                         )
-        embed1.add_field(name="<a:zueiroanonimobotemoji:440504316613230592>",
-                         value="**Minecraft =** <:minecraft:442757343646580757>\n"
-                        "**Rainbow Six  =**  <:r6:442757819926577152> \n"
-                        "**Overwatch  =** <:overwatch:442758257799462913>\n"
-                        "**Paladins =** <:paladins:442823168810549249>\n"
-                        "**Warframe =** <:warframe:442758505816915980>\n"
-                        "**Black Squad =** <:blacksquad:442822965718024201>\n"
-                        "**Rocket League =** <:rocketleague:442822713195757569>\n"
-                        "**Fortnite =** <:fortnite:442823029278638080>\n"
-                        ""
-                         )
-        embed1.set_footer(text="Breve mais... Digite zHelp para saber mais sobre mim")
-        botmsg = await client.send_message(message.channel, embed=embed1)
-
-        await client.add_reaction(botmsg, "person_csgo:439190430924668939")
-        await client.add_reaction(botmsg, "gartic:442757221411979284")
-        await client.add_reaction(botmsg, "gtav:442822601295790080")
-        await client.add_reaction(botmsg, "pubg:442758461810409482")
-        await client.add_reaction(botmsg, "brawlhalla:442757169675370497")
-        await client.add_reaction(botmsg, "vrchat:442758209585807361")
-        await client.add_reaction(botmsg, "lol:442758156850823168")
-        await client.add_reaction(botmsg, "roblox:442757513939648522")
-        await client.add_reaction(botmsg, "minecraft:442757343646580757")
-        await client.add_reaction(botmsg, "r6:442757819926577152")
-        await client.add_reaction(botmsg, "overwatch:442758257799462913")
-        await client.add_reaction(botmsg, "paladins:442823168810549249")
-        await client.add_reaction(botmsg, "warframe:442758505816915980")
-        await client.add_reaction(botmsg, "blacksquad:442822965718024201")
-        await client.add_reaction(botmsg, "rocketleague:442822713195757569")
-        await client.add_reaction(botmsg, "fortnite:442823029278638080")
-
-        global msg_id
-        msg_id = botmsg.id
-
-        global msg_user
-        msg_user = message.author.bot
 
 #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #
 
@@ -1452,6 +1399,60 @@ async def on_message(message):
 #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #
 #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #
 #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #
+
+    if message.content.lower().startswith("zgames"):
+        server = message.server
+        embed1 = discord.Embed(
+            title="Escolha seus jogos!",
+            color=roxo
+        )
+        embed1.add_field(name="<a:zueiroanonimobotemoji:440504316613230592>",
+                         value="**CS:GO =** <:person_csgo:439190430924668939>\n"
+                        "**Gartic  =**  <:gartic:442757221411979284> \n"
+                        "**GTA V  =** <:gtav:442822601295790080>\n"
+                        "**PUBG =** <:pubg:442758461810409482>\n"
+                        "**Brawlhalla =** <:brawlhalla:442757169675370497>\n"
+                        "**VRCHAT =** <:vrchat:442758209585807361>\n"
+                        "**League of Legends =** <:lol:442758156850823168>\n"
+                        "**Roblox =** <:roblox:442757513939648522>\n"
+                        ""
+                         )
+        embed1.add_field(name="<a:zueiroanonimobotemoji:440504316613230592>",
+                         value="**Minecraft =** <:minecraft:442757343646580757>\n"
+                        "**Rainbow Six  =**  <:r6:442757819926577152> \n"
+                        "**Overwatch  =** <:overwatch:442758257799462913>\n"
+                        "**Paladins =** <:paladins:442823168810549249>\n"
+                        "**Warframe =** <:warframe:442758505816915980>\n"
+                        "**Black Squad =** <:blacksquad:442822965718024201>\n"
+                        "**Rocket League =** <:rocketleague:442822713195757569>\n"
+                        "**Fortnite =** <:fortnite:442823029278638080>\n"
+                        ""
+                         )
+        embed1.set_footer(text="Breve mais... Digite zHelp para saber mais sobre mim")
+        botmsg = await client.send_message(message.channel, embed=embed1)
+
+        await client.add_reaction(botmsg, "person_csgo:439190430924668939")
+        await client.add_reaction(botmsg, "gartic:442757221411979284")
+        await client.add_reaction(botmsg, "gtav:442822601295790080")
+        await client.add_reaction(botmsg, "pubg:442758461810409482")
+        await client.add_reaction(botmsg, "brawlhalla:442757169675370497")
+        await client.add_reaction(botmsg, "vrchat:442758209585807361")
+        await client.add_reaction(botmsg, "lol:442758156850823168")
+        await client.add_reaction(botmsg, "roblox:442757513939648522")
+        await client.add_reaction(botmsg, "minecraft:442757343646580757")
+        await client.add_reaction(botmsg, "r6:442757819926577152")
+        await client.add_reaction(botmsg, "overwatch:442758257799462913")
+        await client.add_reaction(botmsg, "paladins:442823168810549249")
+        await client.add_reaction(botmsg, "warframe:442758505816915980")
+        await client.add_reaction(botmsg, "blacksquad:442822965718024201")
+        await client.add_reaction(botmsg, "rocketleague:442822713195757569")
+        await client.add_reaction(botmsg, "fortnite:442823029278638080")
+
+        global msg_id
+        msg_id = botmsg.id
+
+        global msg_user
+        msg_user = message.author.bot
 
 @client.event
 async def on_reaction_add(reaction, user):
