@@ -1452,19 +1452,22 @@ async def on_message(message):
         msg_id = botmsg.id
 
         global msg_user
-        msg_user = message.author
+        msg_user = message.author.bot
+        
+        global msg_userx
+        msg_userx = message.author
 
 @client.event
 async def on_reaction_add(reaction, user):
     msg = reaction.message
 
-    if reaction.emoji.id == "439190430924668939" and msg.id == msg_id:# and not user == msg_user:
+    if reaction.emoji.id == "439190430924668939" and msg.id == msg_id and not user == msg_user:
         try:
             role = discord.utils.find(lambda r: r.name == "CS:GO", msg.server.roles)
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="CS:GO")
+            await client.create_role(msg_userx.server, name="CS:GO")
             print("create")
 
     if reaction.emoji.id == "442757221411979284" and msg.id == msg_id and not user == msg_user:
@@ -1473,7 +1476,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="Gartic")
+            await client.create_role(msg_userx.server, name="Gartic")
             print("create")
 
     if reaction.emoji.id == "442822601295790080" and msg.id == msg_id and not user == msg_user:
@@ -1482,7 +1485,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="GTA V")
+            await client.create_role(msg_userx.server, name="GTA V")
             print("create")
 
     if reaction.emoji.id == "442758461810409482" and msg.id == msg_id and not user == msg_user:
@@ -1491,7 +1494,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="PUBG")
+            await client.create_role(msg_userx.server, name="PUBG")
             print("create")
 
     if reaction.emoji.id == "442757169675370497" and msg.id == msg_id and not user == msg_user:
@@ -1500,7 +1503,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="Brawlhalla")
+            await client.create_role(msg_userx.server, name="Brawlhalla")
             print("create")
 
     if reaction.emoji.id == "442758209585807361" and msg.id == msg_id and not user == msg_user:
@@ -1509,7 +1512,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="VRCHAT")
+            await client.create_role(msg_userx.server, name="VRCHAT")
             print("create")
 
     if reaction.emoji.id == "442758156850823168" and msg.id == msg_id and not user == msg_user:
@@ -1518,7 +1521,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="League of Legends")
+            await client.create_role(msg_userx.server, name="League of Legends")
             print("create")
 
     if reaction.emoji.id == "442757513939648522" and msg.id == msg_id and not user == msg_user:
@@ -1527,7 +1530,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="Roblox")
+            await client.create_role(msg_userx.server, name="Roblox")
             print("create")
 
     if reaction.emoji.id == "442757343646580757" and msg.id == msg_id and not user == msg_user:
@@ -1536,7 +1539,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="Minecraft")
+            await client.create_role(msg_userx.server, name="Minecraft")
             print("create")
 
     if reaction.emoji.id == "442757819926577152" and msg.id == msg_id and not user == msg_user:
@@ -1545,7 +1548,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="Rainbow Six")
+            await client.create_role(msg_userx.server, name="Rainbow Six")
             print("create")
 
     if reaction.emoji.id == "442758257799462913" and msg.id == msg_id and not user == msg_user:
@@ -1554,7 +1557,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="Overwatch")
+            await client.create_role(msg_userx.server, name="Overwatch")
             print("create")
 
     if reaction.emoji.id == "442823168810549249" and msg.id == msg_id and not user == msg_user:
@@ -1563,7 +1566,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="Paladins")
+            await client.create_role(msg_userx.server, name="Paladins")
             print("create")
 
     if reaction.emoji.id == "442758505816915980" and msg.id == msg_id and not user == msg_user:
@@ -1572,7 +1575,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="Warframe")
+            await client.create_role(msg_userx.server, name="Warframe")
             print("create")
 
     if reaction.emoji.id == "442822965718024201" and msg.id == msg_id and not user == msg_user:
@@ -1581,7 +1584,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="Black Squad")
+            await client.create_role(msg_userx.server, name="Black Squad")
             print("create")
 
     if reaction.emoji.id == "442822713195757569" and msg.id == msg_id and not user == msg_user:
@@ -1590,7 +1593,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="Rocket League")
+            await client.create_role(msg_userx.server, name="Rocket League")
             print("create")
 
     if reaction.emoji.id == "442823029278638080" and msg.id == msg_id and not user == msg_user:
@@ -1599,7 +1602,7 @@ async def on_reaction_add(reaction, user):
             await client.add_roles(user, role)
             print("add")
         except:
-            await client.create_role(msg_user.server, name="Fortnite")
+            await client.create_role(msg_userx.server, name="Fortnite")
             print("create")
 
 @client.event
