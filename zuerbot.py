@@ -1452,13 +1452,13 @@ async def on_message(message):
         msg_id = botmsg.id
 
         global msg_user
-        msg_user = message.author.bot
+        msg_user = message.author
 
 @client.event
 async def on_reaction_add(reaction, user):
     msg = reaction.message
 
-    if reaction.emoji.id == "439190430924668939" and msg.id == msg_id and not user == msg_user:
+    if reaction.emoji.id == "439190430924668939" and msg.id == msg_id:# and not user == msg_user:
         try:
             role = discord.utils.find(lambda r: r.name == "CS:GO", msg.server.roles)
             await client.add_roles(user, role)
