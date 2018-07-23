@@ -85,6 +85,35 @@ client.loop.create_task(up_time())
 async def on_message(message):
     if message.author == client.user:
         return
+    
+    if message.content.startswith("zTermos&Condições"):
+        if not message.channel.id == "461613280251871232":
+            return
+        if message.author.id in blacklist:
+            user = message.author
+            role = discord.utils.find(lambda r: r.name == 'BANIDO DO BOT', message.server.roles)
+            await client.add_roles(user, role)
+            embedreg = discord.Embed(title="Você agora está no servidor Zueiros Anonimous ❤",
+                                  description="Infelizmente você foi BANIDO da minha vida, mas como sou legal ainda vou te deixar participando do grupo...",
+                                  color=user.color)
+            embedreg.set_author(name="Olá...")
+            embedreg.set_footer(text='Rum...')
+            await client.send_message(user, embed=embedreg)
+        else:
+            user = message.author
+            role = discord.utils.find(lambda r: r.name == 'Membros', message.server.roles)
+            await client.add_roles(user, role)
+            embedreg = discord.Embed(title="Você agora está no servidor Zueiros Anonimous ❤",
+                                  description="Vê se não deixa o servidor morrer hein, você agora é uma parte importante dele, sinta-se orgulhoso(a) !",
+                                  color=user.color)
+            embedreg.set_author(name="Olá...")
+            embedreg.set_footer(text='Para saber meus comandos digite "zHelp" em um canal ESPECÍFICO !')
+            await client.send_message(user, embed=embedreg)
+
+    if message.channel.id == "461613280251871232":
+        await asyncio.sleep(1)
+        await client.delete_message(message)
+    
     if message.content.lower().startswith("zhelp"):
         if message.author.id in blacklist:
             await client.send_message(message.channel,
@@ -105,6 +134,30 @@ async def on_message(message):
         await client.change_presence(game=discord.Game(name=game))
         await client.send_message(message.channel, "Cóe criador, mudei minha presence para:\n **Jogando** " + game + "")
 
+    if message.content.lower().startswith("z?registro"):
+        if not message.author.id == '320339126601777152':
+            return
+        else:
+            embedreg = discord.Embed(title="Bem vindo ao Zueiros Anonimous", url="https://goo.gl/8Ti3eh",
+                                  description="Antes de mais nada gostaria que você lesse tudinho ❤")
+            embedreg.set_author(name="Mensagem de registramento",
+                             url="http://discord.gg/9yw4AQe", icon_url = "https://images-ext-2.discordapp.net/external/A32qoE2z-1WSyFxjByYYSaLevOFpPxoilGvmQToPpvA/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/421862224454221824/470446de83376ed6744ab43b2a7bc33d.webp?width=428&height=428")
+            embedreg.add_field(name="Como se registrar...",
+                            value="Enfim meu consagrado, vou ser direto, esta é uma espécie de registração em nosso servidor, mas é claro, sem poluir nosso servidor com diversas coisas diferentes e que não fazem muito sentido... \nPulando toda a conversa fiada gostaria que utilizasse o respectivo comando caso queira ficar para 'zoar' no servidor.",
+                            inline=False)
+            embedreg.add_field(name="Obrigado pela compreensão",
+                            value="Comando para registro = `zTermos&Condições`", inline=False)
+            embedreg.add_field(name="Aviso rápido",
+                            value="Ao entrar neste servidor você estará ciente de que deverá ler as regras, caso não as respeite uma punição será utilizada.\n\nProve que leu até o final e reaja a esta mensagem ❤",
+                            inline=False)
+            embedreg.add_field(name="Meu site:", value="https://goo.gl/8Ti3eh", inline=True)
+            embedreg.add_field(name="Meu criador:", value="<@320339126601777152>", inline=True)
+            embedreg.add_field(name="Meu prefix:", value="`z`", inline=True)
+            embedreg.set_footer(text="Registração não funciona ? fale com meu criador = SHAIDERWOW#6701")
+            regmesg = await client.send_message(message.channel, embed=embedreg)
+            await client.add_reaction(regmesg, "a:zueiroanonimobotemoji:440504316613230592")
+        
+        
     if message.content.startswith('zlistadevips'):
         if not message.author.id == '320339126601777152':
             return await client.send_message(message.channel, '**Permissão insuficiente**')
