@@ -783,9 +783,9 @@ async def on_message(message):
                             '**zVideo** = Notificação de video do youtube de... \n'
                             '**zMalfoy** = Certamente vc é... \n'
                             '**zNando** = mas oq é isso aqui na tela ? \n'
-                            '**zVerine** = Wolverine...'
-                            '**zBuzz** = Decepcioned...'
-                            '**zFotoSua** = Manda uma foto sua?...'
+                            '**zVerine** = Wolverine...\n'
+                            '**zBuzz** = Decepcioned...\n'
+                            '**zFotoSua** = Manda uma foto sua?...\n'
                             '**zProerd** = Eu fiz PROERD !')
             await client.send_message(message.author, embed=embhelp2)
             await client.send_message(message.author, embed=embhelpnew)
