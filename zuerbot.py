@@ -85,35 +85,6 @@ client.loop.create_task(up_time())
 async def on_message(message):
     if message.author == client.user:
         return
-    
-    if message.content.startswith("zTermos&Condições"):
-        if not message.channel.id == "461613280251871232":
-            return
-        if message.author.id in blacklist:
-            user = message.author
-            role = discord.utils.find(lambda r: r.name == 'BANIDO DO BOT', message.server.roles)
-            await client.add_roles(user, role)
-            embedreg = discord.Embed(title="Você agora está no servidor Zueiros Anonimous ❤",
-                                  description="Infelizmente você foi BANIDO da minha vida, mas como sou legal ainda vou te deixar participando do grupo...",
-                                  color=user.color)
-            embedreg.set_author(name="Olá...")
-            embedreg.set_footer(text='Rum...')
-            await client.send_message(user, embed=embedreg)
-        else:
-            user = message.author
-            role = discord.utils.find(lambda r: r.name == 'Membros', message.server.roles)
-            await client.add_roles(user, role)
-            embedreg = discord.Embed(title="Você agora está no servidor Zueiros Anonimous ❤",
-                                  description="Vê se não deixa o servidor morrer hein, você agora é uma parte importante dele, sinta-se orgulhoso(a) !",
-                                  color=user.color)
-            embedreg.set_author(name="Olá...")
-            embedreg.set_footer(text='Para saber meus comandos digite "zHelp" em um canal ESPECÍFICO !')
-            await client.send_message(user, embed=embedreg)
-
-    if message.channel.id == "461613280251871232":
-        await asyncio.sleep(1)
-        await client.delete_message(message)
-    
     if message.content.lower().startswith("zhelp"):
         if message.author.id in blacklist:
             await client.send_message(message.channel,
@@ -129,36 +100,12 @@ async def on_message(message):
     #      server = message.server
     #     await client.create_channel(server, 'zueiro-logs', type=discord.ChannelType.text)
 
-    if message.content.startswith('zpresence') and message.author.id == "320339126601777152":
+    if message.content.lower().startswith('zpresence') and message.author.id == "320339126601777152":
         game = message.content[9:]
         await client.change_presence(game=discord.Game(name=game))
         await client.send_message(message.channel, "Cóe criador, mudei minha presence para:\n **Jogando** " + game + "")
 
-    if message.content.lower().startswith("z?registro"):
-        if not message.author.id == '320339126601777152':
-            return
-        else:
-            embedreg = discord.Embed(title="Bem vindo ao Zueiros Anonimous", url="https://goo.gl/8Ti3eh",
-                                  description="Antes de mais nada gostaria que você lesse tudinho ❤")
-            embedreg.set_author(name="Mensagem de registramento",
-                             url="http://discord.gg/9yw4AQe", icon_url = "https://images-ext-2.discordapp.net/external/A32qoE2z-1WSyFxjByYYSaLevOFpPxoilGvmQToPpvA/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/421862224454221824/470446de83376ed6744ab43b2a7bc33d.webp?width=428&height=428")
-            embedreg.add_field(name="Como se registrar...",
-                            value="Enfim meu consagrado, vou ser direto, esta é uma espécie de registração em nosso servidor, mas é claro, sem poluir nosso servidor com diversas coisas diferentes e que não fazem muito sentido... \nPulando toda a conversa fiada gostaria que utilizasse o respectivo comando caso queira ficar para 'zoar' no servidor.",
-                            inline=False)
-            embedreg.add_field(name="Obrigado pela compreensão",
-                            value="Comando para registro = `zTermos&Condições`", inline=False)
-            embedreg.add_field(name="Aviso rápido",
-                            value="Ao entrar neste servidor você estará ciente de que deverá ler as regras, caso não as respeite uma punição será utilizada.\n\nProve que leu até o final e reaja a esta mensagem ❤",
-                            inline=False)
-            embedreg.add_field(name="Meu site:", value="https://goo.gl/8Ti3eh", inline=True)
-            embedreg.add_field(name="Meu criador:", value="<@320339126601777152>", inline=True)
-            embedreg.add_field(name="Meu prefix:", value="`z`", inline=True)
-            embedreg.set_footer(text="Registração não funciona ? fale com meu criador = SHAIDERWOW#6701")
-            regmesg = await client.send_message(message.channel, embed=embedreg)
-            await client.add_reaction(regmesg, "a:zueiroanonimobotemoji:440504316613230592")
-        
-        
-    if message.content.startswith('zlistadevips'):
+    if message.content.lower().startswith('zlistadevips'):
         if not message.author.id == '320339126601777152':
             return await client.send_message(message.channel, '**Permissão insuficiente**')
         try:
@@ -831,12 +778,15 @@ async def on_message(message):
             embhelpnew = discord.Embed(
                 title='{}, Estes são meus comandos novos...'.format(
                     message.author.name), color=user.color,
-                description='z5contra1 = Quando perceber, será tarde demais. \n'
-                            'zFalls = Quem é beautiful ? \n'
-                            'zVideo = Notificação de video do youtube de... \n'
-                            'zMalfoy = Certamente vc é... \n'
-                            'zNando = mas oq é isso aqui na tela ? \n'
-                            'zVerine = Wolverine...')
+                description='z5contra1** = Quando perceber, será tarde demais. \n'
+                            '**zFalls** = Quem é beautiful ? \n'
+                            '**zVideo** = Notificação de video do youtube de... \n'
+                            '**zMalfoy** = Certamente vc é... \n'
+                            '**zNando** = mas oq é isso aqui na tela ? \n'
+                            '**zVerine** = Wolverine...'
+                            '**zBuzz** = Decepcioned...'
+                            '**zFotoSua** = Manda uma foto sua?...'
+                            '**zProerd** = Eu fiz PROERD !')
             await client.send_message(message.author, embed=embhelp2)
             await client.send_message(message.author, embed=embhelpnew)
             await client.send_message(message.channel, embed=embhelp3)
@@ -1055,7 +1005,7 @@ async def on_message(message):
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Meu site:', value='https://goo.gl/8Ti3eh')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online faz:',
                              value='`{} dias, {} hrs e {} min`'.format(days, hour, minutes))
-        embedbotin.add_field(name='<a:nyancat:450290566802964480> Ultima atualização:', value='`22/07/2018`')
+        embedbotin.add_field(name='<a:nyancat:450290566802964480> Ultima atualização:', value='`06/08/2018`')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Criado em:', value='`24/03/2018`')
         embedbotin.add_field(name='<a:nyancat:450290566802964480> Estou online em',
                              value='` ' + (str(len(client.servers))) + ' `  Server(s) <:python:419660191244484609> ')
@@ -1263,7 +1213,7 @@ async def on_message(message):
 
     #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #   #
 
-    if message.content.startswith("shtesteimg"):
+    if message.content.lower().startswith("shtesteimg"):
         member = message.author
         url = requests.get(member.avatar_url)
         avatar = Image.open(BytesIO(url.content))
@@ -1290,9 +1240,10 @@ async def on_message(message):
         # fundo.show()
         await client.send_file(message.channel, 'bv.png')
 
-    if message.content.startswith("zfalls"):
+    if message.content.lower().startswith("zfalls"):
         try:
-            member = message.mentions[0]
+            iddele = message.content[7:]
+            member = discord.utils.get(client.get_all_members(), id=iddele) or message.mentions[0]
             url = requests.get(member.avatar_url)
             avatar = Image.open(BytesIO(url.content))
             avatar = avatar.resize((90, 105))
@@ -1318,9 +1269,10 @@ async def on_message(message):
             fundofalls.save('falls1.png')
             await client.send_file(message.channel, 'falls1.png')
 
-    if message.content.startswith("z5contra1"):
+    if message.content.lower().startswith("z5contra1"):
         try:
-            member = message.mentions[0]
+            iddele = message.content[10:]
+            member = discord.utils.get(client.get_all_members(), id=iddele) or message.mentions[0]
             url = requests.get(member.avatar_url)
             avatar = Image.open(BytesIO(url.content))
             avatar = avatar.resize((86, 87));
@@ -1364,7 +1316,7 @@ async def on_message(message):
             fundo5contra1.save('5contra11.png')
             await client.send_file(message.channel, '5contra11.png')
 
-    if message.content.startswith("zprvideo"):
+    if message.content.lower().startswith("zprvideo"):
         notificação = message.content[9:]
         fundovid = Image.open('prvideo.png')
         fontevid = ImageFont.truetype('Arial.ttf', 15)
@@ -1375,9 +1327,10 @@ async def on_message(message):
         # fundovid.show()
         await client.send_file(message.channel, 'prvideo1.png')
 
-    if message.content.startswith("zvideo"):
+    if message.content.lower().startswith("zvideo"):
         try:
-            member = message.mentions[0]
+            iddele = message.content[7:]
+            member = discord.utils.get(client.get_all_members(), id=iddele) or message.mentions[0]
             url = requests.get(member.avatar_url)
             avatar = Image.open(BytesIO(url.content))
             # avatar = Image.open('avatar.png')
@@ -1429,9 +1382,10 @@ async def on_message(message):
             # fundovid.show()
             await client.send_file(message.channel, 'myvideo1.png')
 
-    if message.content.startswith("zverine"):
+    if message.content.lower().startswith("zverine"):
         try:
-            member = message.mentions[0]
+            iddele = message.content[8:]
+            member = discord.utils.get(client.get_all_members(), id=iddele) or message.mentions[0]
             url = requests.get(member.avatar_url)
             avatar = Image.open(BytesIO(url.content))
             avatar = avatar.resize((280, 300))  # ;
@@ -1455,9 +1409,10 @@ async def on_message(message):
             fundoverine.save('verine1.png')
             await client.send_file(message.channel, 'verine1.png')
 
-    if message.content.startswith("znando"):
+    if message.content.lower().startswith("znando"):
         try:
-            member = message.mentions[0]
+            iddele = message.content[7:]
+            member = discord.utils.get(client.get_all_members(), id=iddele) or message.mentions[0]
             url = requests.get(member.avatar_url)
             avatar = Image.open(BytesIO(url.content))
             avatar = avatar.resize((587, 320))
@@ -1481,7 +1436,7 @@ async def on_message(message):
             fundonando.save('nando1.png')
             await client.send_file(message.channel, 'nando1.png')
 
-    if message.content.startswith("zmalfoy"):
+    if message.content.lower().startswith("zmalfoy"):
         try:
             x1a = message.content[8:]
             x1 = x1a.split(", ")
@@ -1499,7 +1454,91 @@ async def on_message(message):
             await client.send_message(message.channel,
                                       'Você precisa definir as `3` frases.\n**Exemplo:**\nzMalfoy frase 1, frase 2, frase 3.')
 
-    if message.content.startswith("shbarry"):
+    if message.content.lower().startswith("zbuzz"):
+        try:
+            iddele = message.content[6:]
+            member = discord.utils.get(client.get_all_members(), id=iddele) or message.mentions[0]
+            #member = message.mentions[0]
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            avatar = avatar.resize((188, 161))#;
+
+            fundobuzz = Image.open('buzz.png')
+            frentebuzz = Image.open('buzz.png')
+            fundobuzz.paste(avatar, (193, 197))
+            fundobuzz.paste(frentebuzz, (0, 0), frentebuzz)
+            fundobuzz.save('buzz1.png')
+            await client.send_file(message.channel, 'buzz1.png')
+        except:
+            iddele = message.content[6:]
+            member = discord.utils.get(client.get_all_members(), id=iddele) or message.author
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            avatar = avatar.resize((188, 161))#;
+
+            fundobuzz = Image.open('buzz.png')
+            frentebuzz = Image.open('buzz.png')
+            fundobuzz.paste(avatar, (193, 197))
+            fundobuzz.paste(frentebuzz, (0, 0), frentebuzz)
+            fundobuzz.save('buzz1.png')
+            await client.send_file(message.channel, 'buzz1.png')
+
+    if message.content.lower().startswith("zfotosua"):
+        try:
+            iddele = message.content[9:]
+            member = discord.utils.get(client.get_all_members(), id=iddele) or message.mentions[0]
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            avatar = avatar.resize((328, 376))#;
+
+            fundofotosua = Image.open('fotosua.png')
+            fundofotosua.paste(avatar, (210, 90))
+            fundofotosua.save('fotosua1.png')
+            await client.send_file(message.channel, 'fotosua1.png')
+        except:
+            iddele = message.content[9:]
+            member = discord.utils.get(client.get_all_members(), id=iddele) or message.author
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            avatar = avatar.resize((328, 376))#;
+
+            fundofotosua = Image.open('fotosua.png')
+            fundofotosua.paste(avatar, (210, 90))
+            fundofotosua.save('fotosua1.png')
+            await client.send_file(message.channel, 'fotosua1.png')
+
+    if message.content.lower().startswith('zproerd'):
+        try:
+            iddele = message.content[8:]
+            member = discord.utils.get(client.get_all_members(), id=iddele) or message.mentions[0]
+            # member = message.mentions[0]
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            avatar = avatar.resize((800, 800))  # ;
+
+            frentproerd = Image.open('ProerdMDA.png')
+            img = Image.open('ProerdMDA.png')
+            img.paste(avatar, (0, 0))
+            img.paste(frentproerd, (0, 0), frentproerd)
+            img.save('FizProerd.png')
+            await client.send_file(message.channel, 'FizProerd.png')
+        except:
+            member = message.author
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            avatar = avatar.resize((800, 800))  # ;
+
+            frentproerd = Image.open('ProerdMDA.png')
+            img = Image.open('ProerdMDA.png')
+            img.paste(avatar, (0, 0))
+            img.paste(frentproerd, (0, 0), frentproerd)
+            img.save('FizProerd.png')
+            await client.send_file(message.channel, 'FizProerd.png')
+
+
+###
+
+    if message.content.lower().startswith("shbarry"):
         # x1 = message.content[8:]
         # x1 = x1a.split(", ")
         fundobarry = Image.open('barryal.png')
@@ -1525,7 +1564,7 @@ async def on_message(message):
         # fundovid.show()
         await client.send_file(message.channel, 'barryal1.png')
 
-    if message.content.startswith("shbobsp"):
+    if message.content.lower().startswith("shbobsp"):
         x1a = message.content[8:]
         x1 = x1a.split(", ")
         fundobobspon = Image.open('bobspon.png')
@@ -1843,32 +1882,64 @@ async def on_member_join(member):
         pass
     else:
         channel = client.get_channel("425866379921719297")
-        url = requests.get(member.avatar_url)
-        avatar = Image.open(BytesIO(url.content))
-        # avatar = Image.open('avatar.png')
-        avatar = avatar.resize((150, 150));
-        bigsize = (avatar.size[0] * 3, avatar.size[1] * 3)
-        mask = Image.new('L', bigsize, 0)
-        draw = ImageDraw.Draw(mask)
-        draw.ellipse((0, 0) + bigsize, fill=255)
-        mask = mask.resize(avatar.size, Image.ANTIALIAS)
-        avatar.putalpha(mask)
+        #member = message.author
+        avatarxurl = member.avatar_url
+        paramsxxx = [('api_key', 'JydSCyDOeNjI1fk3Xwvc93UEeo0DzdI7'), ('url', '{}'.format(avatarxurl).replace('.webp', '.png'))]
+        responsexxx = requests.get('https://xmoderator.com/api', paramsxxx)
+        xxxjson = json.loads(responsexxx.text)
+        unsafexxx = xxxjson["content"]["unsafe"]
+        if unsafexxx <= 0.85:
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            # avatar = Image.open('avatar.png')
+            avatar = avatar.resize((150, 150));
+            bigsize = (avatar.size[0] * 3, avatar.size[1] * 3)
+            mask = Image.new('L', bigsize, 0)
+            draw = ImageDraw.Draw(mask)
+            draw.ellipse((0, 0) + bigsize, fill=255)
+            mask = mask.resize(avatar.size, Image.ANTIALIAS)
+            avatar.putalpha(mask)
 
-        output = ImageOps.fit(avatar, mask.size, centering=(0.5, 0.5))
-        output.putalpha(mask)
-        output.save('avatar.png')
+            output = ImageOps.fit(avatar, mask.size, centering=(0.5, 0.5))
+            output.putalpha(mask)
+            output.save('avatar.png')
 
-        fundo = Image.open('bemvindo1.png')
-        fonte = ImageFont.truetype('BebasNeue.ttf', 30)
-        # fonte = ImageFont.truetype('Adventure.otf', 70)
-        escrever = ImageDraw.Draw(fundo)
-        escrever.text(xy=(180, 170), text=member.name, fill=(255, 255, 255), font=fonte)
-        fundo.paste(avatar, (20, 85), avatar)
-        fundo.save('bv.png')
-        # fundo.show()
-        # await client.send_message(channel, "{} <3".format(member.mention))
-        await client.send_file(channel, 'bv.png')
-        await client.send_message(channel, "{} ❤ Se divirta bb".format(member.mention))
+            fundo = Image.open('bemvindo1.png')
+            fonte = ImageFont.truetype('BebasNeue.ttf', 30)
+            # fonte = ImageFont.truetype('Adventure.otf', 70)
+            escrever = ImageDraw.Draw(fundo)
+            escrever.text(xy=(180, 170), text=member.name, fill=(255, 255, 255), font=fonte)
+            fundo.paste(avatar, (20, 85), avatar)
+            fundo.save('bv.png')
+            # fundo.show()
+            await client.send_file(channel, 'bv.png')
+            await client.send_message(channel, "{} ❤ Se divirta no server, bb".format(member.mention))
+        else:
+            #url = requests.get(member.avatar_url)
+            avatar = Image.open("proibido.png")
+            # avatar = Image.open('avatar.png')
+            avatar = avatar.resize((150, 150));
+            bigsize = (avatar.size[0] * 3, avatar.size[1] * 3)
+            mask = Image.new('L', bigsize, 0)
+            draw = ImageDraw.Draw(mask)
+            draw.ellipse((0, 0) + bigsize, fill=255)
+            mask = mask.resize(avatar.size, Image.ANTIALIAS)
+            avatar.putalpha(mask)
+
+            output = ImageOps.fit(avatar, mask.size, centering=(0.5, 0.5))
+            output.putalpha(mask)
+            output.save('avatar.png')
+
+            fundo = Image.open('bemvindo1.png')
+            fonte = ImageFont.truetype('BebasNeue.ttf', 30)
+            # fonte = ImageFont.truetype('Adventure.otf', 70)
+            escrever = ImageDraw.Draw(fundo)
+            escrever.text(xy=(180, 170), text=member.name, fill=(255, 255, 255), font=fonte)
+            fundo.paste(avatar, (20, 85), avatar)
+            fundo.save('bv.png')
+            # fundo.show()
+            await client.send_file(channel, 'bv.png')
+            await client.send_message(channel, '{} Err... eu "bloqueei" sua foto de perfil por parecer (ou ser) inapropriada... \n:/'.format(member.mention))
 
     if not member.server.id == "461611632716677140":
         pass
