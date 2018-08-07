@@ -99,6 +99,33 @@ async def on_message(message):
     #   if message.content.lower().startswith('zzueiro-logs'):
     #      server = message.server
     #     await client.create_channel(server, 'zueiro-logs', type=discord.ChannelType.text)
+    if message.content.startswith("zTermos&Condições"):
+        if not message.channel.id == "461613280251871232":
+            return
+        if message.author.id in blacklist:
+            user = message.author
+            role = discord.utils.find(lambda r: r.name == 'BANIDO DO BOT', message.server.roles)
+            await client.add_roles(user, role)
+            embedreg = discord.Embed(title="Você agora está no servidor Zueiros Anonimous ❤",
+                                  description="Infelizmente você foi BANIDO da minha vida, mas como sou legal ainda vou te deixar participando do grupo...",
+                                  color=user.color)
+            embedreg.set_author(name="Olá...")
+            embedreg.set_footer(text='Rum...')
+            await client.send_message(user, embed=embedreg)
+        else:
+            user = message.author
+            role = discord.utils.find(lambda r: r.name == 'Membros', message.server.roles)
+            await client.add_roles(user, role)
+            embedreg = discord.Embed(title="Você agora está no servidor Zueiros Anonimous ❤",
+                                  description="Vê se não deixa o servidor morrer hein, você agora é uma parte importante dele, sinta-se orgulhoso(a) !",
+                                  color=user.color)
+            embedreg.set_author(name="Olá...")
+            embedreg.set_footer(text='Para saber meus comandos digite "zHelp" em um canal ESPECÍFICO !')
+            await client.send_message(user, embed=embedreg)
+    if message.channel.id == "461613280251871232":
+        await asyncio.sleep(1)
+        await client.delete_message(message)
+    
 
     if message.content.lower().startswith('zpresence') and message.author.id == "320339126601777152":
         game = message.content[9:]
