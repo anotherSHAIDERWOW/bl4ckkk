@@ -99,6 +99,7 @@ async def on_message(message):
     #   if message.content.lower().startswith('zzueiro-logs'):
     #      server = message.server
     #     await client.create_channel(server, 'zueiro-logs', type=discord.ChannelType.text)
+    
     if message.content.startswith("zTermos&Condições"):
         if not message.channel.id == "461613280251871232":
             return
@@ -107,8 +108,8 @@ async def on_message(message):
             role = discord.utils.find(lambda r: r.name == 'BANIDO DO BOT', message.server.roles)
             await client.add_roles(user, role)
             embedreg = discord.Embed(title="Você agora está no servidor Zueiros Anonimous ❤",
-                                  description="Infelizmente você foi BANIDO da minha vida, mas como sou legal ainda vou te deixar participando do grupo...",
-                                  color=user.color)
+                                     description="Infelizmente você foi BANIDO da minha vida, mas como sou legal ainda vou te deixar participando do grupo...",
+                                     color=user.color)
             embedreg.set_author(name="Olá...")
             embedreg.set_footer(text='Rum...')
             await client.send_message(user, embed=embedreg)
@@ -117,15 +118,15 @@ async def on_message(message):
             role = discord.utils.find(lambda r: r.name == 'Membros', message.server.roles)
             await client.add_roles(user, role)
             embedreg = discord.Embed(title="Você agora está no servidor Zueiros Anonimous ❤",
-                                  description="Vê se não deixa o servidor morrer hein, você agora é uma parte importante dele, sinta-se orgulhoso(a) !",
-                                  color=user.color)
+                                     description="Vê se não deixa o servidor morrer hein, você agora é uma parte importante dele, sinta-se orgulhoso(a) !",
+                                     color=user.color)
             embedreg.set_author(name="Olá...")
             embedreg.set_footer(text='Para saber meus comandos digite "zHelp" em um canal ESPECÍFICO !')
             await client.send_message(user, embed=embedreg)
+
     if message.channel.id == "461613280251871232":
         await asyncio.sleep(1)
         await client.delete_message(message)
-    
 
     if message.content.lower().startswith('zpresence') and message.author.id == "320339126601777152":
         game = message.content[9:]
@@ -1266,6 +1267,64 @@ async def on_message(message):
         fundo.save('bv.png')
         # fundo.show()
         await client.send_file(message.channel, 'bv.png')
+
+    if message.content.lower().startswith("shxtesteimg"):
+        member = message.author
+        avatarxurl = member.avatar_url
+        paramsxxx = [('api_key', 'JydSCyDOeNjI1fk3Xwvc93UEeo0DzdI7'), ('url', '{}'.format(avatarxurl).replace('.webp', '.png'))]
+        responsexxx = requests.get('https://xmoderator.com/api', paramsxxx)
+        xxxjson = json.loads(responsexxx.text)
+        unsafexxx = xxxjson["content"]["unsafe"]
+        if unsafexxx <= 0.85:
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            # avatar = Image.open('avatar.png')
+            avatar = avatar.resize((150, 150));
+            bigsize = (avatar.size[0] * 3, avatar.size[1] * 3)
+            mask = Image.new('L', bigsize, 0)
+            draw = ImageDraw.Draw(mask)
+            draw.ellipse((0, 0) + bigsize, fill=255)
+            mask = mask.resize(avatar.size, Image.ANTIALIAS)
+            avatar.putalpha(mask)
+
+            output = ImageOps.fit(avatar, mask.size, centering=(0.5, 0.5))
+            output.putalpha(mask)
+            output.save('avatar.png')
+
+            fundo = Image.open('bemvindo1.png')
+            fonte = ImageFont.truetype('BebasNeue.ttf', 30)
+            # fonte = ImageFont.truetype('Adventure.otf', 70)
+            escrever = ImageDraw.Draw(fundo)
+            escrever.text(xy=(180, 170), text=member.name, fill=(255, 255, 255), font=fonte)
+            fundo.paste(avatar, (20, 85), avatar)
+            fundo.save('bv.png')
+            # fundo.show()
+            await client.send_file(message.channel, 'bv.png')
+        else:
+            #url = requests.get(member.avatar_url)
+            avatar = Image.open("proibido.png")
+            # avatar = Image.open('avatar.png')
+            avatar = avatar.resize((150, 150));
+            bigsize = (avatar.size[0] * 3, avatar.size[1] * 3)
+            mask = Image.new('L', bigsize, 0)
+            draw = ImageDraw.Draw(mask)
+            draw.ellipse((0, 0) + bigsize, fill=255)
+            mask = mask.resize(avatar.size, Image.ANTIALIAS)
+            avatar.putalpha(mask)
+
+            output = ImageOps.fit(avatar, mask.size, centering=(0.5, 0.5))
+            output.putalpha(mask)
+            output.save('avatar.png')
+
+            fundo = Image.open('bemvindo1.png')
+            fonte = ImageFont.truetype('BebasNeue.ttf', 30)
+            # fonte = ImageFont.truetype('Adventure.otf', 70)
+            escrever = ImageDraw.Draw(fundo)
+            escrever.text(xy=(180, 170), text=member.name, fill=(255, 255, 255), font=fonte)
+            fundo.paste(avatar, (20, 85), avatar)
+            fundo.save('bv.png')
+            # fundo.show()
+            await client.send_file(message.channel, 'bv.png')
 
     if message.content.lower().startswith("zfalls"):
         try:
