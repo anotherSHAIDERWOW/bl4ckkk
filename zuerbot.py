@@ -1967,7 +1967,7 @@ async def on_member_join(member):
     if not member.server.id == "425864977996578816":
         pass
     else:
-        channel = client.get_channel("425866379921719297")
+        channel = client.get_channel("485837607452803093")
         #member = message.author
         avatarxurl = member.avatar_url
         paramsxxx = [('api_key', 'JydSCyDOeNjI1fk3Xwvc93UEeo0DzdI7'), ('url', '{}'.format(avatarxurl).replace('.webp', '.png'))]
