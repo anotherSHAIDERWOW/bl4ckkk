@@ -99,7 +99,7 @@ async def on_message(message):
     #   if message.content.lower().startswith('zzueiro-logs'):
     #      server = message.server
     #     await client.create_channel(server, 'zueiro-logs', type=discord.ChannelType.text)
-    
+
     if message.content.startswith("zTermos&Condições"):
         if not message.channel.id == "461613280251871232":
             return
@@ -806,7 +806,7 @@ async def on_message(message):
             embhelpnew = discord.Embed(
                 title='{}, Estes são meus comandos novos...'.format(
                     message.author.name), color=user.color,
-                description='z5contra1** = Quando perceber, será tarde demais. \n'
+                description='**z5contra1** = Quando perceber, será tarde demais. \n'
                             '**zFalls** = Quem é beautiful ? \n'
                             '**zVideo** = Notificação de video do youtube de... \n'
                             '**zMalfoy** = Certamente vc é... \n'
@@ -814,7 +814,8 @@ async def on_message(message):
                             '**zVerine** = Wolverine...\n'
                             '**zBuzz** = Decepcioned...\n'
                             '**zFotoSua** = Manda uma foto sua?...\n'
-                            '**zProerd** = Eu fiz PROERD !')
+                            '**zProerd** = Eu fiz PROERD !\n'
+                            '**zTaPresoBabaca** = Mude sua foto de perfil....')
             await client.send_message(message.author, embed=embhelp2)
             await client.send_message(message.author, embed=embhelpnew)
             await client.send_message(message.channel, embed=embhelp3)
@@ -1621,6 +1622,33 @@ async def on_message(message):
             img.save('FizProerd.png')
             await client.send_file(message.channel, 'FizProerd.png')
 
+    if message.content.lower().startswith('ztapresobabaca'):
+        try:
+            iddele = message.content[15:]
+            member = discord.utils.get(client.get_all_members(), id=iddele) or message.mentions[0]
+            # member = message.mentions[0]
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            avatar = avatar.resize((400, 400))  # ;
+
+            frentpreso = Image.open('lulindopreso.png')
+            img = Image.open('lulindopreso.png')
+            img.paste(avatar, (0, 0))
+            img.paste(frentpreso, (0, 0), frentpreso)
+            img.save('tapresobabaca.png')
+            await client.send_file(message.channel, 'tapresobabaca.png')
+        except:
+            member = message.author
+            url = requests.get(member.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            avatar = avatar.resize((400, 400))  # ;
+
+            frentpreso = Image.open('lulindopreso.png')
+            img = Image.open('lulindopreso.png')
+            img.paste(avatar, (0, 0))
+            img.paste(frentpreso, (0, 0), frentpreso)
+            img.save('tapresobabaca.png')
+            await client.send_file(message.channel, 'tapresobabaca.png')
 
 ###
 
@@ -1967,7 +1995,7 @@ async def on_member_join(member):
     if not member.server.id == "425864977996578816":
         pass
     else:
-        channel = client.get_channel("485837607452803093")
+        channel = client.get_channel("425866379921719297")
         #member = message.author
         avatarxurl = member.avatar_url
         paramsxxx = [('api_key', 'JydSCyDOeNjI1fk3Xwvc93UEeo0DzdI7'), ('url', '{}'.format(avatarxurl).replace('.webp', '.png'))]
